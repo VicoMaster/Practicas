@@ -1,0 +1,93 @@
+:root {
+    font-size: 62.5%;
+    --logotipo: #1a1a1a;
+    --profesion: #f2f2f2;
+    --primario: #2e5fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    background: gray;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+}
+
+main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    max-width: 80em;
+    min-height: 100vh;
+    width: 90%;
+}
+
+.logotipo {
+    padding: 1em;
+    border: 0.5em solid var(--logotipo);
+    color: var(--logotipo);
+}
+
+.logotipo .subtitulo {
+    background: var(--logotipo);
+    color: var(--profesion);
+    font-size: 4em;
+    letter-spacing: .2em;
+    padding: 1.2em 2em;
+    text-align: center;
+    text-transform: uppercase;
+    transition: .5s ease all;
+}
+
+.logotipo:hover .subtitulo {
+    background: var(--primario);
+}
+
+.texto-animado {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.texto-animado > div {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: .3s ease all;
+}
+
+.texto-animado > div span {
+    font-size: 10em;
+    font-weight: bold;
+    line-height: 120%;
+}
+
+.texto-animado > div.animation-letter {
+    transform: translateY(-100%);
+}
+
+.texto-animado .second-line {
+    position: absolute;
+    top: 100%;
+}
+
+
+@media (max-width: 800px) {
+    .texto-animado > div span {
+        font-size: 3em;
+    }
+    .logotipo .subtitulo {
+        font-size: 2em;
+    }
+}
