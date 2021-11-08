@@ -8,3 +8,9 @@ body {
     font-size: 62.5%;
     font-family: 'Roboto', sans-serif;
 }
+
+.img-section {
+    height: 50em;
+    width: 50em;
+    object-fit: contain;
+}
