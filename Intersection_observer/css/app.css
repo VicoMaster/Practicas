@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    align-items: center;
+    background-image: url(../img/background.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-weight: 300;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.hero h1 {
+    font-size: 10rem;
+    text-shadow: 10px 5px 5px black;
+}
+
+.hero p {
+    font-size: 2.4rem;
+    text-shadow: 2px 1px 1px black;
+}
+
+.container {
+    flex-direction: column;
+    color: #f2f2f2;
+    font-size: 1.8rem;
+    line-height: 3rem;
+    margin: auto;
+    padding: 1rem;
+    text-align: justify;
+    width: 90%;
+    max-width: 70rem;
+    background: rgba(114, 114, 114, 0.5);
+}
+
+.container p {
+    margin-bottom: 4rem;
+}
+
+.img-random {
+	border-radius: 5px;
+	height: 50rem;
+	margin-bottom: 40px;
+	opacity: 0;
+	overflow: hidden;
+	transform: scale(0.9);
+	transition: .7s ease-in-out all;
+    width: 100%;
+    object-fit: contain;
+}
+
+.izquierda {
+	transform: translateX(-100px);
+}
+
+.derecha {
+	transform: translateX(100px);
+}
+
+.visible {
+	opacity: 1;
+	transform: scale(1) translateX(0);
+}
