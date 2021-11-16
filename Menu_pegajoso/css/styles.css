@@ -73,7 +73,7 @@ a:hover {
     position: absolute;
     /* width: 20%; El ancho se lo pones en JS*/
     transition: .3s ease-in-out all;
-    /* transform: translateX(-100%); */
+    transform: translateX(-100%);
 }
 
 .section {
