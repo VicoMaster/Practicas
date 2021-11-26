@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            background: grey;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .child {
+            margin: 10px;
+            width: 120px;
+            height: 120px;
+            border: 2px solid white;
+            background: transparent;
+        }
+        .action-x {
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transform: translate(50vw, 10vh);
+            cursor: pointer;
+            color: white;
+            margin: 5px;
+        }
+
+        #action-check{
+            display: none;
+        }
+
+        #action-check:checked ~ .container .child {
+            background: tomato;
+        }
+    </style>
+
+</head>
+<body>
+    <input form="action-check" type="checkbox" name="action-check" id="action-check">
+    <div class="container" >
+        <div class="child"></div>
+        <div class="child"></div>
+    </div>
+    <label for="action-check" class="action-x">X</label>
+</body>
+
+</html>

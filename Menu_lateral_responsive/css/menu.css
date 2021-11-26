@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 62.5%;
+    --background-img: url('../img/background.webp');
+    --color-font-white: white;
+    --color-wrapper: rgba(0, 0, 0, .1);
+    --size-text-normal: 2rem;
+    --size-text-h1: 2.5rem;
+    --color-container-responsive-menu: rgba(0, 0, 0, .6);
+    --color-responsive-menu: rgba(30,30,30,.9);
+}
+
+body {
+    background-image: var(--background-img);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: var(--color-font-white);
+    font-family: 'Montserrat Alternates', sans-serif;
+    height: 100vh;
+    width: 100%;
+}
+
+/* MENU PRINCIPAL */
+
+.header {
+    align-items: center;
+    display: flex;
+    height: 10%;
+    justify-content: space-between;
+    padding: 1rem;
+    width: 100%;
+}
+
+.logo {
+    display: flex;   
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .15s ease-out;
+    padding: .5rem;
+}
+
+.logo:hover {
+    border-bottom: .25rem solid rgba(255, 255, 255, .5);
+    padding-bottom: .4rem;
+}
+
+.logo:not(:hover) {
+    border-bottom: 0.01rem solid rgba(255, 255, 255, 0.001);
+    padding-bottom: .1rem;
+}
+
+.logo svg {
+    margin: .5rem;
+}
+
+h1 {
+    font-size: var(--size-text-h1);
+}
+
+nav a {
+    text-decoration: none;
+    list-style: none;
+    color: var(--color-font-white);
+    font-size: var(--size-text-normal);
+    margin: 1rem;
+    transition: all .15s ease-out;
+    outline: none;
+}
+
+nav a:hover {
+    border-bottom: .25rem solid rgba(255, 255, 255, .5);
+    padding-bottom: .4rem;
+}
+
+nav a:not(:hover) {
+    border-bottom: 0.01rem solid rgba(255, 255, 255, 0.001);
+    padding-bottom: .1rem;
+}
+
+.wrapper {
+    background: var(--color-wrapper);
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+/* MENU RESPONSIVE */
+
+#btn-menu {
+    display: none;
+}
+
+.container-responsive-menu {
+    background: var(--color-container-responsive-menu);
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    opacity: 0;
+    width: 100%;
+    transition: all .3s ease-out;
+}
+
+#btn-menu:checked ~ .container-responsive-menu {
+    visibility: visible;
+    opacity: 1;
+}
+
+.menu-responsive {
+    background: var(--color-responsive-menu);
+    height: 100%;
+    padding: 1rem;
+    position: relative;
+    width: 20%;
+    transform: translateX(-100%);
+    transition: all .3s ease-out;
+}
+
+#btn-menu:checked ~ .container-responsive-menu .menu-responsive {
+    transform: translateX(0);
+}
+
+.icon-x {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.icon-x:hover {
+    transform: scale(1.1);
+}
+.icon-x:active {
+    transform: scale(.95);
+}
+
+.icon-x svg {
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.menu-items li {
+    border-left: .2rem solid transparent;
+    list-style: none;
+    margin: 1rem;
+    transform: translateY(10vh);
+    padding-left: .5rem;
+    cursor: pointer;
+    transition: all .3s ease-out;
+}
+
+.menu-items li a {
+    color: var(--color-font-white);
+    font-size: var(--size-text-normal);
+    text-decoration: none;
+}
+
+.menu-items li:hover {
+    border-left: .2rem solid var(--color-font-white);
+}
+
+.container-clic {
+    width: 80%;
+    height: 100%;
+    background: transparent;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+@media (max-width: 600px) {
+    :root {
+        font-size: 55%;
+    }
+    .menu {
+        visibility: hidden;
+    }
+    .menu-responsive {
+        width: 40%;
+    }
+    .container-clic {
+        width: 60%;
+    }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Lateral</title>
+    <link rel="stylesheet" href="css/menu.css">
+    <!-- Google Fonts ROBOTO regular 400 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+    <!-- font-family: 'Montserrat Alternates', sans-serif; -->
+</head>
+
+<body>
+    <!-- MENU PRINCIPAL -->
+    <header class="header">
+        <div class="container">
+            <label class="logo" for="btn-menu">
+                <span class="iconify" data-icon="dashicons:menu-alt3" data-width="35" data-height="35"></span>
+                <h1>Riveloper</h1>
+            </label>
+        </div>
+        <nav class="menu">
+            <a href="#">Inicio</a>
+            <a href="#">Nosotros</a>
+            <a href="#">Blog</a>
+            <a href="#">Contacto</a>
+        </nav>
+    </header>
+    <div class="wrapper"></div>
+
+    <!-- MENU RESPONSIVE -->
+    <input type="checkbox" id="btn-menu">
+    <div id="container-responsive-menu" class="container-responsive-menu">
+        <div class="menu-responsive">
+            <label class="icon-x" for="btn-menu">
+                <span class="iconify" data-icon="fontisto:close" style="color: white;" data-width="25"></span>
+            </label>
+            <ul class="menu-items">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Nosotros</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+
+        <div id="container-clic" class="container-clic"></div>
+    </div>
+
+    <!-- js -->
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <script src="js/menu.js"></script>
+</body>
+
+</html>
