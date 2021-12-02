@@ -1,0 +1,98 @@
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-overlay: rgb(204, 204, 204);
+    --color-yellow-principal: rgba(227,186,8,1);
+    --color-yellow-principal-50: rgba(227,186,8,.5);
+    --img-dragon: url(../img/dragon_logo_2_sombra.webp);
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Raleway', sans-serif;
+}
+
+.overlay-load {
+    height: 100vh;
+    width: 100%;
+    background: var(--color-overlay);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 500ms ease-out;
+    z-index: 10000;
+}
+
+.circle {
+    animation: girar 1.5s linear infinite;
+    border-radius: 50%;
+    border: 1rem solid var(--color-yellow-principal-50);
+    border-top: 1rem solid var(--color-yellow-principal);
+    border-style: groove;
+    bottom: 0;
+    height: 20rem;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20rem;
+}
+
+@keyframes girar {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.load-dragon {
+    background-image: var(--img-dragon);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 15rem;
+    width: 15rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+
+.container-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 25rem;
+    width: 25rem;
+}
+
+.text-load {
+    animation: opacidad 2s linear infinite;
+    bottom: 0;
+    color: var(--color-yellow-principal);
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: .5rem;
+    position: absolute;
+    text-shadow: 3px 3px 5px black;
+}
+
+@keyframes opacidad {
+    0%,100% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 1;
+    }
+}

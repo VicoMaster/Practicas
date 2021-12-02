@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+    --color-background-container: rgb(60, 64, 198);
+    --color-background-arrow: rgba(255, 255, 255, .25);
+    --color-background-progress: rgba(255, 255, 255, .4);
+    --color-opacity: rgba(31, 31, 31, .2);
+    --position-z-arrows: 999;
+    --position-z-progress: 998;
+    --position-z-overlay: 997; 
+}
+
+.container {
+    align-items: center;
+    background: var(--color-background-container);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    width: 100%;
+}
+
+.container-slider {
+    height: 55rem;
+    width: 90%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 0 10px #fff;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background: var(--color-opacity);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: var(--position-z-overlay);
+}
+
+.slider {
+    height: 100%;
+    width: 500%;
+    display: flex;
+    transition: all .3s ease-out
+}
+
+.slider__section {
+    width: 100%;
+}
+
+.slider__img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+}
+
+.container__arrow {
+    align-items: center;
+    background: var(--color-background-arrow);
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    transition: all 150ms ease-out;
+    width: 6rem;
+    z-index: var(--position-z-arrows);
+}
+
+.container__arrow:hover {
+    transform: scale(1.1);
+}
+
+.bar--left {
+    left: 0;
+}
+
+.bar--left:active {
+    transform: translateX(-1rem);
+}
+
+.bar--right {
+    right: 0;
+}
+
+.bar--right:active {
+    transform: translateX(1rem);
+}
+
+.container-progress__bar {
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    height: 6rem;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: var(--position-z-progress);
+}
+
+.progress__bar {
+    background: var(--color-background-progress);
+    border-radius: 10px;
+    cursor: pointer;
+    height: 1.5rem;
+    margin: 10px;
+    transition: all 100ms ease-out;
+    width: 10rem;
+}
+
+.progress__bar:hover {
+    transform: scale(1.1);
+}
+.progress__bar:active {
+    transform: scale(.95);
+}
+
+@media (max-width: 900px) {
+    /*Fix Responsive mobile*/
+    .container__arrow:hover {
+        transform: scale(1);
+    }
+    .progress__bar:hover {
+        transform: scale(1);
+    }
+    .progress__bar {
+        width: 3rem;
+    }
+    
+}
