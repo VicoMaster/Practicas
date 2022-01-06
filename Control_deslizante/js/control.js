@@ -94,7 +94,7 @@ function touchEnd(event) {
         cancelAnimationFrame(animationID);
         removeGrabbing();
 
-        //Guarda el movimiento de la pantalla actual si el mov minimo se cumple
+        //Guarda el index movimiento de la pantalla actual si el mov minimo se cumple
         //print(event, "cursorNow: "+cursorNow);
         if (cursorNow > 100 && screenIndex > 0) {
             screenIndex -= 1;
