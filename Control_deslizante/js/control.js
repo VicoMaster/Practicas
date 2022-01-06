@@ -106,7 +106,6 @@ function touchEnd(event) {
         setPositionByIndex()
     }
 }
-
 function touchMove(event) {
     if (isDragging) {
         const cursorMov = getCursorPositionX(event);
