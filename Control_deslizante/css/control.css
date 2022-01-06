@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-background-main: rgb(51, 51, 51);
+    --color-background-button: rgb(65, 65, 65);
+    --color-background-white: rgb(255, 255, 255);
+    --color-border-img: rgb(255, 255, 255);
+    --color-font-white: rgb(255, 255, 255);
+}
+
+html {
+    background-color: var(--color-background-main);
+    font-size: 62.5%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container-main {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    width: 100%;
+}
+
+.slider-container {
+    height: 90%;
+    min-width: 60rem;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.carrusel-sliders {
+    display: flex;
+    height: 100%;
+    transition: all .3s ease-out;
+    width: 300%;
+}
+
+.slide {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.overlay-slider {
+    height: 90%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.slide img {
+    border: 2px solid var(--color-border-img);
+    height: 80%;
+    margin: 1rem 0;
+    max-width: 100%;
+    object-position: center;
+    transition: all .1s ease-out;
+    width: auto;
+}
+
+.slide h2, .slide h4, .slide a {
+    color: var(--color-font-white);
+    height: 6.66%;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    margin: .5rem;
+}
+
+.slide h2 {
+    font-size: 3rem;
+}
+
+.slide h4 {
+    font-size: 2rem;
+}
+
+.slide a {
+    align-items: center;
+    background: var(--color-background-button);
+    display: flex;
+    font-size: 1.6rem;
+    height: 6rem;
+    justify-content: center;
+    margin: .5rem;
+    padding: .5rem;
+    width: 15rem;
+    z-index: 999;
+}
+
+/*CLASES PARA JS*/
+.cursor-grap {
+    cursor: grab;
+}
+
+.cursor-grabbing {
+    cursor: grabbing;
+}
+
+.img-scale {
+    transform: scale(.9);
+}
+
+/*HOVER-ACTIVE*/
+@media (hover: hover) {
+    .slide a:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+    .slide a:active {
+        transform: scale(1);
+    }
+}
+
+/*MOBILE*/
+@media (max-width: 600px) {
+    .slider-container {
+        min-width: 36rem;
+        height: 100%;
+    }
+
+    .slide a:active {
+        transform: scale(.9);
+    }
+}
