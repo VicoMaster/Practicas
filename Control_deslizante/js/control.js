@@ -24,7 +24,7 @@ overlay.classList.add("cursor-grap");
 let animationID = 0, //Se inicializa la variable para requestAnimationFrame
 isDragging = false,
 cursorMovSave = 0, //Movimiento (px) del cursor presionado en memoria
-cursorNow = 0; //Movimiento actual del cursor
+cursorNow = 0; //Movimiento (px) actual del cursor
 screenIndex = 0, //Número de pantallas acumuladas
 currentScreen = 0, //desplazamiento actual en la pantalla
 prevTraslate = 0; //movimiento el cursor en memoria
