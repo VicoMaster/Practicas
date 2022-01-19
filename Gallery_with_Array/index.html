@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- GOOGLE FONT Montserrat Regular 400 | font-family: 'Montserrat', sans-serif;-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/gallery.css">
+    <title>Gallery</title>
+</head>
+
+<body>
+    <main class="gallery-container">
+        <header class="gallery-title">
+            <p>Galería de Imágenes</p>
+        </header>
+        <section id="gallery-img" class="gallery-img">
+            <!-- img from js -->
+            <img id="img-roulette" src="img/food1_small.webp" alt="">
+            <div id="overlay" class="overlay"></div>
+        </section>
+        <footer class="gallery-footer">
+            <!-- Use hex code for Symbols -->
+            <input id="button-back" type="button" class="gallery-button" value="&#x276C&#x276C">
+            <input id="button-forward" type="button" class="gallery-button" value="&#x276D&#x276D">
+        </footer>
+    </main>
+    <!-- JS -->
+    <script src="js/gallery.js"></script>
+</body>
+
+</html>
