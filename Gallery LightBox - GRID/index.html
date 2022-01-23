@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Font Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/lightbox.css">
+    <title>Lightbox | Grid</title>
+</head>
+
+<body>
+    <main class="lightbox-container">
+        <h1 class="lightbox-title">My LightBox Gallery</h1>
+        <section id="lightbox-gallery" class="lightbox-gallery">
+            <img src="img/img1_small.webp" alt="Imagen de Galería 1">
+            <img src="img/img2_small.webp" alt="Imagen de Galería 2">
+            <img src="img/img3_small.webp" alt="Imagen de Galería 3">
+            <img src="img/img4_small.webp" alt="Imagen de Galería 4">
+            <img src="img/img5_small.webp" alt="Imagen de Galería 5">
+            <img src="img/img6_small.webp" alt="Imagen de Galería 6">
+            <img src="img/img7_small.webp" alt="Imagen de Galería 7">
+            <img src="img/img8_small.webp" alt="Imagen de Galería 8">
+            <img src="img/img9_small.webp" alt="Imagen de Galería 9">
+        </section>
+
+        <!-- Selection Overlay Gallery -->
+        <div id="lightbox-overlay" class="lightbox-overlay lightbox-overlay--hidden">
+            <!-- Central Section -->
+            <section class="lightbox-contain">
+                <img id="img-overlay" class="lightbox__img-overlay" src="img/img1.webp" alt="Imagen Seleccionada">
+                <!-- Left Button -->
+                <div class="lightbox__button lightbox__button--left">
+                    <span class="iconify" data-icon="akar-icons:arrow-left" style="color: white;" data-width="45"
+                        data-height="45"></span>
+                </div>
+                <!-- Right Button -->
+                <div class="lightbox__button lightbox__button--right">
+                    <span class="iconify" data-icon="akar-icons:arrow-right" style="color: white;" data-width="45"
+                        data-height="45"></span>
+                </div>
+            </section>
+            <!-- LightBox Menu -->
+            <nav class="lightbox__menu">
+                <!-- Pagination -->
+                <output class="lightbox-pagination" name="lightbox-result" for="">
+                    <span id="lightbox_result1">0</span>
+                    <span> / </span>
+                    <span id="lightbox_result2">0</span>
+                </output>
+                <!-- Download Button -->
+                <a href="#" target="_blank" download="" id="button-download" class="lightbox__button lightbox__button--relative">
+                    <span class="iconify" data-icon="akar-icons:download" style="color: white;" data-width="45"
+                        data-height="35"></span>
+                </a>
+                <!-- Close Button -->
+                <div id="lightbox-button-close" class="lightbox__button lightbox__button--relative">
+                    <span class="iconify" data-icon="eva:close-outline" style="color: white;" data-width="45"
+                        data-height="45"></span>
+                </div>
+            </nav>
+            <!-- LightBox image Carrusel -->
+            <footer class="lightbox-footer">
+                <img src="img/img1_small.webp" alt="Imagen de Galería 1">
+                <img src="img/img2_small.webp" alt="Imagen de Galería 2">
+                <img src="img/img3_small.webp" alt="Imagen de Galería 3">
+                <img src="img/img4_small.webp" alt="Imagen de Galería 4">
+                <img src="img/img5_small.webp" alt="Imagen de Galería 5">
+                <img src="img/img6_small.webp" alt="Imagen de Galería 6">
+                <img src="img/img7_small.webp" alt="Imagen de Galería 7">
+                <img src="img/img8_small.webp" alt="Imagen de Galería 8">
+                <img src="img/img9_small.webp" alt="Imagen de Galería 9">
+            </footer>
+            <div class="lightbox-footer__plus"><span>&#x276F;</span></div>
+        </div>
+    </main>
+
+    <!-- JS -->
+    <script src="js/lightbox.js"></script>
+    <script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script>
+</body>
+
+</html>
