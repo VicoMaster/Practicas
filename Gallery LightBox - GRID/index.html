@@ -17,15 +17,7 @@
     <main class="lightbox-container">
         <h1 class="lightbox-title">My LightBox Gallery</h1>
         <section id="lightbox-gallery" class="lightbox-gallery">
-            <img src="img/img1_small.webp" alt="Imagen de Galería 1">
-            <img src="img/img2_small.webp" alt="Imagen de Galería 2">
-            <img src="img/img3_small.webp" alt="Imagen de Galería 3">
-            <img src="img/img4_small.webp" alt="Imagen de Galería 4">
-            <img src="img/img5_small.webp" alt="Imagen de Galería 5">
-            <img src="img/img6_small.webp" alt="Imagen de Galería 6">
-            <img src="img/img7_small.webp" alt="Imagen de Galería 7">
-            <img src="img/img8_small.webp" alt="Imagen de Galería 8">
-            <img src="img/img9_small.webp" alt="Imagen de Galería 9">
+            <!-- Bloques img cargados desde JS -->
         </section>
 
         <!-- Selection Overlay Gallery -->
@@ -34,12 +26,12 @@
             <section class="lightbox-contain">
                 <img id="img-overlay" class="lightbox__img-overlay" src="img/img1.webp" alt="Imagen Seleccionada">
                 <!-- Left Button -->
-                <div class="lightbox__button lightbox__button--left">
+                <div id="button-left" class="lightbox__button lightbox__button--left">
                     <span class="iconify" data-icon="akar-icons:arrow-left" style="color: white;" data-width="45"
                         data-height="45"></span>
                 </div>
                 <!-- Right Button -->
-                <div class="lightbox__button lightbox__button--right">
+                <div id="button-right" class="lightbox__button lightbox__button--right">
                     <span class="iconify" data-icon="akar-icons:arrow-right" style="color: white;" data-width="45"
                         data-height="45"></span>
                 </div>
@@ -48,7 +40,7 @@
             <nav class="lightbox__menu">
                 <!-- Pagination -->
                 <output class="lightbox-pagination" name="lightbox-result" for="">
-                    <span id="lightbox_result1">0</span>
+                    <span id="lightbox_result1">1</span>
                     <span> / </span>
                     <span id="lightbox_result2">0</span>
                 </output>
@@ -64,32 +56,15 @@
                 </div>
             </nav>
             <!-- LightBox image Carrusel -->
-            <footer class="lightbox-footer">
-                <img src="img/img1_small.webp" alt="Imagen de Galería 1">
-                <img src="img/img2_small.webp" alt="Imagen de Galería 2">
-                <img src="img/img3_small.webp" alt="Imagen de Galería 3">
-                <img src="img/img4_small.webp" alt="Imagen de Galería 4">
-                <img src="img/img5_small.webp" alt="Imagen de Galería 5">
-                <img src="img/img6_small.webp" alt="Imagen de Galería 6">
-                <img src="img/img7_small.webp" alt="Imagen de Galería 7">
-                <img src="img/img8_small.webp" alt="Imagen de Galería 8">
-                <img src="img/img9_small.webp" alt="Imagen de Galería 9">
-                <img src="img/img1_small.webp" alt="Imagen de Galería 1">
-                <img src="img/img2_small.webp" alt="Imagen de Galería 2">
-                <img src="img/img3_small.webp" alt="Imagen de Galería 3">
-                <img src="img/img4_small.webp" alt="Imagen de Galería 4">
-                <img src="img/img5_small.webp" alt="Imagen de Galería 5">
-                <img src="img/img6_small.webp" alt="Imagen de Galería 6">
-                <img src="img/img7_small.webp" alt="Imagen de Galería 7">
-                <img src="img/img8_small.webp" alt="Imagen de Galería 8">
-                <img src="img/img9_small.webp" alt="Imagen de Galería 9">
+            <footer id="lightbox-footer" class="lightbox-footer">
+                <!-- Bloque de img cargados desde js -->
             </footer>
             <div class="lightbox-footer__plus"><span>&#x276F;</span></div>
         </div>
     </main>
 
     <!-- JS -->
-    <script src="js/lightbox.js"></script>
+    <script src="js/lightbox.js" type="module"></script>
     <script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script>
 </body>
 
