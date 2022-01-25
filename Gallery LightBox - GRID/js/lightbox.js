@@ -10,7 +10,8 @@ let botonCerrar = document.getElementById('lightbox-button-close'),
     botonRight = document.getElementById('button-right'),
     botonLeft = document.getElementById('button-left'),
     lightboxResult1 = document.getElementById('lightbox_result1'),
-    lightboxResult2 = document.getElementById('lightbox_result2');
+    lightboxResult2 = document.getElementById('lightbox_result2'),
+    lightboxFooterPlus = document.getElementById('lightbox-footer-plus');
 
 
 //Carga de bloques en HTML
@@ -130,3 +131,4 @@ botonCerrar.addEventListener('click', cerrarOverlay);
 botonRight.addEventListener('click', avanzarImagen);
 botonLeft.addEventListener('click', retrocederImagen);
 imagenesCarruselFooter.addEventListener('click', cambiarImagenCentral);
+lightboxFooterPlus.addEventListener('click', avanzarImagen);
