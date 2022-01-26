@@ -303,6 +303,7 @@ html {
     }
 }
 
+/*Esta MediaQuery arregla la vista cuando el dispositivo esta horizontal*/
 @media (min-height: 740px) {
     .lightbox-footer__plus span {
         line-height: 6rem;
