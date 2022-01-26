@@ -1,6 +1,14 @@
+/** 
+ * Developer: Andrés F. Rivera 
+ * Description: Script que contiene toda la lógica de la gallería
+ * Observations: Contiene algunas lineas de código CSS en varias funciones
+ * Comments: La información de las imagenes(rutas, nombres de descarga, y tamaños) está en el archivo rutas_imagenes.js
+ **/
+
+//Import datos de las imagenes para agregar
 import { RUTAS_IMAGENES, RUTAS_IMAGENES_SMALL, NOMBRE_IMAGEN_DESCARGAR, agregarBloquesImg } from './rutas_imagenes.js';
 
-//Componentes
+//Componentes HTML
 let botonCerrar = document.getElementById('lightbox-button-close'),
     overlay = document.getElementById('lightbox-overlay'),
     centralImg = document.getElementById('img-overlay'),
