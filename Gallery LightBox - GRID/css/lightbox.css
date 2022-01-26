@@ -23,7 +23,7 @@ html {
     overflow-x: hidden;
 }
 
-/* Minimal Gallery*/
+/* Gallery Grid - Main*/
 .lightbox-container {
     align-items: center;
     display: flex;
