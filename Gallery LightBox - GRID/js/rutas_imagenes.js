@@ -6,6 +6,7 @@
  * Comments: El orden de las imagenes para cada arreglo debe respetarse [1-small = 1]
  **/
 
+//En el archivo ligthbox.js se agrega un contador al final de este nombre
 const NOMBRE_IMAGEN_DESCARGAR = 'Imagen-Gallery-';
 
 const RUTAS_IMAGENES_SMALL = [
