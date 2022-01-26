@@ -3,6 +3,7 @@
  * Description: Script para agregar imagenes al carrusel
  * Observations: No se necesita poner algun nombre en especial
  * Comments: Tamaño imgs [Small: 640*480] [Medium/High: 1920*1440] aproximadamente
+ * Comments: El orden de las imagenes para cada arreglo debe respetarse [1-small = 1]
  **/
 
 const NOMBRE_IMAGEN_DESCARGAR = 'Imagen-Gallery-';
