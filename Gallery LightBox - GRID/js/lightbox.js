@@ -1,4 +1,4 @@
-import { RUTAS_IMAGENES, RUTAS_IMAGENES_SMALL, agregarBloquesImg } from './rutas_imagenes.js';
+import { RUTAS_IMAGENES, RUTAS_IMAGENES_SMALL, NOMBRE_IMAGEN_DESCARGAR, agregarBloquesImg } from './rutas_imagenes.js';
 
 //Componentes
 let botonCerrar = document.getElementById('lightbox-button-close'),
@@ -11,7 +11,8 @@ let botonCerrar = document.getElementById('lightbox-button-close'),
     botonLeft = document.getElementById('button-left'),
     lightboxResult1 = document.getElementById('lightbox_result1'),
     lightboxResult2 = document.getElementById('lightbox_result2'),
-    lightboxFooterPlus = document.getElementById('lightbox-footer-plus');
+    lightboxFooterPlus = document.getElementById('lightbox-footer-plus'),
+    lightboxFooterPlusLeft = document.getElementById('lightbox-footer-plus-left');
 
 
 //Carga de bloques en HTML
@@ -27,7 +28,7 @@ lightboxResult2.innerText = RUTAS_IMAGENES.length;
 
 //Variables Globales
 let indexImgSelecterFooter = null,
-    nombreImagen = "Imagen-Gallery-";
+    nombreImagen = NOMBRE_IMAGEN_DESCARGAR;
 
 //Funciones
 function changeNameImg(indexName) {
@@ -76,6 +77,7 @@ function abrirOverlay(event) {
         lightboxResult1.innerText = (indexImgSelecterFooter + 1);
         selecImgFooter(indexImgSelecterFooter);
         imgDownload(RUTAS_IMAGENES[event.target.id], changeNameImg(indexImgSelecterFooter));
+        moverCarrusel()
     }
 }
 
@@ -85,6 +87,7 @@ function cerrarOverlay() {
     removeSelectedFooter(indexImgSelecterFooter);
     overlay.classList.remove('lightbox-overlay--show');
     overlay.classList.add('lightbox-overlay--hidden');
+    imagenesCarruselFooter.style.transform = `translateX(0px)`;
 }
 
 function avanzarImagen() {
@@ -96,6 +99,7 @@ function avanzarImagen() {
     centralImg.src = RUTAS_IMAGENES[indexImgSelecterFooter];
     imgDownload(RUTAS_IMAGENES[indexImgSelecterFooter], changeNameImg(indexImgSelecterFooter));
     paginationCounter(false);
+    moverCarrusel()
 }
 
 function retrocederImagen() {
@@ -107,6 +111,7 @@ function retrocederImagen() {
     centralImg.src = RUTAS_IMAGENES[indexImgSelecterFooter];
     imgDownload(RUTAS_IMAGENES[indexImgSelecterFooter], changeNameImg(indexImgSelecterFooter));
     paginationCounter(true);
+    moverCarrusel()
 }
 
 function cambiarImagenCentral(event) {
@@ -118,11 +123,24 @@ function cambiarImagenCentral(event) {
         selecImgFooter(indexImgSelecterFooter);
         imgDownload(RUTAS_IMAGENES[indexImgSelecterFooter], changeNameImg(indexImgSelecterFooter));
         lightboxResult1.innerText = (indexImgSelecterFooter + 1);
+        moverCarrusel()
     }
 }
 
-function print(texto) {
-    console.log(texto);
+function moverCarrusel() {
+    let totalWidthCarrusel = 0,
+        continuarSumar = true,
+        marginElementoImg = 0;
+    imagenesCarruselFooter.childNodes.forEach(elemento => {
+        if (elemento.nodeName === 'IMG') {
+            if (continuarSumar) totalWidthCarrusel += (elemento.width + marginElementoImg);
+            if (elemento.classList.item(0)) {
+                totalWidthCarrusel -= (elemento.width - marginElementoImg);
+                continuarSumar = false;
+            }
+        }
+    });
+    imagenesCarruselFooter.style.transform = `translateX(-${totalWidthCarrusel}px)`;
 }
 
 //Eventos
@@ -132,3 +150,4 @@ botonRight.addEventListener('click', avanzarImagen);
 botonLeft.addEventListener('click', retrocederImagen);
 imagenesCarruselFooter.addEventListener('click', cambiarImagenCentral);
 lightboxFooterPlus.addEventListener('click', avanzarImagen);
+lightboxFooterPlusLeft.addEventListener('click', retrocederImagen);

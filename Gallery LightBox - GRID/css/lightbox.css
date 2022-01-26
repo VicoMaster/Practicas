@@ -6,7 +6,8 @@
 
 :root {
     --color-background-lightbox: rgb(59, 59, 59);
-    --color-background-overlay: rgba(0, 0, 0, 0.5);
+    --color-background-overlay: rgba(0, 0, 0, 0.9);
+    --color-background-overlay-obscure: rgba(0, 122, 204, 0.8);
     --color-background-menu-overlay: rgba(0, 0, 0, 0.2);
     --color-background-menu-overlay-responsive: rgba(0, 0, 0, 1);
     --color-font-light: rgb(255, 255, 255);
@@ -19,6 +20,7 @@ html {
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 /* Minimal Gallery*/
@@ -26,10 +28,10 @@ html {
     align-items: center;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     justify-content: center;
     position: relative;
-    width: 100vw;
+    width: 100%;
 }
 
 .lightbox-title {
@@ -43,7 +45,8 @@ html {
 .lightbox-gallery {
     display: grid;
     gap: 1.5rem;
-    grid-template: repeat(3, minmax(10rem, 15rem)) / repeat(3, minmax(20rem, 25rem));
+    grid-auto-rows: 15rem;
+    grid-template: repeat(auto-fit, 15rem) / repeat(3, 20rem) ;
     margin: 1rem;
     place-content: center;
     width: 80%;
@@ -77,12 +80,12 @@ html {
     display: flex;
     height: 100vh;
     justify-content: center;
-    position: absolute;
-    width: 100vw;
-    top: 0;
     left: 0;
-    transition: all 100ms ease-in-out;
     overflow: hidden;
+    position: absolute;
+    top: 0;
+    transition: all 100ms ease-in-out;
+    width: 100vw;
 }
 
 .lightbox-overlay--hidden {
@@ -105,8 +108,8 @@ html {
 .lightbox__img-overlay {
     height: 80%;
     left: 0;
-    object-fit: contain;
     margin: 0 auto;
+    object-fit: contain;
     padding: 1rem;
     position: absolute;
     right: 0;
@@ -122,9 +125,9 @@ html {
 }
 
 .lightbox__button--left {
-    left: 5%;
     background: var(--color-background-overlay);
     border-radius: 1rem;
+    left: 5%;
 }
 
 .lightbox__button--right {
@@ -144,16 +147,16 @@ html {
 }
 
 .lightbox__menu {
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     background: var(--color-background-menu-overlay);
+    display: flex;
     height: 8%;
-    width: inherit;
-    top: 0;
+    justify-content: space-between;
     left: 0;
     padding: 2rem;
+    position: absolute;
+    top: 0;
+    width: inherit;
 }
 
 .lightbox-pagination {
@@ -166,12 +169,12 @@ html {
     justify-content: space-evenly;
     text-align: center;
     user-select: none;
-    width: 6rem;
+    width: 10rem;
 }
 
 .lightbox__button--relative {
-    top: 0;
     position: relative;
+    top: 0;
     transform: none;
 }
 
@@ -186,12 +189,13 @@ html {
     overflow: hidden;
     padding: .5rem;
     position: absolute;
-    width: max-content;
     transition: all 100ms ease-in;
+    width: max-content;
 }
 
 .lightbox-footer__plus {
-    background: var(--color-background-overlay);
+    background: var(--color-background-overlay-obscure);
+    border-top-left-radius: .5rem;
     bottom: 0;
     color: var(--color-font-light);
     cursor: pointer;
@@ -207,6 +211,13 @@ html {
     width: 5%;
 }
 
+.lightbox-footer__plus--left {
+    background: var(--color-background-overlay-obscure);
+    border-top-right-radius: .5rem;
+    left: -.5rem;
+    right: none!important;
+}
+
 @media (hover: hover) {
     .lightbox-footer__plus:hover span {
         transform: scale(1.1);
@@ -219,14 +230,13 @@ html {
 
 .lightbox-footer img {
     border: 1px solid var(--color-border-img);
+    cursor: pointer;
     height: 100%;
     margin: 0 .3rem;
     object-fit: cover;
-    width: 10rem;
-    cursor: pointer;
     transition: all 100ms ease-in;
     user-select: none;
-
+    width: 10rem;
 }
 
 @media (hover: hover) {
@@ -241,8 +251,8 @@ html {
 }
 
 .lightbox-footer--selected {
-    transform: scale(0.92);
     border: 3px solid var(--color-border-img-hover) !important;
+    transform: scale(0.92);
 }
 
 /* Responsive */
@@ -280,7 +290,6 @@ html {
     }
 
     .lightbox-footer__plus {
-        background: var(--color-background-menu-overlay-responsive);
         padding-top: 3%;
         width: 10%;
     }
