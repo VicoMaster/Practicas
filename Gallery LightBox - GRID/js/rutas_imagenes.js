@@ -16,12 +16,7 @@ const RUTAS_IMAGENES_SMALL = [
     "img/img6_small.webp",
     "img/img7_small.webp",
     "img/img8_small.webp",
-    "img/img9_small.webp",
-    "img/academy-1.jpg",
-    "img/academy-2.jpg",
-    "img/academy-3.jpg",
-    "img/academy-4.jpg",
-    "img/academy-5.jpg"
+    "img/img9_small.webp"
 ];
 
 const RUTAS_IMAGENES = [
@@ -33,12 +28,7 @@ const RUTAS_IMAGENES = [
     "img/img6.webp",
     "img/img7.webp",
     "img/img8.webp",
-    "img/img9.webp",
-    "img/academy-1.jpg",
-    "img/academy-2.jpg",
-    "img/academy-3.jpg",
-    "img/academy-4.jpg",
-    "img/academy-5.jpg"
+    "img/img9.webp"
 ];
 
 //Devuelve un arreglo de imagenes con las rutas de argumento
