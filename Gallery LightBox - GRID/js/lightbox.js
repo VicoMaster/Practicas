@@ -138,7 +138,7 @@ function cambiarImagenCentral(event) {
 function moverCarrusel() {
     let totalWidthCarrusel = 0,
         continuarSumar = true,
-        marginElementoImg = 0;
+        marginElementoImg = -15; // No tengo idea por qué este numero pero funciona
     imagenesCarruselFooter.childNodes.forEach(elemento => {
         if (elemento.nodeName === 'IMG') {
             if (continuarSumar) totalWidthCarrusel += (elemento.width + marginElementoImg);
@@ -148,6 +148,7 @@ function moverCarrusel() {
             }
         }
     });
+    if (totalWidthCarrusel < 0) totalWidthCarrusel -= totalWidthCarrusel; //fix nomovecarrusel
     imagenesCarruselFooter.style.transform = `translateX(-${totalWidthCarrusel}px)`;
 }
 
