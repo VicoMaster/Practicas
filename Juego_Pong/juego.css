@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --background-game-area: rgb(33, 33, 33);
+    --color-font-white: rgb(255, 255, 255);
+    --color-font-grey: rgb(50, 50, 51);
+    --color-bar: rgb(0, 122, 204);
+    --color-ball: rgb(171, 167, 10);
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-font-white);
+}
+
+
+/* GAME BASE */
+.game-area {
+    align-items: center;
+    background: var(--background-game-area);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    width: 100vw;
+}
+
+.pause-button {
+    cursor: pointer;
+    left: 0;
+    margin: 1.5rem;
+    position: absolute;
+    top: 0;
+    transition: all 300ms ease-in;
+}
+
+.game-title {
+    font-size: 2.2rem;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.game-lifes {
+    font-size: 2rem;
+    font-weight: bolder;
+    position: absolute;
+    right: 2rem;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25rem;
+}
+
+.game-start {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+.game-button {
+    color: var(--color-font-grey);
+    font-size: 2rem;
+    font-weight: bold;
+    height: 8rem;
+    width: 20rem;
+    z-index: 999;
+    transition: all 300ms ease-in;
+}
+
+.game-bar {
+    background: var(--color-bar);
+    border-radius: 2.5rem;
+    bottom: 0;
+    height: 4rem;
+    left: 0;
+    margin-bottom: .5rem;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    width: 40rem;
+}
+
+.game-ball {
+    background: var(--color-ball);
+    border-radius: 2.5rem;
+    height: 3rem;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 3rem;
+    transition: all 500ms ease-in;
+}
+
+/* GAME EFFECTS */
+.opacity-0 {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.init-ball {
+    transform: translateY(41.3vh);
+}

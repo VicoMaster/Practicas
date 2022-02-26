@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FONT GOOGL -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+    <!-- CSS GAME -->
+    <link rel="stylesheet" href="juego.css">
+    <title>Juego</title>
+</head>
+
+<body>
+    <main id="game-area" class="game-area">
+        <header class="game-title">
+            <div id="pause" class="pause-button opacity-0">
+                <span class="iconify" data-icon="ant-design:pause-circle-outlined" style="color: white;"
+                    data-width="45"></span>
+            </div>
+            <h1>THE PONG GAME</h1>
+            <aside class="game-lifes">
+                <output id="lifes" class="game-count-life">
+                    <span>Intentos: </span>
+                    <span class="life">3</span>
+                </output>
+            </aside>
+        </header>
+        <section class="game-start">
+            <button id="play-button" class="game-button">Play</button>
+        </section>
+        <div id="bolita" class="game-ball opacity-0"></div>
+        <div id="barra" class="game-bar"></div>
+    </main>
+    <!-- JS -->
+    <script src="juego.js"></script>
+    <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+</body>
+
+</html>
