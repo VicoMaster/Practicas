@@ -10,11 +10,13 @@ html {
 }
 
 :root {
-    --color-background-arrow: rgba(255, 255, 255, .25);
+    --color-background-arrow: rgba(111, 111, 111, .8);
     --color-background-progress: rgba(255, 255, 255, .4);
     --color-background-border: rgb(227, 186, 8);
     --color-background-banner-bar: rgba(0, 0, 0, 0.5);
-    --color-opacity: rgba(31, 31, 31, .1);
+    --color-opacity: rgba(255, 255, 255, .01);
+    --color-background-textbar: rgba(150, 150, 150, 0.7);
+    /* Z-INDEX */
     --position-z-icon-burguer: 1000;
     --position-z-arrows: 999;
     --position-z-progress: 1001;
@@ -38,13 +40,38 @@ html {
     width: 100%;
 }
 
+/*BARRA DE TEXTO - Top por performance*/
+.container-text-img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.text-bar {
+    align-items: center;
+    background: var(--color-background-textbar);
+    bottom: 4rem;
+    color: white;
+    display: flex;
+    font-size: 2rem;
+    height: 5rem;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    transform: scale(1.1);
+    transition: all 0.5s ease-in;
+    width: 100%;
+}
+
 .container-slider {
-    box-shadow: 0 0 0 10px var(--color-background-border);
-    height: 55rem;
+    border: 1rem solid var(--color-background-border);
+    height: 43rem;
     margin: 1rem;
     overflow: hidden;
     position: relative;
     width: 98rem;
+    box-shadow: 0px 19px 22px 0px #A49B91, 0px 50px 250px 0px rgb(164, 155, 145, 0.7) inset;
 }
 
 /*CONTENEDOR DE ICONOS SUPERIOR*/
@@ -53,7 +80,7 @@ html {
     background: var(--color-background-banner-bar);
     display: flex;
     flex-direction: row;
-    height: 8%;
+    height: 10%;
     justify-content: space-between;
     justify-content: space-between;
     left: 0;
@@ -94,6 +121,7 @@ html {
     .hover-scale:hover {
         transform: scale(1.1);
     }
+
     .hover-scale:active {
         transform: scale(.95);
     }
@@ -168,7 +196,7 @@ html {
     bottom: 0;
 }
 
-.overlay {
+.overlay-banner {
     width: 100%;
     height: 100%;
     background: var(--color-opacity);
@@ -203,13 +231,15 @@ html {
     background: var(--color-background-arrow);
     cursor: pointer;
     display: flex;
-    height: 100%;
+    height: 15%;
     justify-content: center;
     position: absolute;
-    top: 0;
+    top: 40%;
     transition: all 150ms ease-out;
     width: 6rem;
+    margin: 0 1rem;
     z-index: var(--position-z-arrows);
+    border-radius: 2.5rem;
 }
 
 .container__arrow:hover {
@@ -262,6 +292,23 @@ html {
     transform: scale(.95);
 }
 
+/* RESPONSIVE */
+
+@media (max-width: 1020px) {
+    .banner-bottom::before {
+        display: none;
+    }
+
+    .banner-bottom::after {
+        display: none;
+    }
+
+    .container-slider {
+        box-shadow: none;
+        height: 50rem;
+    }
+}
+
 @media (max-width: 900px) {
 
     /*Fix Responsive mobile*/
@@ -277,4 +324,13 @@ html {
         width: 3rem;
     }
 
+    .text-bar {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .container-slider {
+        height: 43rem;
+    }
 }

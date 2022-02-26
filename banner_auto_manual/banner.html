@@ -18,6 +18,14 @@
 <body>
     <div class="container-banner">
         <div class="container-slider">
+            <!-- ARROWS -->
+            <div id="left-arrow" class="container__arrow bar--left">
+                <span class="iconify" data-icon="akar-icons:chevron-left" style="color: white;" data-width="50"></span>
+            </div>
+            <div id="right-arrow" class="container__arrow bar--right">
+                <span class="iconify" data-icon="akar-icons:chevron-right" style="color: white;" data-width="50"></span>
+            </div>
+            <!-- TOP BAR -->
             <div class="banner-bar banner-top">
                 <div class="container-icons-left">
                     <div id="button-hamburguer" class="icon-banner hover-scale icon-hamburguesa"></div>
@@ -31,31 +39,55 @@
                         class="icon-banner icon-facebook hover-scale"></a>
                 </div>
             </div>
+            <!-- BOTTOM BAR -->
             <div class="banner-bar banner-bottom"></div>
-            <div class="overlay"></div>
+            <div id="overlay-banner" class="overlay-banner"></div>
             <div class="slider" id="slider">
                 <div class="slider__section">
-                    <img src="img/high/1.webp" alt="" class="slider__img">
+                    <div class="container-text-img">
+                        <!-- Barra de texto -->
+                        <div id="text-bar" class="text-bar">
+                            <h3>DISCIPLINA, RESPETO Y TRADICI&Oacute;N</h3>
+                        </div>
+                        <img src="" alt="" class="slider__img section-img">
+                    </div>
                 </div>
                 <div class="slider__section">
-                    <img src="img/high/2.webp" alt="" class="slider__img">
+                    <div class="container-text-img">
+                        <!-- Barra de texto -->
+                        <div id="text-bar" class="text-bar">
+                            <h3>LINAJE DE GRANDES MAESTROS</h3>
+                        </div>
+                        <img src="" alt="" class="slider__img section-img">
+                    </div>
                 </div>
                 <div class="slider__section">
-                    <img src="img/high/3.webp" alt="" class="slider__img">
+                    <div class="container-text-img">
+                        <!-- Barra de texto -->
+                        <div id="text-bar" class="text-bar">
+                            <h3>ENSEÑANZAS ANCESTRALES</h3>
+                        </div>
+                        <img src="" alt="" class="slider__img section-img">
+                    </div>
                 </div>
                 <div class="slider__section">
-                    <img src="img/high/4.webp" alt="" class="slider__img">
+                    <div class="container-text-img">
+                        <!-- Barra de texto -->
+                        <div id="text-bar" class="text-bar">
+                            <h3>LEGADO INMORTAL</h3>
+                        </div>
+                        <img src="" alt="" class="slider__img section-img">
+                    </div>
                 </div>
                 <div class="slider__section">
-                    <img src="img/high/5.webp" alt="" class="slider__img">
+                    <div class="container-text-img">
+                        <!-- Barra de texto -->
+                        <div id="text-bar" class="text-bar">
+                            <h3>TEXTO DEL BANNER</h3>
+                        </div>
+                        <img src="" alt="" class="slider__img section-img">
+                    </div>
                 </div>
-            </div>
-            <!-- ARROWS -->
-            <div id="left-arrow" class="container__arrow bar--left">
-                <span class="iconify" data-icon="akar-icons:chevron-left" style="color: white;" data-width="50"></span>
-            </div>
-            <div id="right-arrow" class="container__arrow bar--right">
-                <span class="iconify" data-icon="akar-icons:chevron-right" style="color: white;" data-width="50"></span>
             </div>
             <!-- PROGRESS -->
             <div id="container-progress" class="container-progress__bar">
@@ -69,7 +101,7 @@
     </div>
 
     <!-- js -->
-    <script src="js/banner.js"></script>
+    <script type="module" src="js/banner.js"></script>
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
 </body>
 

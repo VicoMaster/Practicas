@@ -5,17 +5,38 @@
  * Fecha: 02/12/2021
  */
 
+//Import datos de las imagenes para agregar
+import { PACK_IMAGENES } from './rutas-img.js';
+
 const flecha_izquierda = document.getElementById('left-arrow');
 const flecha_derecha = document.getElementById('right-arrow');
 const slider = document.getElementById('slider');
 const progress_bar = document.querySelectorAll('.progress__bar');
 const container_progress = document.getElementById('container-progress');
+const overlayBanner = document.getElementById('overlay-banner');
+let sectionImg = document.querySelectorAll('.section-img');
 //Ponemos el color inicial al elemento 1 del progress_bar
-const color_progress = 'rgba(60, 64, 198, .9)';
+const color_progress = 'rgb(227, 186, 8)';
 const color_white = 'rgba(255, 255, 255, .4)';
 progress_bar[0].style.background = color_progress;
 
-let position = 0;
+//GLOBAL VARIABLES
+let position = 0,
+    widthOverlayBanner = overlayBanner.offsetWidth;
+
+//CARGA DE IMAGENES EN EL BANNER POR ANCHO DEL CONTENEDOR
+function chargeImgBanner() {
+    if (widthOverlayBanner > 700) {
+        sectionImg.forEach((img, index) => {
+            img.src = PACK_IMAGENES[0][index]; //Pack IMG Large
+        });
+    } else {
+        sectionImg.forEach((img, index) => {
+            img.src = PACK_IMAGENES[1][index]; //Pack IMG MOBILE
+        });
+    }
+}
+chargeImgBanner();
 
 //FUNCION PARA BACKGROUND BARRAS DE PROGRESO
 const next_progress = () => {
@@ -53,7 +74,6 @@ function avance() {
     next_progress();
     slider.style.transform = `translateX(${position}%)`;
 }
-flecha_derecha.addEventListener('click', avance);
 
 //FUNCION DE RETROCESO
 function retroceso() {
@@ -65,7 +85,6 @@ function retroceso() {
     next_progress();
     slider.style.transform = `translateX(${position}%)`;
 }
-flecha_izquierda.addEventListener('click', retroceso);
 
 //FUNCION PROPAGADORA PARA BARRAS DE PROGRESO
 container_progress.addEventListener('click', (evento) => {
@@ -104,6 +123,49 @@ container_progress.addEventListener('click', (evento) => {
     }
 })
 
+//FUNCIONES TOUCH
+let touchPixelsMove = 0,
+    movimientoToqueTouch = 0,
+    primerToqueTouch = 0;
+function galleryMoveOverlay(event) {
+    touchPixelsMove++;
+    movimientoToqueTouch = event.touches[0].clientX;
+}
+
+function galleryMoveOverlayEnd() {
+    if (touchPixelsMove > 2) {
+        if (primerToqueTouch > movimientoToqueTouch) {
+            avance();
+        }
+        if (primerToqueTouch < movimientoToqueTouch) {
+            retroceso();
+        }
+    }
+    touchPixelsMove = 0;
+    primerToqueTouch = 0;
+}
+
+function galleryMoveOverlaystart(event) {
+    primerToqueTouch = event.touches[0].clientX;
+}
+
+//EVENTOS
+flecha_derecha.addEventListener('click', avance);
+flecha_izquierda.addEventListener('click', retroceso);
+overlayBanner.addEventListener('touchmove', galleryMoveOverlay);
+overlayBanner.addEventListener('touchend', galleryMoveOverlayEnd);
+overlayBanner.addEventListener('touchstart', galleryMoveOverlaystart);
+
+
+function resizeWindow() {
+    widthOverlayBanner = overlayBanner.offsetWidth;
+    chargeImgBanner();
+}
+window.onresize = resizeWindow;
+
+
 //FUNCION DE AVANCE CON EL TIEMPO
-let auto_avance = setInterval(avance,3000);
-window.onload = auto_avance;
+let auto_avance = setInterval(avance, 3000);
+window.onload = auto_avance; //Solo puede haber una llamada en toda la página web... verificar donde se llama este metodo de window
+
+//TENER EN CUENTA QUE LA FUNCION LLAMADA CON window.onload DEBERA SER LLAMADA DONDE SE EJECUTE PRIMERO ESTE METODO
