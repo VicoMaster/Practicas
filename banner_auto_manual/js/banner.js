@@ -6,7 +6,7 @@
  */
 
 //Import datos de las imagenes para agregar
-import { PACK_IMAGENES } from './rutas-img.js';
+import { PACK_IMAGENES } from './banner-rutas-img.js';
 
 const flecha_izquierda = document.getElementById('left-arrow');
 const flecha_derecha = document.getElementById('right-arrow');
