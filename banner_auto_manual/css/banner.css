@@ -10,30 +10,162 @@ html {
 }
 
 :root {
-    --color-background-container: rgb(60, 64, 198);
     --color-background-arrow: rgba(255, 255, 255, .25);
     --color-background-progress: rgba(255, 255, 255, .4);
-    --color-opacity: rgba(31, 31, 31, .2);
+    --color-background-border: rgb(227, 186, 8);
+    --color-background-banner-bar: rgba(0, 0, 0, 0.5);
+    --color-opacity: rgba(31, 31, 31, .1);
+    --position-z-icon-burguer: 1000;
     --position-z-arrows: 999;
-    --position-z-progress: 998;
-    --position-z-overlay: 997; 
+    --position-z-progress: 1001;
+    --position-z-overlay: 997;
+    --position-z-banner-bar: 1000;
+    /*ICONOS*/
+    --icon-hamburguer: url(../img/icon-hamburguesa.png);
+    --icon-facebook: url(../img/logo-facebook.png);
+    --icon-youtube: url(../img/icon-youtube.png);
+    --icon-wiki: url(../img/icon_wiki.png);
+    /*LOGOS*/
+    --logo-academy: url(../img/logo_academy.png);
+    --logo-fcdw: url(../img/logo_fcdw.png);
 }
 
-.container {
+.container-banner {
     align-items: center;
-    background: var(--color-background-container);
     display: flex;
-    height: 100vh;
+    height: 100%;
     justify-content: center;
     width: 100%;
 }
 
 .container-slider {
+    box-shadow: 0 0 0 10px var(--color-background-border);
     height: 55rem;
-    width: 90%;
+    margin: 1rem;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 0 0 10px #fff;
+    width: 98rem;
+}
+
+/*CONTENEDOR DE ICONOS SUPERIOR*/
+.banner-bar {
+    align-items: center;
+    background: var(--color-background-banner-bar);
+    display: flex;
+    flex-direction: row;
+    height: 8%;
+    justify-content: space-between;
+    justify-content: space-between;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: var(--position-z-banner-bar);
+
+}
+
+.container-icons-right, .container-icons-left {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 50%;
+}
+
+.container-icons-right {
+    flex-direction: row-reverse;
+}
+
+.icon-hamburguesa {
+    background-image: var(--icon-hamburguer);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    cursor: pointer;
+}
+
+.icon-banner {
+    height: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 50px;
+}
+
+
+@media (hover: hover) {
+    .hover-scale:hover {
+        transform: scale(1.1);
+    }
+    .hover-scale:active {
+        transform: scale(.95);
+    }
+}
+
+.icon-hamburguesa {
+    background-image: var(--icon-hamburguer);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    cursor: pointer;
+}
+
+.icon-facebook {
+    background-image: var(--icon-facebook);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+}
+
+.icon-youtube {
+    background-image: var(--icon-youtube);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40px 30px;
+}
+
+.icon-wiki {
+    background-image: var(--icon-wiki);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+}
+
+/* LOGOS BOTTOM BAR */
+.banner-bottom::before {
+    background-image: var(--logo-academy);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 65px 65px;
+    bottom: 0;
+    content: "";
+    height: 70px;
+    left: 0;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    position: absolute;
+    width: 70px;
+}
+
+.banner-bottom::after {
+    background-image: var(--logo-fcdw);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 65px 65px;
+    bottom: 0;
+    content: "";
+    height: 70px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    position: absolute;
+    right: 0;
+    width: 70px;
+}
+
+
+.banner-top {
+    top: 0;
+}
+
+.banner-bottom {
+    bottom: 0;
 }
 
 .overlay {
@@ -125,20 +257,24 @@ html {
 .progress__bar:hover {
     transform: scale(1.1);
 }
+
 .progress__bar:active {
     transform: scale(.95);
 }
 
 @media (max-width: 900px) {
+
     /*Fix Responsive mobile*/
     .container__arrow:hover {
         transform: scale(1);
     }
+
     .progress__bar:hover {
         transform: scale(1);
     }
+
     .progress__bar {
         width: 3rem;
     }
-    
+
 }
