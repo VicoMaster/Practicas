@@ -1,3 +1,5 @@
+// PRACTICA DE FORMULARIO CON EL OBJETO formData
+
 //Rescatamos componentes HTML - Symbol $ para DOM
 let $contactFormOne = document.getElementById('contact-form-1'),
     $imgPreviewForm = document.getElementById('image'),
@@ -20,7 +22,7 @@ function dataPreview(dataForm = {}) {
 //Evento Submit
 $contactFormOne.addEventListener('submit', event => {
     event.preventDefault();
-    const dataContactForm = new FormData(c$ontactFormOne);
+    const dataContactForm = new FormData($contactFormOne);
     dataPreview(dataContactForm);
     alert('SE HA ENVIADO LA INFO...')
 });
