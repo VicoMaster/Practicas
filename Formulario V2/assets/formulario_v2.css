@@ -1,0 +1,252 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: 'Roboto', sans-serif;
+    font-size: 62.5%;
+}
+
+:root {
+    /* FUENTE */
+    --fontsize-small: 1.4rem;
+    --fontsize-normal: 1.6rem;
+    --fontsize-normal-plus: 1.8rem;
+    --fontsize-title: 2rem;
+    /* BACKGROUND */
+    --background-container-form-v2: rgb(51, 51, 51);
+    --background-group-message: rgba(243, 95, 93);
+    /* COLORES */
+    --color-text-ligth: rgb(255, 255, 255);
+    --color-text-dark: rgb(51, 51, 51);
+    --color-text-grey: rgb(200, 200, 200);
+    --color-text-error: rgb(255, 0, 0);
+    --color-border-focus: rgb(51, 135, 204);
+    --color-white: rgb(255, 255, 255);
+    --color-dark: rgb(33, 33, 33);
+    --color-dark-hover: rgb(53, 53, 53);
+    --color-success: rgba(17, 146, 0, .6);
+}
+
+/* CONTENEDOR FORMULARIO */
+
+.container-form {
+    align-items: center;
+    background-color: var(--background-container-form-v2);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    width: 100%;
+}
+
+/* FORMULARIO */
+
+.form {
+    column-gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    max-width: 100rem;
+    min-width: 100rem;
+}
+
+/* GRUPOS */
+
+.form__group {
+    margin-bottom: 2.5rem;
+    width: 100%;
+}
+
+.form__input-group {
+    position: relative;
+}
+
+.form__input-group input[type="text"],
+.form__input-group input[type="email"],
+.form__input-group input[type="tel"],
+.form__input-group input[type="password"] {
+    border-radius: .8rem;
+    border: .2rem solid transparent;
+    color: var(--color-text-dark);
+    font-size: var(--fontsize-normal-plus);
+    outline: none;
+    padding: .5rem 1.5rem .5rem 1.5rem;
+    transition: all 200ms ease-in-out;
+    width: 100%;
+}
+
+@media (hover: hover) {
+
+    .form__input-group input[type="text"]:hover,
+    .form__input-group input[type="email"]:hover,
+    .form__input-group input[type="tel"]:hover,
+    .form__input-group input[type="password"]:hover {
+        border: .2rem solid var(--color-border-focus);
+    }
+
+}
+
+.form__input-group input[type="text"]:focus,
+.form__input-group input[type="email"]:focus,
+.form__input-group input[type="tel"]:focus,
+.form__input-group input[type="password"]:focus {
+    border: .2rem solid var(--color-border-focus);
+}
+
+.form_checkbox {
+    height: var(--fontsize-normal-plus);
+    width: var(--fontsize-normal-plus);
+}
+
+.form_checkbox:checked {
+    background-color: red;
+    border-color: red;
+    border: .2rem solid transparent;
+}
+
+.form__group--max-width {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    grid-column: span 2;
+    justify-content: center;
+}
+
+.form__group-message {
+    background-color: var(--background-group-message);
+    color: var(--color-text-dark);
+    font-size: var(--fontsize-normal-plus);
+    height: 5rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+/* COMPONENTES GRUPOS */
+
+.form__icon-state {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.form__icon-state--outline {
+    right: -1.5rem;
+}
+
+.form__label {
+    border: .1rem solid transparent;
+    font-size: var(--fontsize-title);
+    padding: .5rem;
+    width: 100%;
+}
+
+.label--ligth {
+    color: var(--color-text-ligth);
+}
+
+.label--dark {
+    color: var(--color-text-dark);
+}
+
+.form__message-help {
+    color: var(--color-text-grey);
+    font-size: var(--fontsize-small);
+    padding: .5rem;
+}
+
+.form_button {
+    background-color: var(--color-dark);
+    border-radius: .4rem;
+    border: .2rem solid transparent;
+    border: none;
+    color: var(--color-white);
+    font-size: var(--fontsize-normal-plus);
+    font-weight: bold;
+    height: 6rem;
+    margin-bottom: 1rem;
+    outline: none;
+    transition: all 50ms ease-in-out;
+    width: 30rem;
+}
+
+.form_button:focus {
+    border: .2rem solid var(--color-border-focus);
+}
+
+.form_button:active {
+    border: .2rem solid var(--color-border-focus);
+    transform: scale(.98);
+}
+
+@media (hover:hover) {
+    .form_button:hover {
+        background-color: var(--color-dark-hover);
+        border: .2rem solid var(--color-border-focus);
+    }
+}
+
+.form__message-success {
+    background-color: var(--color-success);
+    color: var(--color-text-ligth);
+    font-size: var(--fontsize-normal-plus);
+    font-weight: bold;
+    height: 5rem;
+    line-height: 5rem;
+    text-align: center;
+    width: 100%;
+}
+
+/* VALIDACIONES */
+
+.form__invalid {
+    border-color: var(--color-text-error);
+    color: var(--color-text-error);
+}
+
+.form__valid {
+    border-color: var(--color-success);
+    color: var(--color-success);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1020px) {
+
+    :root {
+        /* FUENTE */
+        --fontsize-normal-plus: 1.6rem;
+        --fontsize-normal: 1.4rem;
+        --fontsize-small: 1.2rem;
+        --fontsize-title: 1.8rem;
+    }
+
+    /* CONTENEDOR FORMULARIO */
+    .container-form {
+        height: 100%;
+    }
+
+    /* FORMULARIO */
+    .form {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        min-width: 100%;
+        padding: 2.5rem;
+    }
+
+    /* GRUPOS */
+    .form__group--max-width {
+        grid-column: 1;
+    }
+}
+
+@media (max-width: 400px) {
+
+    /* COMPONENTES */
+    .form__icon-state--outline {
+        right: .8rem;
+    }
+}

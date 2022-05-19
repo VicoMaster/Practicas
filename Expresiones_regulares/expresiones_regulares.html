@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- CSS Project -->
+    <link rel="stylesheet" href="assets/styles.css">
+    <title>Expresiones regulares</title>
+</head>
+
+<body>
+    <main class="container">
+
+        <header class="row">
+            <section class="col-12 text-center mt-3">
+                <h1>EXPRESIONES REGULARES</h1>
+            </section>
+        </header>
+
+        <section class="row">
+            <article class="col-12">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Glosario - Keywords<small>&#160;&#160;(Búsqueda)</small>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">
+                                        Escriba la coincidencia y presione ENTER &#8618;
+                                    </label>
+                                    <input type="text" class="form-control" id="inputKey" aria-describedby="emailHelp"
+                                        placeholder="Ejemplo: A,z,g,W,(),[]">
+                                    <div id="emailHelp" class="form-text">Para múltiples búsquedas separarlas por coma (
+                                        , ) <p style="color: red;"> Lógica no acabada por falta de tiempo.</p> </div>
+                                    <div id="root" class="p-2 root background-to-read"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Accordion Item #2
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <strong>This is the second item's accordion body.</strong> It is hidden by default,
+                                until the collapse plugin adds the appropriate classes that we use to style each
+                                element. These classes control the overall appearance, as well as the showing and hiding
+                                via CSS transitions. You can modify any of this with custom CSS or overriding our
+                                default variables. It's also worth noting that just about any HTML can go within the
+                                <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-2">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Banco de Datos <small>&#160;&#160;(Muchos datos)</small>
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body background-to-read">
+                                <!-- Escape para Caracter -->
+                                <p>Escape para Caracter</p>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><code>\</code></td>
+                                            <td>BackSlash (para símbolos) ejemplo: <code>\.</code></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- Coincidencias Básicas -->
+                                <p>Coincidencias Básicas</p>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><code>.</code></td>
+                                            <td>Cualquier Carácter, excepto nueva línea</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\d</code></td>
+                                            <td>Cualquier Dígitos (0-9)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\D</code></td>
+                                            <td>No es un Dígito (0-9)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\w</code></td>
+                                            <td>Caracter de Palabra (a-z, A-Z, 0-9, _)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\W</code></td>
+                                            <td>No es un Carácter de Palabra.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\s</code></td>
+                                            <td>Espacios de cualquier tipo. (espacio, tab, nueva línea)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\S</code></td>
+                                            <td>No es un Espacio, Tab o nueva línea.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\t</code></td>
+                                            <td>Coincide con una tabulación horizontal.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\r</code></td>
+                                            <td>Coincide con un retorno de carro.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\n</code></td>
+                                            <td>Coincide con un salto de línea.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\v</code></td>
+                                            <td>Coincide con una tabulación vertical.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\f</code></td>
+                                            <td>Coincide con un caracter de avance de página.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>[\b]</code></td>
+                                            <td>Coincide con un caracter de retroceso.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\0</code></td>
+                                            <td>Coincide con un caracter NUL. No sigue a este con otro dígito.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\cX</code></td>
+                                            <td>
+                                                Coincide con un caracter de control usando notación de acento
+                                                circunflejo, donde "X" es una letra de la A a la Z (correspondiente a
+                                                los puntos de código U+0001-U+001F). Por ejemplo, /\cM/ reconoce el
+                                                caracter "\r" en "\r\n".
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\xhh</code></td>
+                                            <td>Busca el caracter con el código hh (dos dígitos hexadecimales).</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\uhhhh</code></td>
+                                            <td>
+                                                Busca una unidad de código UTF-16 con el valor hhhh (cuatro dígitos
+                                                hexadecimales).
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\u{hhhh}</code></td>
+                                            <td>
+                                                (Solo cuando se establece el indicador u). Busca el caracter con el
+                                                valor Unicode U+hhhh o U+hhhhh
+                                                (dígitos hexadecimales).
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- Límites o Aserciones -->
+                                <p>Límites o Aserciones</p>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><code>\b</code></td>
+                                            <td>Límite de Palabra</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>\B</code></td>
+                                            <td>No es un Límite de Palabra</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>^</code></td>
+                                            <td>Inicio de una cadena de texto</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>$</code></td>
+                                            <td>Final de una cadena de texto</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>x(?=y)</code></td>
+                                            <td>
+                                                <u>Aserción anticipada:</u> Coincide con "x" solo si "x" va seguida de
+                                                "y". Por
+                                                ejemplo, <code>/Jack(?=Sprat)/</code> reconocerá a "Jack" solo si
+                                                va seguida de "Sprat". <br>
+                                                <code>/Jack(?=Sprat|Frost)/</code> encontrará a "Jack" solo si va
+                                                seguida de "Sprat"
+                                                o "Frost". Sin embargo, ni "Sprat" ni "Frost"
+                                                forman parte del resultado.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>x(?!y)</code></td>
+                                            <td>
+                                                <u>Aserción de búsqueda anticipada negativa:</u> reconoce la "x" solo si
+                                                la "x" no va seguida de "y". Por
+                                                ejemplo, <code>/\d+(?!\.)/</code>
+                                                reconoce un número solo si no va seguido de un punto decimal.
+                                                <code>/\d+(?!\.)/.exec('3.141')</code> halla el "141" pero no
+                                                el "3".
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>(?<=y)x</code></td>
+                                            <td>
+                                                <u>Aserción de búsqueda inversa:</u> encontrará "x" solo si "x" está
+                                                precedida por "y" . Por ejemplo,
+                                                <code>/(?<=Jack)Sprat/</code>
+                                                reconoce a "Sprat" solo si está precedido por "Jack".
+                                                <code>/(?<=Jack|Tom)Sprat/</code> empareja "Sprat" solo si
+                                                está precedido
+                                                por "Jack" o "Tom" . Sin embargo, ni "Jack" ni "Tom" forman parte del
+                                                resultado.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>(?<&#33;y)x</code></td>
+                                            <td>
+                                                <u>Aserción de búsqueda inversa negativa:</u> Reconoce la "x" solo si
+                                                "x" no está precedida por "y" . Por
+                                                ejemplo,
+                                                <code>/(?<&#33;-)\d+/</code> encuentra un número solo si no está
+                                                precedido por un signo menos.
+                                                <code>/(?<&#33;-)\d+/.exec('3')</code> encuentra el
+                                                "3".<code>/(?<&#33;-)\d+/.exec('-3')</code>
+                                                no lo reconoce porque el número está precedido por el signo menos.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- Cuantificadores: -->
+                                <p>Cuantificadores:</p>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><code>*</code></td>
+                                            <td>0 o Más</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>+</code></td>
+                                            <td>1 o Más</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>?</code></td>
+                                            <td>0 o Uno</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>{3}</code></td>
+                                            <td>Número Exacto</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>{3,4}</code></td>
+                                            <td>Rango de Números (Mínimo, Máximo)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- Conjuntos de Caracteres -->
+                                <p>Conjuntos de Caracteres</p>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><code>[]</code></td>
+                                            <td>
+                                                Caracteres dentro de los brackets.
+                                                Por ejemplo, <code>[abcd]</code> es lo mismo que <code>[a-d]</code>.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>[^]</code></td>
+                                            <td>Caracteres que NO ESTÁN dentro de los brackets</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- Grupos -->
+                                <p>Grupos</p>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><code>()</code></td>
+                                            <td>Grupo. Por ejemplo: <code>(449|448)</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>|</code></td>
+                                            <td>Uno u otro</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- Métodos para RegExp -->
+                                <p>Métodos para RegExp</p>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><code>exec()</code></td>
+                                            <td>Ejecuta una búsqueda por una coincidencia en una cadena. Devuelve un
+                                                arreglo de información o null en una discrepancia.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>test()</code></td>
+                                            <td>Prueba una coincidencia en una cadena. Devuelve true o false.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>match()</code></td>
+                                            <td>
+                                                Devuelve un arreglo que contiene todas las coincidencias, incluidos los
+                                                grupos de captura, o null si no se encuentra ninguna coincidencia.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>matchAll()</code></td>
+                                            <td>
+                                                Devuelve un iterador que contiene todas las coincidencias, incluidos los
+                                                grupos de captura.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>search()</code></td>
+                                            <td>
+                                                Prueba una coincidencia en una cadena. Devuelve el índice de la
+                                                coincidencia, o -1 si la búsqueda falla.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>replace()</code></td>
+                                            <td>
+                                                Ejecuta una búsqueda por una coincidencia en una cadena y reemplaza la
+                                                subcadena coincidente con una subcadena de reemplazo.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>replaceAll()</code></td>
+                                            <td>
+                                                Ejecuta una búsqueda de todas las coincidencias en una cadena y
+                                                reemplaza las subcadenas coincidentes con una subcadena de reemplazo.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>split()</code></td>
+                                            <td>
+                                                Utiliza una expresión regular o una cadena fija para dividir una cadena
+                                                en un arreglo de subcadenas.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- Banderas -->
+                                <p>Banderas</p>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><code>g</code></td>
+                                            <td>Búsqueda global.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>i</code></td>
+                                            <td>Búsqueda que no distingue entre mayúsculas y minúsculas.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>m</code></td>
+                                            <td>Búsqueda multilínea.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>s</code></td>
+                                            <td>Permite que el . coincida con caracteres de nueva línea.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>u</code></td>
+                                            <td>"unicode"; tratar un patrón como una secuencia de puntos de código
+                                                Unicode.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>y</code></td>
+                                            <td>
+                                                Realiza una búsqueda "pegajosa" que coincida a partir de la posición
+                                                actual en la cadena de destino. Consulta
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+
+
+
+
+    <!--Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <!-- Script Regexp-->
+    <script src="assets/expresiones.js"></script>
+</body>
+
+</html>

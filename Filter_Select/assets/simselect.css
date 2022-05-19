@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --background-color-dark: rgb(31, 31, 31);
+    --background-color-white: white;
+    --background-hover-option: #3366CC;
+    --color-text-normal: black;
+    --color-border-input: grey;
+    --color-text-light: white;
+}
+
+/* RETIRAR BODY PARA IMPLEMENTAR */
+body {
+    height: 100vh;
+    width: 100%;
+    background-color: var(--background-color-dark);
+}
+
+/* SIMSELECT */
+.simselect {
+    font-size: 62.5%;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 4em;
+    max-height: 4em;
+    width: 100%;
+    z-index: 999;
+}
+
+/* CABECERA */
+.simselect-header {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 0 1em;
+    background-color: var(--background-color-white);
+    border: 1px solid var(--color-border-input);
+    border-radius: .4em;
+}
+
+.simselect-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1.6em;
+    cursor: pointer;
+}
+
+.simselect-input::placeholder {
+    color: var(--color-text-normal);
+}
+
+.simselect-icon {
+    margin-top: .5em;
+    cursor: pointer;
+}
+
+/* OPTIONS */
+.simselect-options {
+    background-color: var(--background-color-white);
+    width: 100%;
+    height: 30em;
+    padding: .5em;
+    overflow-y: scroll;
+}
+
+.simselect-filter {
+    width: 100%;
+    height: 2em;
+    border: 1px solid var(--color-border-input);
+    padding: 0 .5em;
+    margin-bottom: .5em;
+    font-size: 1.5em;
+    outline-color: var(--background-hover-option);
+}
+
+.simselect__option {
+    font-size: 1.6em;
+    height: 1.8em;
+    line-height: 2em;
+    padding-left: .5em;
+    cursor: pointer;
+}
+
+@media (hover: hover) {
+    .simselect__option:hover {
+        background-color: var(--background-hover-option);
+        color: var(--color-text-light);
+    }
+}
+
+/* GENERALES */
+.simselect-hidden {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}

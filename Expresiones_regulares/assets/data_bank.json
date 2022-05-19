@@ -1,0 +1,68 @@
+{
+    "Escape para Caracter": {
+        "\\": "BackSlash (para símbolos) ejemplo: <code>\\.</code>"
+    },
+    "Coincidencias Básicas": {
+        ".": "Cualquier Carácter, excepto nueva línea",
+        "\\d": "Cualquier Dígitos (0-9)",
+        "\\D": "No es un Dígito (0-9)",
+        "\\w": "Caracter de Palabra (a-z, A-Z, 0-9, _)",
+        "\\W": "No es un Carácter de Palabra.",
+        "\\s": "Espacios de cualquier tipo. (espacio, tab, nueva línea)",
+        "\\S": "No es un Espacio, Tab o nueva línea.",
+        "\\t": "Coincide con una tabulación horizontal.",
+        "\\r": "Coincide con un retorno de carro.",
+        "\\n": "Coincide con un salto de línea.",
+        "\\v": "Coincide con una tabulación vertical.",
+        "\\f": "Coincide con un caracter de avance de página.",
+        "[\\b]": "Coincide con un caracter de retroceso.",
+        "\\0": "Coincide con un caracter NUL. No sigue a este con otro dígito.",
+        "\\cX": "Coincide con un caracter de control usando notación de acento circunflejo, donde 'X' es una letra de la A a la Z (correspondiente a los puntos de código U+0001-U+001F). Por ejemplo, /\\cM/ reconoce el caracter '\\r' en '\\r\\n'.",
+        "\\xhh": "Busca el caracter con el código hh (dos dígitos hexadecimales).",
+        "\\uhhhh": "Busca una unidad de código UTF-16 con el valor hhhh (cuatro dígitos hexadecimales).",
+        "\\u{hhhh}": "(Solo cuando se establece el indicador u). Busca el caracter con el valor Unicode U+hhhh o U+hhhhh (dígitos hexadecimales)."
+    },
+    "Límites o Aserciones": {
+        "\\b": "Límite de Palabra",
+        "\\B": "No es un Límite de Palabra",
+        "^": "Inicio de una cadena de texto",
+        "$": "Final de una cadena de texto",
+        "x(?=y)": "<u>Aserción de búsqueda anticipada negativa:</u> reconoce la 'x' solo si la 'x' no va seguida de 'y'. Por ejemplo, <code>/\\d+(?!\\.)/</code> reconoce un número solo si no va seguido de un punto decimal. <code>/\\d+(?!\\.)/.exec('3.141')</code> halla el '141' pero no el '3'.",
+        "x(?!y)": "Límite de Palabra",
+        "(?<=y)x": "Límite de Palabra",
+        "(?<!y)x": "Límite de Palabra"
+    },
+    "Cuantificadores": {
+        "*": "0 o Más",
+        "+": "1 o Más",
+        "?": "0 o Uno",
+        "{3}": "Número Exacto",
+        "{3,4}": "Rango de Números (Mínimo, Máximo)"
+    },
+    "Conjuntos de Caracteres": {
+        "[]": "Caracteres dentro de los brackets. Por ejemplo, <code>[abcd]</code> es lo mismo que <code>[a-d]</code>.",
+        "[^]": "Caracteres que NO ESTÁN dentro de los brackets"
+    },
+    "Grupos": {
+        "()": "Grupo. Por ejemplo: <code>(449|448)</code>",
+        "|": "Uno u otro"
+    },
+    "Métodos para RegExp": {
+        "exec()": "Ejecuta una búsqueda por una coincidencia en una cadena. Devuelve un arreglo de información o null en una discrepancia.",
+        "test()": "Prueba una coincidencia en una cadena. Devuelve true o false.",
+        "match()": "Devuelve un arreglo que contiene todas las coincidencias, incluidos los grupos de captura, o null si no se encuentra ninguna coincidencia.",
+        "matchAll()": "Devuelve un iterador que contiene todas las coincidencias, incluidos los grupos de captura.",
+        "search()": "Prueba una coincidencia en una cadena. Devuelve el índice de la coincidencia, o -1 si la búsqueda falla.",
+        "replace()": "Ejecuta una búsqueda por una coincidencia en una cadena y reemplaza la subcadena coincidente con una subcadena de reemplazo.",
+        "replaceAll()": "Ejecuta una búsqueda de todas las coincidencias en una cadena y reemplaza las subcadenas coincidentes con una subcadena de reemplazo.",
+        "split()": "Utiliza una expresión regular o una cadena fija para dividir una cadena en un arreglo de subcadenas."
+    },
+    "Banderas": {
+        "g": "Búsqueda global.",
+        "i": "Búsqueda que no distingue entre mayúsculas y minúsculas.",
+        "m": "Búsqueda multilínea.",
+        "s": "Permite que el . coincida con caracteres de nueva línea.",
+        "u": "'unicode'; tratar un patrón como una secuencia de puntos de código Unicode.",
+        "y": "Realiza una búsqueda 'pegajosa' que coincida a partir de la posición actual en la cadena de destino. Consulta"
+    }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/simCalendar.css">
+    <title>Mi Calendar</title>
+</head>
+
+<body>
+    <!-- INIT OVERLAY  CALENDAR - NIVEL DE PAGINA : EN LO POSIBLE DEJAR AL COMIENZO DEL BODY -->
+    <section id="overlay-simcalendar" name="overlay-simcalendar" class="overlay-simcalendar simcalendar--hidden">
+    </section>
+    <!-- CLOSE OVERLAY CALENDAR  -->
+
+    <div class="container-test-input"
+        style="width: 100%; border: 2px solid black; height: 40px; display: flex; justify-content: center; align-items: center;">
+        <input id="test-calendar-input" type="text" placeholder="Ingrese una Fecha"
+            style="position: relative; padding: 2px; padding-left: 5px;">
+
+
+
+        <!-- COPIAR EL SIGUIENTE CÓDIGO PARA IMPLEMENTAR EL CALENDARIO EN OTRAS PAGINAS-->
+        <!-- Es necesario que exista un contenedor con position relative y el id del input se debe configurar en el JS -->
+
+
+        <section id="simcalendar-container" class="simcalendar-container simcalendar--hidden">
+            <main id="simcalendar" class="simcalendar">
+                <!-- CONTROLES -->
+                <article class="simcalendar__controls">
+                    <div class="sim-arrow" id="arrow-retroceder">
+                        <span class="iconify" data-icon="bi:caret-left-square-fill" style="color: grey;"
+                            data-width="25"></span>
+                        <div class="wrapper-click" name="arrow-retroceder"></div>
+                    </div>
+                    <div class="wrapper-name">
+                        <span id="simcalendar-span-title"></span>
+                        <div class="wrapper-noclick"></div>
+                    </div>
+                    <div class="sim-arrow" id="arrow-avanzar">
+                        <span class="iconify" data-icon="bi:caret-right-square-fill" style="color: gray;"
+                            data-width="25"></span>
+                        <div class="wrapper-click" name="arrow-avanzar"></div>
+                    </div>
+                </article>
+
+                <!-- AÑOS -->
+                <article id="simcalendar-years" class="simcalendar-grid">
+                    <!-- SPAN FROM JS -->
+                </article>
+
+                <!-- MESES -->
+                <article id="simcalendar-month" class="simcalendar-grid grid-month simcalendar--hidden">
+                    <!-- SPAN FROM JS -->
+                </article>
+
+                <!-- DIAS -->
+                <article id="simcalendar-days" class="simcalendar-grid grid-days simcalendar--hidden">
+                    <!-- SPAN FROM JS -->
+                </article>
+
+            </main>
+        </section>
+        <!-- JS -->
+        <script src="assets/simCalendar.js"></script>
+        <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
+        <!-- FIN DEL CALENDARIO : copiar hasta acá -->
+
+
+
+
+    </div>
+</body>
+
+</html>

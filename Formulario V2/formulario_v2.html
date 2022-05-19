@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- GOOGLE FONTS - ROBOTO : font-family: 'Roboto', sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/formulario_v2.css">
+    <title>Formulario V2</title>
+</head>
+
+<body>
+    <main class="container-form">
+        <form action="" class="form" id="form">
+            <!-- Username -->
+            <section class="form__group" id="group__username">
+                <label class="form__label label--ligth" for="input-username">Tu usuario: </label>
+                <div class="form__input-group">
+                    <input type="text" name="username" id="input-username" placeholder="user123"
+                        autocomplete="username">
+                    <span class="iconify form__icon-state" data-icon="fa-solid:times-circle" data-width="16"
+                        style="color: red;"></span>
+                </div>
+                <p class="form__message-help">
+                    El usuario tiene que ser de 4 a 16 dígitos y solo puede contener
+                    números, letras y guion bajo.
+                </p>
+            </section>
+            <!-- Name -->
+            <section class="form__group" id="group__name">
+                <label class="form__label label--ligth" for="input-name">Tu nombre: </label>
+                <div class="form__input-group">
+                    <input type="text" name="name" id="input-name" placeholder="Andrés Rivera" autocomplete="name">
+                    <span class="iconify form__icon-state" data-icon="fa-solid:times-circle" data-width="16"
+                        style="color: red;"></span>
+                </div>
+                <p class="form__message-help">
+                    Tu nombre no puede contener caracteres especiales o números.
+                </p>
+            </section>
+            <!-- Password -->
+            <section class="form__group" id="group__password">
+                <label class="form__label label--ligth" for="input-password">Escribe una contraseña: </label>
+                <div class="form__input-group">
+                    <input type="password" name="password" id="input-password" placeholder="Contraseña"
+                        autocomplete="new-password">
+                    <span class="iconify form__icon-state" data-icon="fa-solid:times-circle" data-width="16"
+                        style="color: red;"></span>
+                </div>
+                <p class="form__message-help">
+                    La contraseña tiene que ser de 8 a 16 dígitos, debe contener minúsculas, mayúsculas
+                    y caracteres especiales.
+                </p>
+            </section>
+            <!-- Re Password -->
+            <section class="form__group" id="group__password">
+                <label class="form__label label--ligth" for="input-password-repeat">Repite la contraseña: </label>
+                <div class="form__input-group">
+                    <input type="password" name="repassword" id="input-password-repeat" placeholder="Contraseña">
+                    <span class="iconify form__icon-state" data-icon="fa-solid:times-circle" data-width="16"
+                        style="color: red;"></span>
+                </div>
+                <p class="form__message-help">
+                    Las contraseñas deben ser iguales.
+                </p>
+            </section>
+            <!-- Email -->
+            <section class="form__group" id="group__email">
+                <label class="form__label label--ligth" for="input-email">Tu correo: </label>
+                <div class="form__input-group">
+                    <input type="email" name="email" id="input-email" placeholder="correo@correo.com"
+                        autocomplete="email">
+                    <span class="iconify form__icon-state" data-icon="fa-solid:times-circle" data-width="16"
+                        style="color: red;"></span>
+                </div>
+                <p class="form__message-help">
+                    El correo solo puede contener letras, números, puntos, guiones y guion bajo.
+                </p>
+            </section>
+            <!-- Phone -->
+            <section class="form__group" id="group__tel">
+                <label class="form__label label--ligth" for="input-phone">Tu telefono: </label>
+                <div class="form__input-group">
+                    <input type="tel" name="tel" id="input-phone" placeholder="3005447463" autocomplete="tel">
+                    <span class="iconify form__icon-state" data-icon="fa-solid:times-circle" data-width="16"
+                        style="color: red;"></span>
+                </div>
+                <p class="form__message-help">
+                    El telefono solo puede contener números y máximo 10 caracteres.
+                </p>
+            </section>
+            <!-- Terms & conditions -->
+            <section class="form__group form__group--max-width" id="group__terms">
+                <div class="form__input-group">
+                    <input class="form_checkbox" type="checkbox" name="terms" id="input-check">
+                    <label class="form__label label--ligth" for="input-check">Acepto los Terminos y Condiciones</label>
+                    <span class="iconify form__icon-state form__icon-state--outline" data-icon="fa-solid:times-circle" data-width="16"
+                        style="color: red;"></span>
+                </div>
+                <p class="form__message-help">
+                    Debes aceptar los terminos y condiciones.
+                </p>
+            </section>
+            <!-- Error Message -->
+            <section class="form__group-message form__group--max-width" id="group__message">
+                <p class="form__input-message">
+                    <span class="iconify" data-icon="dashicons:warning" data-width="20" style="color: red;"></span>
+                    <strong>Error:</strong> Por favor diligencie el formulario correctamente.
+                </p>
+            </section>
+            <!-- Submit -->
+            <section class="form__group form__group--max-width" id="group__submit">
+                <div class="form__input-group">
+                    <input class="form_button" type="submit" name="submit" value="Enviar">
+                </div>
+                <p class="form__message-success" id="messageSucess">
+                    <span class="iconify" data-icon="bi:send-check" style="color: white; margin-right: .5rem;" data-width="20"></span>
+                    Datos enviados exitosamente.
+                </p>
+            </section>
+        </form>
+    </main>
+
+    <!-- ICONIFY -->
+    <script src="https://code.iconify.design/2/2.2.0/iconify.min.js"></script>
+</body>
+
+</html>

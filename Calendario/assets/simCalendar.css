@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* CONTENEDOR CALENDARIO */
+.simcalendar-container {
+    font-size: 62.5%;
+    height: max-content;
+    left: inherit;
+    position: absolute;
+    top: 5em;
+    width: max-content;
+}
+
+/* CALENDARIO */
+.simcalendar {
+    height: 32em;
+    width: 33em;
+}
+
+.simcalendar__controls {
+    align-items: center;
+    background-color: white;
+    border-top-left-radius: .2em;
+    border-top-right-radius: .2em;
+    border: 2px solid rgb(150, 150, 150);
+    border-bottom: none;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.6em;
+    height: 2em;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 1em;
+}
+
+.overlay-simcalendar {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+}
+
+.simcalendar__controls svg {
+    margin-top: .2em;
+}
+
+.simcalendar__controls span {
+    color: rgb(80, 80, 80);
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.sim-arrow {
+    height: 100%;
+    width: max-content;
+    position: relative;
+}
+
+.wrapper-click {
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.wrapper-name {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+.wrapper-noclick {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* GRID GENERICA */
+.simcalendar-grid {
+    align-items: center;
+    background-color: rgb(250, 250, 250);
+    border-radius: .2em;
+    border: 2px solid rgb(150, 150, 150);
+    display: grid;
+    gap: .5em;
+    grid-template: repeat(6, auto) / repeat(7, auto);
+    height: 100%;
+    justify-items: center;
+    padding: .5em;
+    width: 100%;
+}
+
+.simcalendar__field {
+    align-items: center;
+    background-color: rgb(216, 216, 216);
+    border-radius: .2em;
+    border: 1px solid transparent;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.6em;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+@media (hover: hover) {
+    .simcalendar__field:hover {
+        background-color: rgb(209, 209, 209);
+        border: 1px solid grey;
+        cursor: pointer;
+    }
+}
+
+/* VISTA MESES */
+.grid-month {
+    grid-template: repeat(4, auto) / repeat(3, auto);
+}
+
+/* CLASES GENERICAS */
+.simcalendar--hidden {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+
+.simcalendar--opacity0 {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.simcalendar--selected {
+    border: 1px solid grey;
+    background-color: rgb(209, 209, 209);
+}
+
+.justify--right {
+    justify-content: flex-end;
+    padding-right: .5em;
+}
