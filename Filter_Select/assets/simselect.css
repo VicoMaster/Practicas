@@ -79,6 +79,11 @@ body {
     outline-color: var(--background-hover-option);
 }
 
+.simselect-option-container {
+    height: 100%;
+    width: 100%;
+}
+
 .simselect__option {
     font-size: 1.6em;
     height: 1.8em;
