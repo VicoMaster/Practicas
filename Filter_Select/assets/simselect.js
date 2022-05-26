@@ -38,9 +38,13 @@ function filtrarDatos(arrayValues) {
 
 //TEST MULTIINPUT
 function identifyInput(element) {
-    const ID_INPUT = element.getAttribute('id');
-    const $ELEMENT_SELECTED = document.getElementById(ID_INPUT);
-    return $ELEMENT_SELECTED;
+    const PATH = element.composedPath();
+    PATH.forEach(element => {
+        if (element.nodeName === 'HEADER') {
+            console.log(element.getAttribute('data-simselect-index'));
+            return;
+        }
+    })
 }
 
 //ACCION PARA MOSTRAR LA CAJA DE OPCIONES
@@ -48,7 +52,7 @@ function simselectShow(event = undefined) {
     //Init: lógica para cerrar las options cuando no se da click al input
     let nameEvent = '';
     if (event !== undefined) {
-        const ACTUAL_ELEMENT = identifyInput(event.target);
+        identifyInput(event);
         nameEvent = event.target.getAttribute('name');
         if (nameEvent === 'simselect-input') {
             actionInput = !actionInput;
@@ -113,7 +117,7 @@ function crearHijos(valoresArray, contenedorPadre) {
 }
 
 //FUNCION PRINCIPAL, LEERA LAS LETRAS INGRESADAS
-function ingresoFiltro(event) {
+function ingresoFiltro() {
     textFilter = $SIMSELECT_FILTER.value;
     let valoresActuales = [];  // Valores actuales options
     let valoresFiltrados = [];  // Valores filtrados options
