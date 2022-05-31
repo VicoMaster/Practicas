@@ -1,33 +1,40 @@
 
 //VARIABLES
-let textFilter = '',
-    actionInput = false;
+let textFilter = '',  // texto ingresado usado para filtrar resultados
+    valoresOriginalsOptions = [],  // Valores de los options actuales, SE DEBE REINICIAR al cerrar simselect.
+    dataSimselectIndex = 0;  // Index del elemento actual seleccionado, si cambia se reinicia valoresOriginalsOptions
+
 //ELEMENTOS DOOM 
 const $SIMSELECT = document.querySelectorAll('#simselect-header'),
-    $SIMSELECT_OPTIONS = document.getElementById('simselect-options'),
+    $SIMSELECT_OPTIONS = document.querySelectorAll('#simselect-options'),
     $SIMSELECT_INPUT = document.getElementById('simselect-input'),
-    $CONTAINER_HIDDEN_SIMSELECTOR = document.querySelector('.simselect-click-hidden'),
-    $SIMSELECT_FILTER = document.getElementById('simselect-filter'),
+    $SIMSELECT_FILTER = document.querySelectorAll('#simselect-filter'),
     $SIMSELECT_OPTIONS_VALUES = document.querySelectorAll('.simselect__option');
 let $simselectIconDown = document.getElementById('simselect-icon-down');
+let elementosActuales = {};  // Guarda los elementos target actuales
 
 
-//GUARDAMOS LOS VALORES DE LOS OPTIONS
-function saveValuesOptions() {
+//GUARDAMOS LOS VALORES DE LOS OPTIONS y RETORNAMOS ARRAY DE VALORES
+function saveReturnValues(elementos) {
     let tempValueOptions = [];
-    for (const ELEMENT of $SIMSELECT_OPTIONS_VALUES) {
+    if (valoresOriginalsOptions.length <= 0) {
+        valoresOriginalsOptions = [...elementos];
+    }
+    for (const ELEMENT of valoresOriginalsOptions) {
         const VALOR_ELEMENT = ELEMENT.getAttribute('value');
         if (VALOR_ELEMENT != '') {
             tempValueOptions.push(VALOR_ELEMENT);
         }
     }
+
     return tempValueOptions;
 }
 
 //FILTRAMOS VALORES EN LAS OPTIONS vs FILTRO
 function filtrarDatos(arrayValues) {
     let tempValuesFilter = arrayValues.filter(element => {
-        let indexSearch = element.search(textFilter);
+        const REGEX = new RegExp(textFilter, 'gi');
+        let indexSearch = element.search(REGEX);
         if (indexSearch != -1 && indexSearch === 0) {
             return element;
         }
@@ -35,47 +42,69 @@ function filtrarDatos(arrayValues) {
     return tempValuesFilter;
 }
 
-
-//TEST MULTIINPUT
+//ENCONTRAMOS LOS ELEMENTOS ACTUALES PARA MULTI-INPUT | si es nuevo cierra el anterior
 function identifyInput(element) {
+    const ELEMENTOS_DOM = {}
     const PATH = element.composedPath();
     PATH.forEach(element => {
-        if (element.nodeName === 'HEADER') {
-            console.log(element.getAttribute('data-simselect-index'));
-            return;
+        if (element !== document && element !== window && element.nodeName !== 'BODY' && element.nodeName !== 'HTML') {
+            if (element.getAttribute('class') === 'simselect') {
+                ELEMENTOS_DOM.main = element;
+                ELEMENTOS_DOM.header = element.children[0];
+                ELEMENTOS_DOM.sectionOptions = element.children[1];
+                //Si el elemento main es diferente al anterior vacía los valoresOriginalsOptions
+                if (dataSimselectIndex === 0) {
+                    dataSimselectIndex = element.getAttribute('data-simselect-index');
+                }
+                if (dataSimselectIndex !== element.getAttribute('data-simselect-index')) {
+                    dataSimselectIndex = element.getAttribute('data-simselect-index');
+                    const HIDDEN_CLASS = elementosActuales.sectionOptions.getAttribute('class').includes('simselect-hidden');
+                    if (!HIDDEN_CLASS) {
+                        showClose(elementosActuales);
+                    }
+                    valoresOriginalsOptions = [];
+                }
+            }
         }
     })
+    return ELEMENTOS_DOM;
 }
 
-//ACCION PARA MOSTRAR LA CAJA DE OPCIONES
-function simselectShow(event = undefined) {
-    //Init: lógica para cerrar las options cuando no se da click al input
-    let nameEvent = '';
-    if (event !== undefined) {
-        identifyInput(event);
-        nameEvent = event.target.getAttribute('name');
-        if (nameEvent === 'simselect-input') {
-            actionInput = !actionInput;
-        }
-        //Init: Fix click on icon svg or path or HEADER
-        const NODE_NAME = event.target.nodeName;
-        if (NODE_NAME === 'path' || NODE_NAME === 'svg' || NODE_NAME === 'HEADER') {
-            actionInput = !actionInput
-        }
-        //Close: Fix click on icon svg or path or HEADER
-    } else {
-        nameEvent = event;
-        actionInput = false;
-    }
-    //Close: lógica para cerrar las options cuando no se da click al input
-    $SIMSELECT_OPTIONS.classList.toggle('simselect-hidden');
+//Vuelve a llenar las options con sus valores originales
+function resetValuesOptions() {
+    const $CONTAINER_OPTIONS = elementosActuales.sectionOptions.children[1];
+    eliminarHijos($CONTAINER_OPTIONS);
+    valoresActuales = [...saveReturnValues(valoresOriginalsOptions)];
+    crearHijos(valoresActuales, $CONTAINER_OPTIONS);
+    elementosActuales.sectionOptions.children[0].value = '';
+}
+
+function showClose(elementosDom) {
+    elementosDom.sectionOptions.classList.toggle('simselect-hidden');
     //Encontramos nuevamente las flechas de acción por funcionamiento SVG
-    $simselectIconDown = document.getElementById('simselect-icon-down');
-    const $RE_SIMSELECT_ICON_UP = document.getElementById('simselect-icon-up');
+    $simselectIconDown = elementosDom.header.children[1];
+    const $RE_SIMSELECT_ICON_UP = elementosDom.header.children[2];
     //Cambiamos estilos
     $simselectIconDown.classList.toggle('simselect-hidden');
     $RE_SIMSELECT_ICON_UP.classList.toggle('simselect-hidden');
-    $SIMSELECT_FILTER.focus();
+    elementosDom.sectionOptions.children[0].focus();
+    //Si existe una copia de los valores los restablece al cerrar
+    if (valoresOriginalsOptions.length > 0) {
+        resetValuesOptions();
+    }
+}
+
+//ACCION PARA MOSTRAR LA CAJA DE OPCIONES
+function simselectInit(event = undefined) {
+    if (event !== undefined) {
+        let temp = identifyInput(event);
+        elementosActuales = { ...temp };
+        nameEvent = elementosActuales.header.children[0].getAttribute('name');
+        const NODE_NAME = event.target.nodeName;
+        if (nameEvent === 'simselect-input' || (NODE_NAME === 'path' || NODE_NAME === 'svg' || NODE_NAME === 'HEADER')) {
+            showClose(elementosActuales);
+        }
+    }
 }
 
 //ACCION PARA CAMBIAR EL VALOR SELECCIONADO
@@ -83,8 +112,13 @@ function actionOption(event) {
     const OPTION_SELECTED = event.target.getAttribute('name');
     if (OPTION_SELECTED === 'simselect__option') {
         const VALOR_OPTION = event.target.getAttribute('value');
-        $SIMSELECT_INPUT.setAttribute('value', VALOR_OPTION);
-        simselectShow();
+        elementosActuales.header.children[0].setAttribute('value', VALOR_OPTION);
+        elementosActuales.sectionOptions.children[0].value = '';
+        showClose(elementosActuales);
+        //Si existe una copia de los valores los restablece al cerrar
+        if (valoresOriginalsOptions.length > 0) {
+            resetValuesOptions();
+        }
     }
 }
 
@@ -118,15 +152,15 @@ function crearHijos(valoresArray, contenedorPadre) {
 
 //FUNCION PRINCIPAL, LEERA LAS LETRAS INGRESADAS
 function ingresoFiltro() {
-    textFilter = $SIMSELECT_FILTER.value;
+    textFilter = elementosActuales.sectionOptions.children[0].value;
     let valoresActuales = [];  // Valores actuales options
     let valoresFiltrados = [];  // Valores filtrados options
     //Creamos array con cada uno de los valores de las opciones
-    valoresActuales = [...saveValuesOptions()];
+    valoresActuales = [...saveReturnValues(elementosActuales.sectionOptions.children[1].children)];
     //Validamos las coincidencias del filtro en el array de valores
     valoresFiltrados = [...filtrarDatos(valoresActuales)];
     //Creamos los nuevos elementos article con los resultados del filtro
-    const $CONTAINER_OPTIONS = document.getElementById('simselect-option-container');
+    const $CONTAINER_OPTIONS = elementosActuales.sectionOptions.children[1];
     if (valoresFiltrados.length > 0) {
         eliminarHijos($CONTAINER_OPTIONS);
         crearHijos(valoresFiltrados, $CONTAINER_OPTIONS);
@@ -137,18 +171,27 @@ function ingresoFiltro() {
 
 //CIERRA LAS OPTIONS CUANDO SE DA CLICK FUERA DEL SELECT -- ¡UNICAMENTE PARA ACCIONAR FUERA DEL SELECT!
 function cerrarOptionsInput(event) {
-    const NAME_EVENT = event.target.getAttribute('name');
-    const NODE_NAME = event.target.nodeName;
-    if (NODE_NAME !== 'svg' && NODE_NAME !== 'HEADER' && NODE_NAME !== 'path' && NAME_EVENT !== 'simselect-input'
-        && actionInput && NAME_EVENT !== 'simselect-filter' && NAME_EVENT !== 'simselect__option') {
-        simselectShow();
+    if (Object.keys(elementosActuales).length > 0) {
+        const HIDDEN_CLASS = elementosActuales.sectionOptions.getAttribute('class').includes('simselect-hidden');
+        if (!HIDDEN_CLASS) {
+            const NAME_EVENT = event.target.getAttribute('name');
+            const NODE_NAME = event.target.nodeName;
+            if (NODE_NAME !== 'svg' && NODE_NAME !== 'HEADER' && NODE_NAME !== 'path' && NAME_EVENT !== 'simselect-input'
+                && NAME_EVENT !== 'simselect-filter' && NAME_EVENT !== 'simselect__option') {
+                showClose(elementosActuales);
+            }
+        }
     }
 }
 
 //ADD EVENTOS
 $SIMSELECT.forEach(elementSelect => {
-    elementSelect.addEventListener('click', simselectShow);
+    elementSelect.addEventListener('click', simselectInit);
 });
-$SIMSELECT_OPTIONS.addEventListener('click', actionOption);
-$SIMSELECT_FILTER.addEventListener('keyup', ingresoFiltro);
+$SIMSELECT_OPTIONS.forEach(elementContainerOption => {
+    elementContainerOption.addEventListener('click', actionOption);
+})
+$SIMSELECT_FILTER.forEach(elementInputFilter => {
+    elementInputFilter.addEventListener('keyup', ingresoFiltro);
+})
 document.addEventListener('click', cerrarOptionsInput);

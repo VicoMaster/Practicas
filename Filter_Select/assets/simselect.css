@@ -1,54 +1,53 @@
 * {
     box-sizing: border-box;
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
 
 :root {
     --background-color-dark: rgb(31, 31, 31);
     --background-color-white: white;
     --background-hover-option: #3366CC;
-    --color-text-normal: black;
     --color-border-input: grey;
     --color-text-light: white;
+    --color-text-normal: black;
 }
 
 /* RETIRAR BODY PARA IMPLEMENTAR */
 body {
-    height: 100vh;
-    width: 100%;
     background-color: var(--background-color-dark);
+    height: 100%;
+    width: 100%;
 }
 
 /* SIMSELECT */
 .simselect {
-    font-size: 62.5%;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 62.5%;
     height: 4em;
     max-height: 4em;
     width: 100%;
-    z-index: 999;
 }
 
 /* CABECERA */
 .simselect-header {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    padding: 0 1em;
     background-color: var(--background-color-white);
-    border: 1px solid var(--color-border-input);
     border-radius: .4em;
+    border: 1px solid var(--color-border-input);
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    padding: 0 1em;
+    text-align: center;
+    width: 100%;
 }
 
 .simselect-input {
-    width: 100%;
     border: none;
-    outline: none;
-    font-size: 1.6em;
     cursor: pointer;
+    font-size: 1.6em;
+    outline: none;
+    width: 100%;
 }
 
 .simselect-input::placeholder {
@@ -56,40 +55,43 @@ body {
 }
 
 .simselect-icon {
-    margin-top: .5em;
     cursor: pointer;
+    margin-top: .5em;
 }
 
 /* OPTIONS */
 .simselect-options {
     background-color: var(--background-color-white);
-    width: 100%;
+    border-radius: .3em;
     height: 30em;
+    overflow: hidden;
     padding: .5em;
-    overflow-y: scroll;
+    position: fixed;
+    width: 100%;
 }
 
 .simselect-filter {
-    width: 100%;
-    height: 2em;
     border: 1px solid var(--color-border-input);
-    padding: 0 .5em;
-    margin-bottom: .5em;
+    border-radius: .3em;
     font-size: 1.5em;
+    height: 2em;
     outline-color: var(--background-hover-option);
+    padding: 0 .5em;
+    width: 100%;
 }
 
 .simselect-option-container {
-    height: 100%;
+    height: 92%;
+    overflow-y: scroll;
     width: 100%;
 }
 
 .simselect__option {
+    cursor: pointer;
     font-size: 1.6em;
     height: 1.8em;
     line-height: 2em;
     padding-left: .5em;
-    cursor: pointer;
 }
 
 @media (hover: hover) {
@@ -101,7 +103,7 @@ body {
 
 /* GENERALES */
 .simselect-hidden {
+    display: none;
     opacity: 0;
     visibility: hidden;
-    display: none;
 }
