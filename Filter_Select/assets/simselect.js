@@ -1,3 +1,10 @@
+/*
+    Autor: AndrésR.Dev 
+    Description: Siguiendo la estructura html creada[FIJA] identificará cada componente main para ubicar las acciones
+    Comments: Creado para sustituir las etiquetas [SELECT] que no ofrecen comodidad al usuario.
+
+*/
+
 
 //VARIABLES
 let textFilter = '',  // texto ingresado usado para filtrar resultados
@@ -5,10 +12,10 @@ let textFilter = '',  // texto ingresado usado para filtrar resultados
     dataSimselectIndex = 0;  // Index del elemento actual seleccionado, si cambia se reinicia valoresOriginalsOptions
 
 //ELEMENTOS DOOM 
-const $SIMSELECT = document.querySelectorAll('#simselect-header'),
-    $SIMSELECT_OPTIONS = document.querySelectorAll('#simselect-options'),
-    $SIMSELECT_INPUT = document.getElementById('simselect-input'),
-    $SIMSELECT_FILTER = document.querySelectorAll('#simselect-filter'),
+const $SIMSELECT = document.querySelectorAll('.simselect-header'),
+    $SIMSELECT_OPTIONS = document.querySelectorAll('.simselect-options'),
+    $SIMSELECT_INPUT = document.querySelector('.simselect-input'),
+    $SIMSELECT_FILTER = document.querySelectorAll('.simselect-filter'),
     $SIMSELECT_OPTIONS_VALUES = document.querySelectorAll('.simselect__option');
 let $simselectIconDown = document.getElementById('simselect-icon-down');
 let elementosActuales = {};  // Guarda los elementos target actuales

@@ -8,9 +8,10 @@
     --background-color-dark: rgb(31, 31, 31);
     --background-color-white: white;
     --background-hover-option: #3366CC;
-    --color-border-input: grey;
+    --color-border-input: rgb(199, 199, 199);
     --color-text-light: white;
-    --color-text-normal: black;
+    --color-text-normal: rgb(31, 31, 31);
+    --color-text-placeholder: rgb(102, 102, 102);
 }
 
 /* RETIRAR BODY PARA IMPLEMENTAR */
@@ -27,6 +28,7 @@ body {
     height: 4em;
     max-height: 4em;
     width: 100%;
+    position: relative;
 }
 
 /* CABECERA */
@@ -44,30 +46,34 @@ body {
 
 .simselect-input {
     border: none;
+    color: var(--color-text-normal);
     cursor: pointer;
-    font-size: 1.6em;
+    font-size: 1.5em;
     outline: none;
     width: 100%;
 }
 
 .simselect-input::placeholder {
-    color: var(--color-text-normal);
+    color: var(--color-text-placeholder);
 }
 
 .simselect-icon {
     cursor: pointer;
-    margin-top: .5em;
+    margin-top: 1em;
+    margin-right: .3em;
 }
 
 /* OPTIONS */
 .simselect-options {
     background-color: var(--background-color-white);
     border-radius: .3em;
+    border: 1px solid var(--color-border-input);
     height: 30em;
     overflow: hidden;
     padding: .5em;
-    position: fixed;
+    position: absolute;
     width: 100%;
+    z-index: 9999;
 }
 
 .simselect-filter {
@@ -88,7 +94,7 @@ body {
 
 .simselect__option {
     cursor: pointer;
-    font-size: 1.6em;
+    font-size: 1.5em;
     height: 1.8em;
     line-height: 2em;
     padding-left: .5em;
