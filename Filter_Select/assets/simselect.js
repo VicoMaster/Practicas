@@ -119,6 +119,7 @@ function actionOption(event) {
     const OPTION_SELECTED = event.target.getAttribute('class').includes('simselect__option');;
     if (OPTION_SELECTED) {
         const VALOR_OPTION = event.target.getAttribute('value');
+        elementosActuales.header.children[0].value = VALOR_OPTION;
         elementosActuales.header.children[0].setAttribute('value', VALOR_OPTION);
         elementosActuales.sectionOptions.children[0].value = '';
         showClose(elementosActuales);
