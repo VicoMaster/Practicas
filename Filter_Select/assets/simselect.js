@@ -180,15 +180,13 @@ function cerrarOptionsInput(event) {
         const HIDDEN_CLASS = elementosActuales.sectionOptions.getAttribute('class').includes('simselect-hidden');
         let nameEvent = false;
         if (!HIDDEN_CLASS) {
-            const INCLUDES_CLASS = ['simselect-input', 'simselect-filter', 'simselect__option', ''];
+            const INCLUDES_CLASS = ['simselect-input', 'simselect-filter', 'simselect__option'];
             INCLUDES_CLASS.forEach(element => {
                 let containClass = event.target.getAttribute('class');
                 if (containClass !== null) {
                     containClass = containClass.includes(element);
                     if (containClass) {
                         nameEvent = true;
-                    } else {
-                        nameEvent = false;
                     }
                 }
             });
