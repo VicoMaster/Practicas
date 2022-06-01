@@ -106,9 +106,9 @@ function simselectInit(event = undefined) {
     if (event !== undefined) {
         let temp = identifyInput(event);
         elementosActuales = { ...temp };
-        nameEvent = elementosActuales.header.children[0].getAttribute('name');
+        nameEvent = elementosActuales.header.children[0].getAttribute('class').includes('simselect-input');
         const NODE_NAME = event.target.nodeName;
-        if (nameEvent === 'simselect-input' || (NODE_NAME === 'path' || NODE_NAME === 'svg' || NODE_NAME === 'HEADER')) {
+        if (nameEvent || (NODE_NAME === 'path' || NODE_NAME === 'svg' || NODE_NAME === 'HEADER')) {
             showClose(elementosActuales);
         }
     }
@@ -116,8 +116,8 @@ function simselectInit(event = undefined) {
 
 //ACCION PARA CAMBIAR EL VALOR SELECCIONADO
 function actionOption(event) {
-    const OPTION_SELECTED = event.target.getAttribute('name');
-    if (OPTION_SELECTED === 'simselect__option') {
+    const OPTION_SELECTED = event.target.getAttribute('class').includes('simselect__option');;
+    if (OPTION_SELECTED) {
         const VALOR_OPTION = event.target.getAttribute('value');
         elementosActuales.header.children[0].setAttribute('value', VALOR_OPTION);
         elementosActuales.sectionOptions.children[0].value = '';
@@ -141,7 +141,6 @@ function eliminarHijos(contenedorPadre) {
 function crearHijos(valoresArray, contenedorPadre) {
     //Crear elemento seleccione
     let $firstElementArticle = document.createElement('article');
-    $firstElementArticle.setAttribute('name', 'simselect__option');
     $firstElementArticle.setAttribute('class', 'simselect__option');
     $firstElementArticle.setAttribute('value', '');
     $firstElementArticle.textContent = 'Seleccione una opción';
@@ -149,7 +148,6 @@ function crearHijos(valoresArray, contenedorPadre) {
     //Creamos e insertamos los demás hijos
     for (const element of valoresArray) {
         let $elementArticle = document.createElement('article');
-        $elementArticle.setAttribute('name', 'simselect__option');
         $elementArticle.setAttribute('class', 'simselect__option');
         $elementArticle.setAttribute('value', element);
         $elementArticle.textContent = element;
@@ -180,11 +178,22 @@ function ingresoFiltro() {
 function cerrarOptionsInput(event) {
     if (Object.keys(elementosActuales).length > 0) {
         const HIDDEN_CLASS = elementosActuales.sectionOptions.getAttribute('class').includes('simselect-hidden');
+        let nameEvent = false;
         if (!HIDDEN_CLASS) {
-            const NAME_EVENT = event.target.getAttribute('name');
+            const INCLUDES_CLASS = ['simselect-input', 'simselect-filter', 'simselect__option', ''];
+            INCLUDES_CLASS.forEach(element => {
+                let containClass = event.target.getAttribute('class');
+                if (containClass !== null) {
+                    containClass = containClass.includes(element);
+                    if (containClass) {
+                        nameEvent = true;
+                    } else {
+                        nameEvent = false;
+                    }
+                }
+            });
             const NODE_NAME = event.target.nodeName;
-            if (NODE_NAME !== 'svg' && NODE_NAME !== 'HEADER' && NODE_NAME !== 'path' && NAME_EVENT !== 'simselect-input'
-                && NAME_EVENT !== 'simselect-filter' && NAME_EVENT !== 'simselect__option') {
+            if (NODE_NAME !== 'svg' && NODE_NAME !== 'HEADER' && NODE_NAME !== 'path' && !nameEvent) {
                 showClose(elementosActuales);
             }
         }
