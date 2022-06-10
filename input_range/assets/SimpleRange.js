@@ -1,6 +1,8 @@
 /*
     Autor: AndrésR.Dev
     Description: Un simple range input para seleccionar un rango de datos
+    Logica: identifica todos los inputs y modifica los datos del range, 
+            la función updateProgressBar() actualiza los datos de los range leyendo la info guardada.
 */
 const $SIMPLE_RANGE = document.querySelectorAll('.simple-range__input');
 const $CONTAINER_CONTROLS = document.querySelectorAll('.simple-range__controls');
@@ -45,3 +47,15 @@ $CONTAINER_CONTROLS.forEach(element => {
     })
 })
 
+function updateProgressBar() {
+    const $SIMPLE_INPUT_VALUES = document.querySelectorAll('.simple-range__input-values');
+    const $PROGRESS_BAR = document.querySelectorAll('.simple-range__input');
+    let valorInput = [];
+    $SIMPLE_INPUT_VALUES.forEach(element => {
+        valorInput.push(element.value)
+    });
+    $PROGRESS_BAR.forEach((element, index) => {
+        element.value = valorInput[index];
+        element.setAttribute('value', valorInput[index]);
+    })
+}
