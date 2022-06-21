@@ -20,6 +20,10 @@
     position: relative;
 }
 
+.simple-range__input {
+    width: 20em;
+}
+
 .simple-range__input-values {
     border-radius: .3em;
     border: 1px solid var(--color-border-input);
@@ -27,14 +31,14 @@
     outline-color: var(--color-border-input-overline);
     padding: .2em;
     padding-left: .4em;
-    width: 3.8em;
+    width: 5.5em;
     font-size: 1.5em;
 }
 
 .simple-range__span {
     font-size: 1.6em;
     position: absolute;
-    top: 20%;
+    top: 30%;
     right: 6%;
 }
 
