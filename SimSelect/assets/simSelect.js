@@ -1,10 +1,23 @@
 /*
     Autor: AndrésR.Dev 
-    Description: Siguiendo la estructura html creada[FIJA] identificará cada componente main para ubicar las acciones
+    Description: Identifica los [select] con la clase [simSelect] para remplazarlos con el contenido HTML creado
+                 en la function [transformSelect()]. Esta recogera los atributos ingresados en el [select] original
+                 y los pondra en el input donde se refleja la option seleccionada.
+    Logica: Luego de remplazar los [select] identifica cada parte del HTML nuevo y así generar las acciones correspondientes.
     Comments: Creado para sustituir las etiquetas [SELECT] que no ofrecen comodidad al usuario.
 
 */
 
+//ELEMENTOS DOM - ACTUALIZADOS EN FUNCION addEventDom()
+let $simSelect = undefined,
+    $simSelectOptions = undefined,
+    $simSelectInput = undefined,
+    $simSelectFilter = undefined,
+    $simSelectOptionsValues = undefined,
+    $simselectIconDown = undefined,  // Icono de flecha abajo actual
+    $iconClearInputFiltro = undefined,  // Icono X clear Input actual 
+    $iconSearchInputFiltro = undefined,  // Icono Lupa en Input actual 
+    elementosActuales = {};  // Guarda los elementos target(DOM elements) actuales
 
 //VARIABLES
 let textFilter = '',  // texto ingresado usado para filtrar resultados
@@ -12,19 +25,6 @@ let textFilter = '',  // texto ingresado usado para filtrar resultados
     dataSimselectIndex = 0,  // Index del elemento actual seleccionado, si cambia se reinicia valoresOriginalsOptions
     contKeyArrow = 0, // Añade o disminuye dependiendo de la flecha de navegación usada
     accessKey = false; // SI es True activará la recolección del valor de [ARTICLE] focuseado por flechas de teclado
-
-
-//ELEMENTOS DOOM 
-const $SIMSELECT = document.querySelectorAll('.simSelect-header'),
-    $SIMSELECT_OPTIONS = document.querySelectorAll('.simSelect-options'),
-    $SIMSELECT_INPUT = document.querySelector('.simSelect-input'),
-    $SIMSELECT_FILTER = document.querySelectorAll('.simSelect-filter'),
-    $SIMSELECT_OPTIONS_VALUES = document.querySelectorAll('.simSelect__option');
-let $simselectIconDown = undefined;  // Icono de flecha abajo actual
-let $iconClearInputFiltro = undefined;  // Icono X clear Input actual 
-let $iconSearchInputFiltro = undefined;  // Icono Lupa en Input actual 
-let elementosActuales = {};  // Guarda los elementos target(DOM elements) actuales
-
 
 //GUARDAMOS LOS VALORES DE LOS OPTIONS y RETORNAMOS OBJECT DE VALORES DE LOS ARTICLE
 function saveReturnValues(elementosArticle) {
@@ -161,7 +161,7 @@ function simselectInit(event = undefined) {
         //identificamos los elementos actuales
         let temp = identifyInput(event);
         elementosActuales = { ...temp };
-        //Añadimos evento clearInput al icono de flecha en el input y a la lupa
+        //Añadimos evento clearInput al icono de close(X) en el input y a la lupa
         if ($iconClearInputFiltro === undefined) {
             $iconClearInputFiltro = elementosActuales.sectionOptions.children[0].children[2].children[0];
             $iconClearInputFiltro.addEventListener('click', clearFiltro);
@@ -332,16 +332,124 @@ function detectKey(event = undefined) {
     }
 }
 
-//ADD EVENTOS
-$SIMSELECT.forEach(elementSelect => {
-    elementSelect.addEventListener('click', simselectInit);
-    elementSelect.addEventListener('keyup', detectKey);
+//ADD EVENTOS - LLamada para leer los elementos validos luego de remplazo del select (transformSelect())
+function addEventDom() {
+    //ELEMENTOS DOOM 
+    $simSelect = document.querySelectorAll('.simSelect-header'),
+        $simSelectOptions = document.querySelectorAll('.simSelect-options'),
+        $simSelectInput = document.querySelector('.simSelect-input'),
+        $simSelectFilter = document.querySelectorAll('.simSelect-filter'),
+        $simSelectOptionsValues = document.querySelectorAll('.simSelect__option');
+
+    $simSelect.forEach(elementSelect => {
+        elementSelect.addEventListener('click', simselectInit);
+        elementSelect.addEventListener('keyup', detectKey);
+    });
+    $simSelectOptions.forEach(elementContainerOption => {
+        elementContainerOption.addEventListener('click', actionOption);
+        elementContainerOption.addEventListener('keyup', actionOption);
+    })
+    $simSelectFilter.forEach(elementInputFilter => {
+        elementInputFilter.addEventListener('keyup', ingresoFiltro);
+    })
+    document.addEventListener('click', cerrarOptionsInput);
+}
+
+//FUNCION PARA TRANSFORMAR ELEMENTOS [SELECT] Y CONVERTIRLOS EN EL simSelect
+function transformSelect($select = undefined, index = 0) {
+    const newElement = element => document.createElement(element);
+    //Creamos y agregamos los atributos del select al nuevo elemento main
+    let $newSelect = newElement('main');
+    $newSelect.setAttribute('class', 'simSelect');
+    $newSelect.setAttribute('data-simselect-index', index);
+    //Creamos Header del main
+    let $header = newElement('header');
+    $header.setAttribute('class', 'simSelect-header');
+    $header.setAttribute('tabindex', '0');
+    let $input = newElement('input');
+    let $span_1 = newElement('span');
+    let $span_2 = newElement('span');
+    const ATTRIBUTES_SELECT = $select.getAttributeNames();
+    ATTRIBUTES_SELECT.forEach(attribute => {
+        if (attribute === 'class') {
+            $input.setAttribute('class', 'simSelect-input');
+        } else {
+            $input.setAttribute(`${attribute}`, $select.getAttribute(attribute));
+        }
+    });
+    $select.classList.add('simSelect-hidden');
+    $input.setAttribute('type', 'text');
+    $input.setAttribute('placeholder', 'Seleccione una opción');
+    $input.setAttribute('disabled', '');
+    $span_1.setAttribute('class', 'iconify-inline simSelect-icon');
+    $span_1.setAttribute('data-icon', 'akar-icons:chevron-down');
+    $span_1.style.color = 'rgb(31, 31, 31)';
+    $span_1.setAttribute('data-width', '15');
+    $span_2.setAttribute('class', 'iconify-inline simSelect-icon simSelect-hidden');
+    $span_2.setAttribute('data-icon', 'akar-icons:chevron-up');
+    $span_2.style.color = 'rgb(31, 31, 31)';
+    $span_2.setAttribute('data-width', '15');
+    $header.appendChild($input);
+    $header.appendChild($span_1);
+    $header.appendChild($span_2);
+    $newSelect.appendChild($header);
+    //Creamos Section OPTIONS del Main
+    let $sectionOptions = newElement('section');
+    $sectionOptions.setAttribute('class', 'simSelect-options simSelect-hidden');
+    let $headerSectionOptions = newElement('header');
+    //Creamos hijos del sections OPTIONS [HEADER FILTRO]
+    $headerSectionOptions.setAttribute('class', 'simSelect-filter-header');
+    let $inputOption = newElement('input');
+    $inputOption.setAttribute('class', 'simSelect-filter');
+    $inputOption.setAttribute('type', 'text');
+    $inputOption.setAttribute('tabindex', '0');
+    $inputOption.setAttribute('placeholder', '¿Qué busca?');
+    $headerSectionOptions.appendChild($inputOption);
+    let $sectionIcon1 = newElement('section');
+    let $sectionIcon2 = newElement('section');
+    $sectionIcon1.setAttribute('class', 'simSelect-icon-search');
+    $sectionIcon2.setAttribute('class', 'simSelect-icon-close');
+    let $spanIcon1 = newElement('span');
+    $spanIcon1.setAttribute('class', 'iconify-inline');
+    $spanIcon1.setAttribute('data-icon', 'codicon:search');
+    $spanIcon1.setAttribute('data-width', '16');
+    $spanIcon1.style.color = '#36c';
+    $sectionIcon1.appendChild($spanIcon1);
+    let $spanIcon2 = newElement('span');
+    $spanIcon2.setAttribute('class', 'iconify-inline');
+    $spanIcon2.setAttribute('data-icon', 'codicon:chrome-close');
+    $spanIcon2.setAttribute('data-width', '18');
+    $sectionIcon2.appendChild($spanIcon2);
+    $headerSectionOptions.appendChild($sectionIcon1);
+    $headerSectionOptions.appendChild($sectionIcon2);
+    $sectionOptions.appendChild($headerSectionOptions);
+    //Creamos hijos del sections OPTIONS [section OPTIONS]
+    let $sectionsOptionsValues = newElement('section');
+    $sectionsOptionsValues.setAttribute('class', 'simSelect-option-container');
+    Array.from($select.children).forEach(option => {
+        const valueOption = option.value;
+        const textContentOption = option.textContent;
+        let $article = newElement('article');
+        $article.setAttribute('class', 'simSelect__option');
+        $article.setAttribute('tabindex', '0');
+        $article.setAttribute('value', valueOption);
+        $article.textContent = textContentOption;
+        $sectionsOptionsValues.appendChild($article);
+    })
+    $sectionOptions.appendChild($sectionsOptionsValues);
+    $newSelect.appendChild($sectionOptions);
+    //Remplazamos el Select por lo nuevo
+    $select.parentNode.replaceChild($newSelect, $select)
+    addEventDom();
+}
+
+//ADD Plugin ICONIFY to BODY
+const scriptIconify = document.createElement('script');
+scriptIconify.setAttribute('src', 'https://code.iconify.design/2/2.2.1/iconify.min.js')
+document.body.appendChild(scriptIconify);
+
+//Buscamos todos los elementos Selects y los remplazamos
+const $SELECT_SIMSELECT = document.querySelectorAll('.simSelect');
+$SELECT_SIMSELECT.forEach((select, index) => {
+    transformSelect(select, index);
 });
-$SIMSELECT_OPTIONS.forEach(elementContainerOption => {
-    elementContainerOption.addEventListener('click', actionOption);
-    elementContainerOption.addEventListener('keyup', actionOption);
-})
-$SIMSELECT_FILTER.forEach(elementInputFilter => {
-    elementInputFilter.addEventListener('keyup', ingresoFiltro);
-})
-document.addEventListener('click', cerrarOptionsInput);
