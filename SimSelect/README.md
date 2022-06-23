@@ -2,6 +2,7 @@
 Solo necesitas crear un componente [select] con la clase [simSelect]. Puedes agregar las [option] que necesites.
 
 # ESTRUCTURA CREADA (remplaza los select)
+```
 <main class="simSelect" data-simselect-index="1">
     <header class="simSelect-header" tabindex="0">
         <input type="text" class="simSelect-input" placeholder="Seleccione una opci&oacute;n" disabled>
@@ -32,3 +33,4 @@ Solo necesitas crear un componente [select] con la clase [simSelect]. Puedes agr
         </section>
     </section>
 </main
+```
