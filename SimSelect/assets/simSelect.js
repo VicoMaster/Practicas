@@ -10,7 +10,6 @@
 let textFilter = '',  // texto ingresado usado para filtrar resultados
     valoresOriginalsOptions = [],  // Elementos DOM [article] actuales, SE REINICIA al cambiar de simselect.
     dataSimselectIndex = 0,  // Index del elemento actual seleccionado, si cambia se reinicia valoresOriginalsOptions
-    testValores = {},  // test para guardar los valores y textContent de los article
     contKeyArrow = 0, // Añade o disminuye dependiendo de la flecha de navegación usada
     accessKey = false; // SI es True activará la recolección del valor de [ARTICLE] focuseado por flechas de teclado
 
@@ -27,33 +26,34 @@ let $iconSearchInputFiltro = undefined;  // Icono Lupa en Input actual
 let elementosActuales = {};  // Guarda los elementos target(DOM elements) actuales
 
 
-//GUARDAMOS LOS VALORES DE LOS OPTIONS y RETORNAMOS ARRAY DE VALORES DE LOS ARTICLE
+//GUARDAMOS LOS VALORES DE LOS OPTIONS y RETORNAMOS OBJECT DE VALORES DE LOS ARTICLE
 function saveReturnValues(elementosArticle) {
-    let tempValueOptions = [];
+    let keysValuesOptions = {};
     if (valoresOriginalsOptions.length <= 0) {
         valoresOriginalsOptions = [...elementosArticle];
     }
     for (const ELEMENT of valoresOriginalsOptions) {
         const VALOR_ELEMENT = ELEMENT.getAttribute('value');
         if (VALOR_ELEMENT != '') {
-            tempValueOptions.push(VALOR_ELEMENT);
-            testValores[`"${ELEMENT.textContent}"`] = VALOR_ELEMENT;
+            //tempValueOptions.push(VALOR_ELEMENT);
+            keysValuesOptions[`${ELEMENT.textContent}`] = VALOR_ELEMENT;
         }
     }
-    return tempValueOptions;
+    return keysValuesOptions;
 }
 
 //FILTRAMOS VALORES EN LAS OPTIONS vs FILTRO
-function filtrarDatos(arrayValues) {
+function filtrarDatos(objectValuesOptions) {
     navegationKeys();
-    let tempValuesFilter = arrayValues.filter(element => {
+    let keysValuesOptions = {};
+    Object.keys(objectValuesOptions).filter(element => {
         const REGEX = new RegExp(textFilter, 'gi');
         let indexSearch = element.search(REGEX);
         if (indexSearch != -1 && indexSearch === 0) {
-            return element;
+            keysValuesOptions[element] = objectValuesOptions[element];
         }
     });
-    return tempValuesFilter;
+    return keysValuesOptions;
 }
 
 //ENCONTRAMOS LOS ELEMENTOS ACTUALES PARA MULTI-INPUT | si es nuevo cierra el anterior
@@ -77,7 +77,6 @@ function identifyInput(element) {
                         showClose(elementosActuales);
                     }
                     valoresOriginalsOptions = [];
-                    testValores = {};
                 }
             }
         }
@@ -89,7 +88,7 @@ function identifyInput(element) {
 function resetValuesOptions() {
     const $CONTAINER_OPTIONS = elementosActuales.sectionOptions.children[1];
     eliminarHijos($CONTAINER_OPTIONS);
-    let valoresActuales = [...saveReturnValues(valoresOriginalsOptions)];
+    let valoresActuales = { ...saveReturnValues(valoresOriginalsOptions) };
     crearHijos(valoresActuales, $CONTAINER_OPTIONS);
     elementosActuales.sectionOptions.children[0].children[0].value = '';
 }
@@ -127,7 +126,7 @@ function navegationKeys(event = undefined) {
         elementosActuales.sectionOptions.children[1].children[contKeyArrow].classList.add('border-focus');
         accessKey = true;
     } else {
-        //Reiniciamos la interacción con las flechas del teclado
+        //Reiniciamos la interacción con las flechas del teclado cuando se llama sin argumentos
         if (contKeyArrow >= 0) {
             elementosActuales.sectionOptions.children[1].children[contKeyArrow].classList.remove('border-focus');
             contKeyArrow = 0;
@@ -199,7 +198,8 @@ function actionOption(event) {
             const OPTION_SELECTED = event.target.getAttribute('class').includes('simselect__option');;
             if (OPTION_SELECTED) {
                 const VALOR_OPTION = event.target.getAttribute('value');
-                elementosActuales.header.children[0].value = VALOR_OPTION;
+                const VALOR_TEXT_CONTENT = event.target.textContent;
+                elementosActuales.header.children[0].value = VALOR_TEXT_CONTENT;
                 elementosActuales.header.children[0].setAttribute('value', VALOR_OPTION);
                 elementosActuales.sectionOptions.children[0].children[0].value = '';
                 showClose(elementosActuales);
@@ -217,7 +217,8 @@ function actionOption(event) {
     //Si está seleccionado una opcion con las flechas recoge su valor
     if (accessKey && VALID_KEYS.includes(event.code)) {
         const VALOR_OPTION = elementosActuales.sectionOptions.children[1].children[contKeyArrow].getAttribute('value');
-        elementosActuales.header.children[0].value = VALOR_OPTION;
+        const VALOR_TEXT_CONTENT = elementosActuales.sectionOptions.children[1].children[contKeyArrow].textContent;
+        elementosActuales.header.children[0].value = VALOR_TEXT_CONTENT;
         elementosActuales.header.children[0].setAttribute('value', VALOR_OPTION);
         elementosActuales.sectionOptions.children[0].children[0].value = '';
         showClose(elementosActuales);
@@ -238,7 +239,7 @@ function eliminarHijos(contenedorPadre) {
 }
 
 //CREAMOS HIJOS A MOSTRAR
-function crearHijos(valoresArray, contenedorPadre) {
+function crearHijos(objectValoresOptions, contenedorPadre) {
     //Crear elemento seleccione
     let $firstElementArticle = document.createElement('article');
     $firstElementArticle.setAttribute('class', 'simselect__option');
@@ -246,14 +247,15 @@ function crearHijos(valoresArray, contenedorPadre) {
     $firstElementArticle.textContent = 'Seleccione una opción';
     contenedorPadre.appendChild($firstElementArticle);
     //Creamos e insertamos los demás hijos
-    for (const element of valoresArray) {
+    Object.keys(objectValoresOptions).forEach(key => {
         let $elementArticle = document.createElement('article');
         $elementArticle.setAttribute('class', 'simselect__option');
-        $elementArticle.setAttribute('value', element);
+        $elementArticle.setAttribute('value', objectValoresOptions[key]);
         $elementArticle.setAttribute('tabindex', '0');
-        $elementArticle.textContent = element;
+        $elementArticle.textContent = key;
         contenedorPadre.appendChild($elementArticle);
-    }
+
+    });
 }
 
 //Cuando no existen coincidencias en filtro crea hijo NODATA
@@ -276,15 +278,15 @@ function ingresoFiltro(event) {
         const INVALID_KEYS = ['Enter', 'NumpadEnter']
         if (!INVALID_KEYS.includes(event.code)) {
             textFilter = elementosActuales.sectionOptions.children[0].children[0].value;
-            let valoresActuales = [];  // Valores actuales options
-            let valoresFiltrados = [];  // Valores filtrados options
-            //Creamos array con cada uno de los valores de las opciones
-            valoresActuales = [...saveReturnValues(elementosActuales.sectionOptions.children[1].children)];
-            //Validamos las coincidencias del filtro en el array de valores
-            valoresFiltrados = [...filtrarDatos(valoresActuales)];
+            let valoresActuales = {};  // Valores actuales options
+            let valoresFiltrados = {};  // Valores filtrados options
+            //Creamos Object con cada uno de los Keys(textContent)/valores(values) de las opciones
+            valoresActuales = { ...saveReturnValues(elementosActuales.sectionOptions.children[1].children) };
+            //Validamos las coincidencias del filtro en el Object de valores
+            valoresFiltrados = { ...filtrarDatos(valoresActuales) };
             //Creamos los nuevos elementos article con los resultados del filtro
             const $CONTAINER_OPTIONS = elementosActuales.sectionOptions.children[1];
-            if (valoresFiltrados.length > 0) {
+            if (Object.keys(valoresFiltrados).length > 0) {
                 eliminarHijos($CONTAINER_OPTIONS);
                 crearHijos(valoresFiltrados, $CONTAINER_OPTIONS);
             } else {

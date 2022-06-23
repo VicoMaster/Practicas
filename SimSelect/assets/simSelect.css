@@ -6,6 +6,7 @@
 
 :root {
     --background-color-dark: rgb(31, 31, 31);
+    --brackground-transparent: transparent;
     --background-color-white: white;
     --background-hover-option: #3366CC;
     --color-border-input: rgb(199, 199, 199);
@@ -39,6 +40,7 @@
 }
 
 .simselect-input {
+    background-color: var(--background-color-white);
     border: none;
     color: var(--color-text-normal);
     cursor: pointer;
