@@ -15,11 +15,11 @@ let textFilter = '',  // texto ingresado usado para filtrar resultados
 
 
 //ELEMENTOS DOOM 
-const $SIMSELECT = document.querySelectorAll('.simselect-header'),
-    $SIMSELECT_OPTIONS = document.querySelectorAll('.simselect-options'),
-    $SIMSELECT_INPUT = document.querySelector('.simselect-input'),
-    $SIMSELECT_FILTER = document.querySelectorAll('.simselect-filter'),
-    $SIMSELECT_OPTIONS_VALUES = document.querySelectorAll('.simselect__option');
+const $SIMSELECT = document.querySelectorAll('.simSelect-header'),
+    $SIMSELECT_OPTIONS = document.querySelectorAll('.simSelect-options'),
+    $SIMSELECT_INPUT = document.querySelector('.simSelect-input'),
+    $SIMSELECT_FILTER = document.querySelectorAll('.simSelect-filter'),
+    $SIMSELECT_OPTIONS_VALUES = document.querySelectorAll('.simSelect__option');
 let $simselectIconDown = undefined;  // Icono de flecha abajo actual
 let $iconClearInputFiltro = undefined;  // Icono X clear Input actual 
 let $iconSearchInputFiltro = undefined;  // Icono Lupa en Input actual 
@@ -62,7 +62,7 @@ function identifyInput(element) {
     const PATH = element.composedPath();
     PATH.forEach(element => {
         if (element !== document && element !== window && element.nodeName !== 'BODY' && element.nodeName !== 'HTML') {
-            if (element.getAttribute('class') === 'simselect') {
+            if (element.getAttribute('class') === 'simSelect') {
                 ELEMENTOS_DOM.main = element;
                 ELEMENTOS_DOM.header = element.children[0];
                 ELEMENTOS_DOM.sectionOptions = element.children[1];
@@ -72,7 +72,7 @@ function identifyInput(element) {
                 }
                 if (dataSimselectIndex !== element.getAttribute('data-simselect-index')) {
                     dataSimselectIndex = element.getAttribute('data-simselect-index');
-                    const HIDDEN_CLASS = elementosActuales.sectionOptions.getAttribute('class').includes('simselect-hidden');
+                    const HIDDEN_CLASS = elementosActuales.sectionOptions.getAttribute('class').includes('simSelect-hidden');
                     if (!HIDDEN_CLASS) {
                         showClose(elementosActuales);
                     }
@@ -95,9 +95,9 @@ function resetValuesOptions() {
 
 //Se llama cuando se necesita cerrar la caja de opciones y reiniciar todo
 function showClose(elementosDom) {
-    elementosDom.sectionOptions.classList.toggle('simselect-hidden');
+    elementosDom.sectionOptions.classList.toggle('simSelect-hidden');
     //Si la caja de opciones está oculta mandamos focus al header
-    if (elementosDom.sectionOptions.classList.contains('simselect-hidden')) {
+    if (elementosDom.sectionOptions.classList.contains('simSelect-hidden')) {
         directHeader();
         navegationKeys();
     }
@@ -106,8 +106,8 @@ function showClose(elementosDom) {
     $simselectIconDown = elementosDom.header.children[1];
     const $RE_SIMSELECT_ICON_UP = elementosDom.header.children[2];
     //Cambiamos estilos
-    $simselectIconDown.classList.toggle('simselect-hidden');
-    $RE_SIMSELECT_ICON_UP.classList.toggle('simselect-hidden');
+    $simselectIconDown.classList.toggle('simSelect-hidden');
+    $RE_SIMSELECT_ICON_UP.classList.toggle('simSelect-hidden');
     elementosDom.sectionOptions.children[0].children[0].focus();
     //Si existe una copia de los valores los restablece al cerrar
     if (valoresOriginalsOptions.length > 0) {
@@ -176,7 +176,7 @@ function simselectInit(event = undefined) {
             $iconSearchInputFiltro.addEventListener('click', directInput);
         }
         //Cerramos la caja de opciones dependiendo del componente
-        nameEvent = elementosActuales.header.children[0].getAttribute('class').includes('simselect-input');
+        nameEvent = elementosActuales.header.children[0].getAttribute('class').includes('simSelect-input');
         const NODE_NAME = event.target.nodeName;
         if (nameEvent || (NODE_NAME === 'path' || NODE_NAME === 'svg' || NODE_NAME === 'HEADER')) {
             showClose(elementosActuales);
@@ -195,7 +195,7 @@ function actionOption(event) {
     if (VALID_KEYS.includes(event.code) || event.type === 'click') {
         const COMPONENTES_INVALIDOS = ['path', 'INPUT', 'svg'];
         if (!COMPONENTES_INVALIDOS.includes(event.target.nodeName)) {
-            const OPTION_SELECTED = event.target.getAttribute('class').includes('simselect__option');;
+            const OPTION_SELECTED = event.target.getAttribute('class').includes('simSelect__option');;
             if (OPTION_SELECTED) {
                 const VALOR_OPTION = event.target.getAttribute('value');
                 const VALOR_TEXT_CONTENT = event.target.textContent;
@@ -242,14 +242,14 @@ function eliminarHijos(contenedorPadre) {
 function crearHijos(objectValoresOptions, contenedorPadre) {
     //Crear elemento seleccione
     let $firstElementArticle = document.createElement('article');
-    $firstElementArticle.setAttribute('class', 'simselect__option');
+    $firstElementArticle.setAttribute('class', 'simSelect__option');
     $firstElementArticle.setAttribute('value', '');
     $firstElementArticle.textContent = 'Seleccione una opción';
     contenedorPadre.appendChild($firstElementArticle);
     //Creamos e insertamos los demás hijos
     Object.keys(objectValoresOptions).forEach(key => {
         let $elementArticle = document.createElement('article');
-        $elementArticle.setAttribute('class', 'simselect__option');
+        $elementArticle.setAttribute('class', 'simSelect__option');
         $elementArticle.setAttribute('value', objectValoresOptions[key]);
         $elementArticle.setAttribute('tabindex', '0');
         $elementArticle.textContent = key;
@@ -301,10 +301,10 @@ function ingresoFiltro(event) {
 //CIERRA LAS OPTIONS CUANDO SE DA CLICK FUERA DEL SELECT -- ¡UNICAMENTE PARA ACCIONAR FUERA DEL SELECT!
 function cerrarOptionsInput(event) {
     if (Object.keys(elementosActuales).length > 0) {
-        const HIDDEN_CLASS = elementosActuales.sectionOptions.getAttribute('class').includes('simselect-hidden');
+        const HIDDEN_CLASS = elementosActuales.sectionOptions.getAttribute('class').includes('simSelect-hidden');
         let nameEvent = false;
         if (!HIDDEN_CLASS) {
-            const INCLUDES_CLASS = ['simselect-input', 'simselect-filter', 'simselect__option', 'noData'];
+            const INCLUDES_CLASS = ['simSelect-input', 'simSelect-filter', 'simSelect__option', 'noData'];
             INCLUDES_CLASS.forEach(element => {
                 let containClass = event.target.getAttribute('class');
                 if (containClass !== null) {
