@@ -85,4 +85,5 @@ El siguiente código muestra una plantilla muy simple donde el componente SIMSEL
 **Aclaración**: el body tiene un padding de 20px por simple estética unicamente.
 
 # PREVIEW
+Permite navegación por medio de las flechas del teclado, al igual que la tabulación.
 ![simSelect, SIMPLE SELECT](https://github.com/VicoMaster/Practicas/blob/main/SimSelect/assets/img/screenshot.png?raw=true)
