@@ -1,7 +1,28 @@
 # SIMSELECT (Simple Select)
-Solo necesitas crear un componente [select] con la clase [simSelect]. Puedes agregar las [option] que necesites.
+Solo necesitas crear un componente [select] con la clase [simSelect]. Puedes agregar los [simSelect] que desees, al igual que las [option] que necesites.
+```
+<select class="simSelect">
+    <option value="" selected>Seleccione una opci&oacute;n</option>
+    <option value=0>Cero</option>
+    <option value=1>Uno</option>
+    <option value=2>Dos</option>
+    <option value=3>Tres</option>
+</select>
+```
+Carga la hoja de estilos en tu [head] usando la siguiente linea:
+```
+<link rel="stylesheet" href="assets/simSelect.css">
+```
 
-# ESTRUCTURA CREADA (remplaza los select)
+También necesitas agregar la siguiente linea [script] al final de tu body:
+```
+<script src="assets/simSelect.js"></script>
+```
+# ESTRUCTURA DE ARCHIVOS
+La estructura de archivos es muy simple, se compone de 2 archivos [simSelect.css, simSelect.js]. Puedes cargar estos mismos en cualquier parte de tu proyecto, solo no olvides llamar a estos en el archivo [HTML] donde quieras crear el [simSelect]
+
+# ESTRUCTURA CREADA (remplaza los [select])
+La siguiente estructura se crea remplazando el [select] ingresado en la función [transformSelect()]. Esta función es extensa ya que creamos elemento por elemento usando código JavaScript.
 ```
 <main class="simSelect" data-simselect-index="1">
     <header class="simSelect-header" tabindex="0">
@@ -26,11 +47,42 @@ Solo necesitas crear un componente [select] con la clase [simSelect]. Puedes agr
             <article class="simSelect__option" tabindex="0" value="1">Uno</article>
             <article class="simSelect__option" tabindex="0" value="2">Dos</article>
             <article class="simSelect__option" tabindex="0" value="3">Tres</article>
-            <article class="simSelect__option" tabindex="0" value="4">Cuatro</article>
-            <article class="simSelect__option" tabindex="0" value="5">Cinco</article>
-            <article class="simSelect__option" tabindex="0" value="6">Seis</article>
-            <article class="simSelect__option" tabindex="0" value="7">Siete</article>
         </section>
     </section>
 </main
 ```
+
+# PLANTILLA SIMPLE CREANDO UN SIMSELECT
+El siguiente código muestra una plantilla muy simple donde el componente SIMSELECT es llamado usando la clase[simSelect]. 
+```
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/simSelect.css">
+    <title>SimSelect | Simple Select</title>
+</head>
+
+<body style="padding: 20px;">
+    
+    <select class="simSelect">
+        <option value="" selected>Seleccione una opci&oacute;n</option>
+        <option value=0>Cero</option>
+        <option value=1>Uno</option>
+        <option value=2>Dos</option>
+        <option value=3>Tres</option>
+    </select>
+
+    <!-- JS -->
+    <script src="assets/simSelect.js"></script>
+</body>
+
+</html>
+```
+**Aclaración**: el body tiene un padding de 20px por simple estética unicamente.
+
+# PREVIEW
+![simSelect, SIMPLE SELECT](/assets/img/screenshot.png)
