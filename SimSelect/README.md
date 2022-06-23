@@ -9,7 +9,7 @@ Solo necesitas crear un componente [select] con la clase [simSelect]. Puedes agr
     <option value=3>Tres</option>
 </select>
 ```
-<p>**ADVERTENCIA:** No soporta grupos o estructuras complejas. En esta versión solo admite [option].</p>
+**ADVERTENCIA:**<p>No soporta grupos o estructuras complejas. En esta versión solo admite [option].</p>
 <p><br>Carga la hoja de estilos en tu [head] usando la siguiente linea:</p>
 
 ```
