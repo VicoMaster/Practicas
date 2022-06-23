@@ -22,7 +22,7 @@ También necesitas agregar la siguiente linea [script] al final de tu body:
 La estructura de archivos es muy simple, se compone de 2 archivos [simSelect.css, simSelect.js]. Puedes cargar estos mismos en cualquier parte de tu proyecto, solo no olvides llamar a estos en el archivo [HTML] donde quieras crear el [simSelect]
 
 # ESTRUCTURA CREADA (remplaza los [select])
-La siguiente estructura se crea remplazando el [select] ingresado en la función [transformSelect()]. Esta función es extensa ya que creamos elemento por elemento usando código JavaScript.
+La siguiente estructura se crea remplazando el [select] por medio de la función "transformSelect()". Esta función es extensa ya que creamos elemento por elemento usando código JavaScript.
 ```
 <main class="simSelect" data-simselect-index="1">
     <header class="simSelect-header" tabindex="0">
@@ -85,4 +85,4 @@ El siguiente código muestra una plantilla muy simple donde el componente SIMSEL
 **Aclaración**: el body tiene un padding de 20px por simple estética unicamente.
 
 # PREVIEW
-![simSelect, SIMPLE SELECT](/assets/img/screenshot.png)
+![simSelect, SIMPLE SELECT](https://github.com/VicoMaster/Practicas/blob/main/SimSelect/assets/img/screenshot.png?raw=true)
