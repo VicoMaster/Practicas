@@ -1,5 +1,5 @@
 # SIMSELECT (Simple Select)
-Solo necesitas crear un componente [select] con la clase [simSelect]. Puedes agregar los [simSelect] que desees, al igual que las [option] que necesites.
+Solo necesitas crear un componente [select] con la clase [simSelect]. Puedes agregar los [simSelect] que desees, al igual que las [option] que necesites. Si una opción está marcada con [selected] el valor del input será el de la opción seleccionada.
 ```
 <select class="simSelect">
     <option value="" selected>Seleccione una opci&oacute;n</option>
@@ -9,7 +9,9 @@ Solo necesitas crear un componente [select] con la clase [simSelect]. Puedes agr
     <option value=3>Tres</option>
 </select>
 ```
-Carga la hoja de estilos en tu [head] usando la siguiente linea:
+<p>**ADVERTENCIA:** No soporta grupos o estructuras complejas. En esta versión solo admite [option].
+<br>
+Carga la hoja de estilos en tu [head] usando la siguiente linea:</p>
 ```
 <link rel="stylesheet" href="assets/simSelect.css">
 ```
@@ -85,6 +87,5 @@ El siguiente código muestra una plantilla muy simple donde el componente SIMSEL
 **Aclaración**: el body tiene un padding de 20px por simple estética unicamente.
 
 # PREVIEW
-Permite navegación por medio de las flechas del teclado, al igual que la tabulación
-<br>
+<p>Permite navegación por medio de las flechas del teclado, al igual que la tabulación.<br></p>
 ![simSelect, SIMPLE SELECT](https://github.com/VicoMaster/Practicas/blob/main/SimSelect/assets/img/screenshot.png?raw=true)
