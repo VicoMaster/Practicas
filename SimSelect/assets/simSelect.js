@@ -23,7 +23,7 @@ let $simSelect = undefined,
 let textFilter = '',  // texto ingresado usado para filtrar resultados
     valoresOriginalsOptions = [],  // Elementos DOM [article] actuales, SE REINICIA al cambiar de simselect.
     dataSimselectIndex = 0,  // Index del elemento actual seleccionado, si cambia se reinicia valoresOriginalsOptions
-    contKeyArrow = 0, // Añade o disminuye dependiendo de la flecha de navegación usada
+    contKeyArrow = -1, // Añade o disminuye dependiendo de la flecha de navegación usada
     accessKey = false; // SI es True activará la recolección del valor de [ARTICLE] focuseado por flechas de teclado
 
 //GUARDAMOS LOS VALORES DE LOS OPTIONS y RETORNAMOS OBJECT DE VALORES DE LOS ARTICLE
@@ -34,10 +34,7 @@ function saveReturnValues(elementosArticle) {
     }
     for (const ELEMENT of valoresOriginalsOptions) {
         const VALOR_ELEMENT = ELEMENT.getAttribute('value');
-        if (VALOR_ELEMENT != '') {
-            //tempValueOptions.push(VALOR_ELEMENT);
-            keysValuesOptions[`${ELEMENT.textContent}`] = VALOR_ELEMENT;
-        }
+        keysValuesOptions[`${ELEMENT.textContent}`] = VALOR_ELEMENT;
     }
     return keysValuesOptions;
 }
@@ -117,22 +114,31 @@ function showClose(elementosDom) {
 
 //Navegación con flechas del teclado
 function navegationKeys(event = undefined) {
-    if (event !== undefined) {
-        //elementosActuales.sectionOptions.children[1].children[3].classList.add('border-focus');
-        elementosActuales.sectionOptions.children[1].children[contKeyArrow].classList.remove('border-focus');
-        contKeyArrow += (event.code === 'ArrowDown' || event.code === 'ArrowRight')
-            ? (contKeyArrow < elementosActuales.sectionOptions.children[1].children.length - 1) ? 1 : 0
-            : (contKeyArrow > 0) ? -1 : 0;
-        elementosActuales.sectionOptions.children[1].children[contKeyArrow].classList.add('border-focus');
-        accessKey = true;
-    } else {
-        //Reiniciamos la interacción con las flechas del teclado cuando se llama sin argumentos
-        if (contKeyArrow >= 0) {
-            elementosActuales.sectionOptions.children[1].children[contKeyArrow].classList.remove('border-focus');
-            contKeyArrow = 0;
-            accessKey = false;
+    try {
+        if (event !== undefined) {
+            if (contKeyArrow !== -1) {
+                elementosActuales.sectionOptions.children[1].children[contKeyArrow].classList.remove('border-focus');
+            }
+            contKeyArrow += (event.code === 'ArrowDown' || event.code === 'ArrowRight')
+                ? (contKeyArrow < elementosActuales.sectionOptions.children[1].children.length - 1) ? 1 : 0
+                : (contKeyArrow > 0) ? -1 : 0;
+            if (contKeyArrow === -1) {
+                contKeyArrow = 0;
+            }
+            elementosActuales.sectionOptions.children[1].children[contKeyArrow].classList.add('border-focus');
+            accessKey = true;
+        } else {
+            //Reiniciamos la interacción con las flechas del teclado cuando se llama sin argumentos
+            if (contKeyArrow >= 0) {
+                elementosActuales.sectionOptions.children[1].children[contKeyArrow].classList.remove('border-focus');
+                contKeyArrow = 0;
+                accessKey = false;
+            }
         }
+    } catch {
+        console.log('ALGO RARO PASO...');
     }
+    
 }
 
 //Limpia el input de filtro y reinicia los datos
@@ -213,7 +219,6 @@ function actionOption(event) {
         directHeader();
         showClose(elementosActuales);
     }
-
     //Si está seleccionado una opcion con las flechas recoge su valor
     if (accessKey && VALID_KEYS.includes(event.code)) {
         const VALOR_OPTION = elementosActuales.sectionOptions.children[1].children[contKeyArrow].getAttribute('value');
@@ -240,13 +245,7 @@ function eliminarHijos(contenedorPadre) {
 
 //CREAMOS HIJOS A MOSTRAR
 function crearHijos(objectValoresOptions, contenedorPadre) {
-    //Crear elemento seleccione
-    let $firstElementArticle = document.createElement('article');
-    $firstElementArticle.setAttribute('class', 'simSelect__option');
-    $firstElementArticle.setAttribute('value', '');
-    $firstElementArticle.textContent = 'Seleccione una opción';
-    contenedorPadre.appendChild($firstElementArticle);
-    //Creamos e insertamos los demás hijos
+    //Creamos e insertamos los hijos
     Object.keys(objectValoresOptions).forEach(key => {
         let $elementArticle = document.createElement('article');
         $elementArticle.setAttribute('class', 'simSelect__option');
@@ -372,14 +371,14 @@ function transformSelect($select = undefined, index = 0) {
     const ATTRIBUTES_SELECT = $select.getAttributeNames();
     ATTRIBUTES_SELECT.forEach(attribute => {
         if (attribute === 'class') {
-            $input.setAttribute('class', 'simSelect-input');
+            const CLASES = 'simSelect-input ' + $select.getAttribute(attribute).replace('simSelect', '').trim();
+            $input.setAttribute('class', CLASES);
         } else {
             $input.setAttribute(`${attribute}`, $select.getAttribute(attribute));
         }
     });
     $select.classList.add('simSelect-hidden');
     $input.setAttribute('type', 'text');
-    $input.setAttribute('placeholder', 'Seleccione una opción');
     $input.setAttribute('disabled', '');
     $span_1.setAttribute('class', 'iconify-inline simSelect-icon');
     $span_1.setAttribute('data-icon', 'akar-icons:chevron-down');
@@ -389,10 +388,6 @@ function transformSelect($select = undefined, index = 0) {
     $span_2.setAttribute('data-icon', 'akar-icons:chevron-up');
     $span_2.style.color = 'rgb(31, 31, 31)';
     $span_2.setAttribute('data-width', '15');
-    $header.appendChild($input);
-    $header.appendChild($span_1);
-    $header.appendChild($span_2);
-    $newSelect.appendChild($header);
     //Creamos Section OPTIONS del Main
     let $sectionOptions = newElement('section');
     $sectionOptions.setAttribute('class', 'simSelect-options simSelect-hidden');
@@ -404,7 +399,6 @@ function transformSelect($select = undefined, index = 0) {
     $inputOption.setAttribute('type', 'text');
     $inputOption.setAttribute('tabindex', '0');
     $inputOption.setAttribute('placeholder', '¿Qué busca?');
-    $headerSectionOptions.appendChild($inputOption);
     let $sectionIcon1 = newElement('section');
     let $sectionIcon2 = newElement('section');
     $sectionIcon1.setAttribute('class', 'simSelect-icon-search');
@@ -414,18 +408,34 @@ function transformSelect($select = undefined, index = 0) {
     $spanIcon1.setAttribute('data-icon', 'codicon:search');
     $spanIcon1.setAttribute('data-width', '16');
     $spanIcon1.style.color = '#36c';
-    $sectionIcon1.appendChild($spanIcon1);
     let $spanIcon2 = newElement('span');
     $spanIcon2.setAttribute('class', 'iconify-inline');
     $spanIcon2.setAttribute('data-icon', 'codicon:chrome-close');
     $spanIcon2.setAttribute('data-width', '18');
-    $sectionIcon2.appendChild($spanIcon2);
-    $headerSectionOptions.appendChild($sectionIcon1);
-    $headerSectionOptions.appendChild($sectionIcon2);
-    $sectionOptions.appendChild($headerSectionOptions);
     //Creamos hijos del sections OPTIONS [section OPTIONS]
     let $sectionsOptionsValues = newElement('section');
     $sectionsOptionsValues.setAttribute('class', 'simSelect-option-container');
+    //Creamos las options[Articles], si existe una option [selected] tomara esa como primer hijo
+    let $optionSelected = undefined; // Guarda la option SELECTED, si no hay ninguna toma la primera option
+    Array.from($select.children).forEach($children => {
+        if ($children.getAttributeNames().findIndex(attribute => attribute === 'selected') !== -1) {
+            $optionSelected = $children;
+        }
+    });
+    if ($optionSelected === undefined) {
+        if ($select.children[0] !== undefined) {
+            $optionSelected = $select.children[0];
+            $input.setAttribute('value', $optionSelected.value);
+            $input.value = $optionSelected.textContent;
+        } else {
+            $input.setAttribute('placeholder', 'NO OPTIONS');
+            $input.setAttribute('value', '');
+            $input.value = '';
+        }
+    } else {
+        $input.setAttribute('value', $optionSelected.value);
+        $input.value = $optionSelected.textContent;
+    }
     Array.from($select.children).forEach(option => {
         const valueOption = option.value;
         const textContentOption = option.textContent;
@@ -436,6 +446,16 @@ function transformSelect($select = undefined, index = 0) {
         $article.textContent = textContentOption;
         $sectionsOptionsValues.appendChild($article);
     })
+    $header.appendChild($input);
+    $header.appendChild($span_1);
+    $header.appendChild($span_2);
+    $newSelect.appendChild($header);
+    $headerSectionOptions.appendChild($inputOption);
+    $sectionIcon1.appendChild($spanIcon1);
+    $sectionIcon2.appendChild($spanIcon2);
+    $headerSectionOptions.appendChild($sectionIcon1);
+    $headerSectionOptions.appendChild($sectionIcon2);
+    $sectionOptions.appendChild($headerSectionOptions);
     $sectionOptions.appendChild($sectionsOptionsValues);
     $newSelect.appendChild($sectionOptions);
     //Remplazamos el Select por lo nuevo
