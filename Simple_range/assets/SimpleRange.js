@@ -65,12 +65,12 @@ $CONTAINER_CONTROLS.forEach(element => {
 
 $SIMPLE_RANGE.forEach(element => {
     element.addEventListener('mousemove', event => {
-        event.composedPath()[1].children[1].value = event.target.value;
-        event.composedPath()[1].children[1].setAttribute('value', event.target.value);
+        event.composedPath()[1].children[1].value = parseFloat(event.target.value).toFixed(2);
+        event.composedPath()[1].children[1].setAttribute('value', parseFloat(event.target.value).toFixed(2));
     })
     element.addEventListener('click', event => {
-        event.composedPath()[1].children[1].value = event.target.value;
-        event.composedPath()[1].children[1].setAttribute('value', event.target.value);
+        event.composedPath()[1].children[1].value = parseFloat(event.target.value).toFixed(2);
+        event.composedPath()[1].children[1].setAttribute('value', parseFloat(event.target.value).toFixed(2));
     })
 })
 
