@@ -1,5 +1,5 @@
 # SIMSELECT (Simple Select)
-1. Solo necesitas crear un componente [select] con la clase [simSelect]. Puedes agregar los [simSelect] que desees, al igual que las [option] que necesites. Si una opción está marcada con [selected] el valor del input será el de la opción seleccionada.
+- Solo necesitas crear un componente [select] con la clase [simSelect]. Puedes agregar los [simSelect] que desees, al igual que las [option] que necesites. Si una opción está marcada con [selected] el valor del input será el de la opción seleccionada.
 ```
 <select class="simSelect">
     <option value="" selected>Seleccione una opci&oacute;n</option>
@@ -10,13 +10,15 @@
 </select>
 ```
 **ADVERTENCIA**: No soporta grupos o estructuras complejas. En esta versión solo admite [option].<br>
-2. Carga la hoja de estilos en tu [head] usando la siguiente linea:
+
+- Carga la hoja de estilos en tu [head] usando la siguiente linea:
 
 ```
 <link rel="stylesheet" href="assets/simSelect.css">
 ```
 
-3. También necesitas agregar la siguiente linea [script] al final de tu body:
+- También necesitas agregar la siguiente linea [script] al final de tu body:
+
 ```
 <script src="assets/simSelect.js"></script>
 ```
