@@ -1,5 +1,5 @@
 # SIMSELECT (Simple Select)
-- Solo necesitas crear un componente [select] con la clase [simSelect]. Puedes agregar los [simSelect] que desees, al igual que las [option] que necesites. Si una opción está marcada con [selected] el valor del input será el de la opción seleccionada.
+- Solo necesitas crear un componente <span style="color:blue">[select]</span>. con la clase [simSelect]. Puedes agregar los [simSelect] que desees, al igual que las [option] que necesites. Si una opción está marcada con [selected] el valor del input será el de la opción seleccionada.
 ```
 <select class="simSelect">
     <option value="" selected>Seleccione una opci&oacute;n</option>
