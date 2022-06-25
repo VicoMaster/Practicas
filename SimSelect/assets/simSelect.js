@@ -44,7 +44,7 @@ function filtrarDatos(objectValuesOptions) {
     navegationKeys();
     let keysValuesOptions = {};
     Object.keys(objectValuesOptions).filter(element => {
-        const REGEX = new RegExp(textFilter, 'gi');
+        const REGEX = new RegExp(`.*${textFilter}.*`, 'gi');
         let indexSearch = element.search(REGEX);
         if (indexSearch != -1 && indexSearch === 0) {
             keysValuesOptions[element] = objectValuesOptions[element];
