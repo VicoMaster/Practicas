@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Graficas</title>
+</head>
+
+<body>
+    <div style="width:600px; height:400px">
+        <canvas id="myChart"></canvas>
+    </div>
+</body>
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+
+<script>
+
+    let data = {
+        labels: ["Uno", "Dos", "Tres"],
+        datasets: [{
+            data: [2, 6, 2],
+            backgroundColor: ["#339966", "#144FFF", "#006666"]
+        }]
+    };
+
+    let options = {
+        type: 'pie',
+        data: data,
+        reponsive: true,
+        legend: {
+            position: 'bottom'
+        }
+    }
+
+
+    const config = {
+        type: 'pie',
+        data: data,
+        options: options,
+    };
+
+
+    //INIT
+
+
+    let datatest = {
+        datasets: [{
+            data: [
+                97,
+                7,
+                1,
+            ],
+            backgroundColor: [
+                'rgb(51, 102, 204)',
+                'rgb(52, 73, 94)',
+                'rgb(39, 174, 96)',
+                'rgb(39, 174, 56)',
+            ],
+            label: 'My dataset' // for legend
+        }],
+        labels: [
+            "Inicial",
+            "intermedio",
+            "Avanzado",
+        ]
+    };
+
+    let pieOptions = {
+        title: {
+            display: true,
+            fontsize: 14,
+            text: '2.1 Programa de gestión documental'
+        },
+        events: false,
+        animation: {
+            duration: 500,
+            easing: "easeOutQuart",
+            onComplete: function () {
+                var ctx = this.chart.ctx;
+                ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+
+                this.data.datasets.forEach(function (dataset) {
+
+                    for (var i = 0; i < dataset.data.length; i++) {
+                        var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                            total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+                            mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius) / 2,
+                            start_angle = model.startAngle,
+                            end_angle = model.endAngle,
+                            mid_angle = start_angle + (end_angle - start_angle) / 2;
+
+                        var x = mid_radius * Math.cos(mid_angle);
+                        var y = mid_radius * Math.sin(mid_angle);
+
+                        ctx.fillStyle = '#fff';
+                        if (i == 3) { // Darker text color for lighter background
+                            ctx.fillStyle = '#444';
+                        }
+
+                        var val = dataset.data[i];
+                        var percent = String(Math.round(val / total * 100)) + "%";
+
+                        if (val != 0) {
+                            ctx.fillText(dataset.data[i], model.x + x, model.y + y + 5);
+                            // Display percent in another line, line break doesn't work for fillText
+                            //ctx.fillText(percent, model.x + x, model.y + y + 20);
+                        }
+                    }
+                });
+            }
+            
+        },
+    };
+
+
+
+    //CLOSE
+
+
+
+
+
+    let ctxGraph = document.getElementById('myChart').getContext("2d");
+    let myGraph = new Chart(ctxGraph, {
+        type: 'pie',
+        data: datatest,
+        options: pieOptions
+    });
+</script>
+
+</html>
