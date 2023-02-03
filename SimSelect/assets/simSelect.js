@@ -10,12 +10,13 @@
 */
 
 // [CSS MINIFY - INJECTION]
-let cssMinify = "";
-cssMinify = ".simSelect-header,.simSelect-input,.simSelect-options{background-color:var(--background-color-white)}*{box-sizing:border-box;margin:0;padding:0}:root{--background-color-dark:rgb(31, 31, 31);--brackground-transparent:transparent;--background-color-white:white;--background-hover-option:#1787c9;--color-border-input:rgb(199, 199, 199);--color-text-light:white;--color-text-normal:rgb(31, 31, 31);--color-text-placeholder:rgb(102, 102, 102)}.simSelect{font-family:Arial,Helvetica,sans-serif;font-size:62.5%;height:4em;max-height:4em;width:100%;position:relative}.simSelect-header{border-radius:.4em;border:1px solid var(--color-border-input);display:flex;height:100%;justify-content:space-between;outline-color:var(--background-hover-option);padding:0 1em;text-align:center;width:100%}.simSelect-input{border:none;color:var(--color-text-normal);cursor:pointer;font-size:1.5em;outline:0;width:100%}.simSelect-filter,.simSelect__option{outline-color:var(--background-hover-option)}.simSelect-icon-close,.simSelect-icon-search{height:100%;top:.7em;width:max-content;position:absolute}.simSelect-input::placeholder{color:var(--color-text-placeholder)}";
-cssMinify += ".simSelect-icon{cursor:pointer;margin-top:1em;margin-right:.3em}.simSelect-icon-search{left:1em;cursor:text}.simSelect-icon-close{cursor:pointer;right:1.2em}.simSelect-icon-close svg{color:var(--background-hover-option);transition:.1s ease-in-out}.simSelect-options{border-radius:.3em;border:1px solid var(--color-border-input);max-height:30em;min-height:min-content;overflow:hidden;overflow-y:scroll;padding:.5em;position:absolute;width:100%;z-index:9999}.simSelect-filter-header{height:2em;left:0;position:sticky;top:0;width:100%;margin-bottom:1.2em}.simSelect-filter{border-radius:.3em;border:1px solid var(--color-border-input);box-shadow:0 -10px 0 0 var(--background-color-white);font-size:1.5em;height:2em;padding:0 .5em 0 2em;width:100%}.noData,.simSelect__option{font-size:1.5em;line-height:2em;padding-left:.5em}.simSelect-option-container{height:100%;width:100%}.simSelect__option{cursor:pointer;height:max-content;word-break:break-all}@media (hover:hover){.simSelect-icon-close:hover svg{color:red;transform:rotateZ(25deg)}.simSelect__option:hover{background-color:var(--background-hover-option);color:var(--color-text-light)}}.simSelect-hidden{opacity:0;visibility:hidden;display:none}.border-focus{border:1px solid var(--background-hover-option)}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.noData{height:1.8em}";
+// Descomentar siguientes lineas para generar archivo minify
+/* let cssMinify = "";
+cssMinify = ".simSelect-icon-close svg,.simSelect-icon-search svg{transition:.1s ease-in-out}.simSelect-header,.simSelect-input,.simSelect-options{background-color:var(--background-color-white)}*{box-sizing:border-box;margin:0;padding:0}:root{--background-color-dark:rgb(31, 31, 31);--brackground-transparent:transparent;--background-color-white:white;--background-hover-option:#1787c9;--color-border-input:rgb(199, 199, 199);--color-text-light:white;--color-text-normal:rgb(31, 31, 31);--color-text-placeholder:rgb(102, 102, 102)}.simSelect{font-family:Arial,Helvetica,sans-serif;font-size:62.5%;height:4em;max-height:4em;width:100%;position:relative}.simSelect-header{border-radius:.4em;border:1px solid var(--color-border-input);display:flex;height:100%;justify-content:space-between;outline-color:var(--background-hover-option);padding:0 1em;text-align:center;width:100%}.simSelect-input{border:none;color:var(--color-text-normal);cursor:pointer;font-size:1.5em;outline:0;width:100%}.simSelect-icon-close,.simSelect-icon-search{height:100%;top:.7em;width:max-content;position:absolute}.simSelect-input::placeholder{color:var(--color-text-placeholder)}.simSelect-icon{cursor:pointer;margin-top:1em;margin-right:.3em}.simSelect-icon-search{left:1em;cursor:text}";
+cssMinify += ".simSelect-icon-close{cursor:pointer;right:1.2em}.simSelect-icon-close svg{color:var(--background-hover-option)}.simSelect-options{border-radius:.3em;border:1px solid var(--color-border-input);max-height:30em;min-height:min-content;overflow:hidden;overflow-y:scroll;padding:.5em;position:absolute;width:100%;z-index:9999}.simSelect-filter-header{height:2em;left:0;position:sticky;top:0;width:100%;margin-bottom:1.2em}.simSelect-filter{border-radius:.3em;border:1px solid var(--color-border-input);box-shadow:0 -10px 0 0 var(--background-color-white);font-size:1.5em;height:2em;outline-color:var(--background-hover-option);padding:0 .5em 0 2em;width:100%}.noData,.simSelect__option{line-height:2em;padding-left:.5em}.simSelect-option-container{height:100%;width:100%}.simSelect__option,.simSelect__results{height:max-content;outline-color:var(--background-hover-option);font-size:1.5em}.simSelect__option{cursor:pointer;word-break:break-all}.simSelect__results{text-align:center;transform:scale(.8);padding-top:.5rem;pointer-events:none;color:var(--color-text-placeholder)}@media (hover:hover){.simSelect-icon-close:hover svg{color:red;transform:rotateZ(25deg)}.simSelect-icon-search:hover svg{transform:scale(1.1)}.simSelect__option:hover{background-color:var(--background-hover-option);color:var(--color-text-light)}}.simSelect-hidden{opacity:0;visibility:hidden;display:none}.border-focus{border:1px solid var(--background-hover-option)}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.noData{font-size:1.5em;height:1.8em}";
 const ELEMENT_STYLE_CSS = document.createElement('style');
 ELEMENT_STYLE_CSS.textContent = cssMinify;
-document.querySelector('body').insertBefore(ELEMENT_STYLE_CSS, document.querySelector('body').children[0]);
+document.querySelector('body').insertBefore(ELEMENT_STYLE_CSS, document.querySelector('body').children[0]); */
 
 
 //ELEMENTOS DOM - ACTUALIZADOS EN FUNCION addEventDom()
@@ -43,8 +44,11 @@ function saveReturnValues(elementosArticle) {
         valoresOriginalsOptions = [...elementosArticle];
     }
     for (const ELEMENT of valoresOriginalsOptions) {
-        const VALOR_ELEMENT = ELEMENT.getAttribute('value');
-        keysValuesOptions[`${ELEMENT.textContent}`] = VALOR_ELEMENT;
+        // Solo guarda article [Fix por SECTION de Mostrar # resultados]
+        if (ELEMENT.nodeName === 'ARTICLE') {
+            const VALOR_ELEMENT = ELEMENT.getAttribute('value');
+            keysValuesOptions[`${ELEMENT.textContent}`] = VALOR_ELEMENT;
+        }
     }
     return keysValuesOptions;
 }
@@ -98,6 +102,13 @@ function resetValuesOptions() {
     let valoresActuales = { ...saveReturnValues(valoresOriginalsOptions) };
     crearHijos(valoresActuales, $CONTAINER_OPTIONS);
     elementosActuales.sectionOptions.children[0].children[0].value = '';
+    // Si detecta que existe el [SECTION.class="resultsNumber"] lo elimina
+    const ELIMINAR_ELEMENTOS = document.querySelectorAll('.resultsNumber').length;
+    if (ELIMINAR_ELEMENTOS > 0) {
+        document.querySelectorAll('.resultsNumber').forEach(elemento => {
+            elemento.remove();
+        });
+    }
 }
 
 //Se llama cuando se necesita cerrar la caja de opciones y reiniciar todo
@@ -255,6 +266,11 @@ function eliminarHijos(contenedorPadre) {
 
 //CREAMOS HIJOS A MOSTRAR
 function crearHijos(objectValoresOptions, contenedorPadre) {
+    //Creamos texto con # de coincidencias
+    let $cantidadResultados = document.createElement('section');
+    $cantidadResultados.setAttribute('class', 'simSelect__results noSelect resultsNumber');
+    $cantidadResultados.textContent = `Mostrando ${Object.keys(objectValoresOptions).length} resultados`;
+    contenedorPadre.appendChild($cantidadResultados);
     //Creamos e insertamos los hijos
     Object.keys(objectValoresOptions).forEach(key => {
         let $elementArticle = document.createElement('article');
@@ -263,7 +279,6 @@ function crearHijos(objectValoresOptions, contenedorPadre) {
         $elementArticle.setAttribute('tabindex', '0');
         $elementArticle.textContent = key;
         contenedorPadre.appendChild($elementArticle);
-
     });
 }
 
@@ -324,8 +339,12 @@ function cerrarOptionsInput(event) {
                 }
             });
             const NODE_NAME = event.target.nodeName;
-            if (NODE_NAME !== 'svg' && NODE_NAME !== 'HEADER' && NODE_NAME !== 'path' && !nameEvent) {
+            // [IS_NUMBER_RESULTS] = si da click en [resultsNumber] no hace nada
+            const IS_NUMBER_RESULTS = (event.composedPath()[0].nodeName === 'SECTION') ? event.composedPath()[0].firstChild.getAttribute('class').includes('resultsNumber') : false;
+            if (NODE_NAME !== 'svg' && NODE_NAME !== 'HEADER' && NODE_NAME !== 'path' && !nameEvent && !IS_NUMBER_RESULTS) {
                 showClose(elementosActuales);
+            } else if (IS_NUMBER_RESULTS) {
+                directInput();
             }
         }
     }

@@ -82,10 +82,18 @@
     transition: all 100ms ease-in-out;
 }
 
+.simSelect-icon-search svg {
+    transition: all 100ms ease-in-out;
+}
+
 @media (hover:hover) {
     .simSelect-icon-close:hover svg {
         color: red;
         transform: rotateZ(25deg);
+    }
+
+    .simSelect-icon-search:hover svg {
+        transform: scale(1.1);
     }
 }
 
@@ -139,6 +147,17 @@
     padding-left: .5em;
     outline-color: var(--background-hover-option);
     word-break: break-all;
+}
+
+.simSelect__results {
+    font-size: 1.5em;
+    height: max-content;
+    outline-color: var(--background-hover-option);
+    text-align: center;
+    transform: scale(.8);
+    padding-top: .5rem;
+    pointer-events: none;
+    color: var(--color-text-placeholder);
 }
 
 @media (hover: hover) {
