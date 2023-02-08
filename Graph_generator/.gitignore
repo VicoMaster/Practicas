@@ -1,0 +1,9 @@
+.vscode
+.vscode/*
+.vscode/
+js/library/bootstrap-5.2.3-dist
+js/library/bootstrap-5.2.3-dist/
+js/library/bootstrap-5.2.3-dist/*
+js/library/materialize
+js/library/materialize/
+js/library/materialize/*

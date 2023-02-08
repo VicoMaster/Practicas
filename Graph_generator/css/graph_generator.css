@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-* {
+.graph-generator, .graph-generator * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -28,9 +28,10 @@ html {
     flex-direction: column;
     height: 100%;
     justify-content: center;
+    align-items: center;
     /* max-width: Ajusta el ancho máximo del Chart */
     max-width: 76rem;
-    padding: 1rem;
+    padding: 2rem;
     width: 100%;
 }
 
@@ -41,7 +42,6 @@ html {
 }
 
 .graph-generator__header-section {
-    width: 100%;
     height: 50%;
     display: flex;
     flex-wrap: wrap;
@@ -49,19 +49,26 @@ html {
 }
 
 .graph-generator__select {
-    border: 2px solid var(--color-dark-grey);
+    border: .1em solid var(--color-dark-grey);
     flex: 0 0 25%;
-    font-size: 1.6rem;
     height: 4rem;
     margin: .5rem;
     padding: .5rem;
     width: 100%;
 }
 
+.graph-generator__select-label {
+    font-size: 1.8rem !important;
+    transform: translateY(-.2em) !important;
+}
+
 .graph-generator__body {
     /* height: Ajusta el alto máximo del Chart */
     height: 53rem;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .graph-generator__footer {
@@ -103,6 +110,9 @@ html {
     cursor: pointer;
     font-size: 4rem;
     line-height: 5rem;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
     font-variation-settings:
         'FILL'0,
         'wght'400,
@@ -150,5 +160,9 @@ html {
     .graph-generator__select {
         flex: none;
         margin: .5rem 0;
+    }
+
+    .graph-generator__header-section {
+        gap: 2em;
     }
 }

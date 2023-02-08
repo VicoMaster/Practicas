@@ -9,12 +9,47 @@ class MyChart {
     constructor(params = {}) {
         try {
             this._datasets = params.datasets;
+            this._labels = params.labels;
             this._datalabels = params.datalabels;
+            this._titleDataSet = params.titleDataSet || 'Title dataSet';
             this._type = params.type || 'bar';
             this._parent = params.parent;
             this._width = params.width || `${this._parent.clientWidth}px`;
             this._height = params.height || `${this._parent.clientHeight}px`;
-            this.reSize = true;
+            this._reSize = true;
+            this._backgroundColors = [
+                'rgba(0, 168, 255, x)',
+                'rgba(0, 151, 230, x)',
+                'rgba(52, 152, 219, x)',
+                'rgba(34, 112, 147, x)',
+                'rgba(51, 102, 204, x)',
+                'rgba(108, 92, 231, x)',
+                'rgba(155, 89, 182, x)',
+                'rgba(142, 68, 173, x)',
+                'rgba(71, 71, 135, x)',
+                'rgba(64, 64, 122, x)',
+                'rgba(44, 44, 84, x)',
+                'rgba(52, 73, 94, x)',
+                'rgba(39, 60, 117, x)',
+                'rgba(25, 42, 86, x)',
+                'rgba(18, 31, 61, x)',
+                'rgba(120, 224, 143, x)',
+                'rgba(11, 232, 129, x)',
+                'rgba(46, 204, 113, x)',
+                'rgba(5, 196, 107, x)',
+                'rgba(39, 174, 96, x)',
+                'rgba(0, 148, 50, x)',
+                'rgba(17, 146, 0, x)',
+                'rgba(22, 160, 133, x)',
+                'rgba(7, 153, 146, x)',
+                'rgba(250, 211, 144, x)',
+                'rgba(246, 185, 59, x)',
+                'rgba(250, 152, 58, x)',
+                'rgba(229, 142, 38, x)',
+                'rgba(248, 194, 145, x)',
+                'rgba(229, 80, 57, x)',
+                'rgba(235, 47, 6, x)',
+            ];
         } catch (error) {
             console.error('MyChart: error en constructor');
         }
@@ -25,6 +60,12 @@ class MyChart {
     }
     get datalabels() {
         return this._datalabels;
+    }
+    get labels() {
+        return this._labels;
+    }
+    get titleDataSet() {
+        return this._titleDataSet;
     }
     get type() {
         return this._type;
@@ -38,6 +79,9 @@ class MyChart {
     get height() {
         return this._height;
     }
+    get backgroundColors() {
+        return this._backgroundColors;
+    }
     // [SETTERS]
     set datasets(datasets) {
         this._datasets = datasets;
@@ -45,6 +89,14 @@ class MyChart {
     }
     set datalabels(datalabels) {
         this._datalabels = datalabels;
+        this.#reCreate();
+    }
+    set labels(labels) {
+        this._labels = labels;
+        this.#reCreate();
+    }
+    set titleDataSet(titleDataSet) {
+        this._titleDataSet = titleDataSet;
         this.#reCreate();
     }
     set type(type) {
@@ -83,15 +135,19 @@ class MyChart {
             console.error('Unidad requerida [px]');
         }
     }
+    set backgroundColors(backgroundColors) {
+        this._backgroundColors = backgroundColors;
+        this.#reCreate();
+    }
     // [METHODS]
     #reSizeWitdh() {
         //timeOut para evitar ejecución desmedida de reSize
-        if (this.reSize) {
-            this.reSize = false;
+        if (this._reSize) {
+            this._reSize = false;
             this._width = `${this._parent.clientWidth}px`;
             this.#reCreate();
             setTimeout(() => {
-                this.reSize = true;
+                this._reSize = true;
             }, 200);
         }
     }
@@ -100,63 +156,110 @@ class MyChart {
         this.create();
     }
     create() {
-        if (this._datasets !== undefined && this._datalabels !== undefined && this._parent !== undefined) {
-            // Creamos el canvas dentro del <article>
-            const $CONTAINER_CANVAS = document.createElement('section');
-            $CONTAINER_CANVAS.style.width = this._width;
-            $CONTAINER_CANVAS.style.height = this._height;
-            const $CANVAS = document.createElement('canvas');
-            $CANVAS.setAttribute('id', 'canvasChart');
-            $CONTAINER_CANVAS.appendChild($CANVAS);
-            this._parent.appendChild($CONTAINER_CANVAS);
-            // Creamos la configuración
-            const configChart = {
-                type: this._type,
-                data: {
-                    datasets: [{
-                        label: '# de datos',
-                        data: this._datasets,
-                        borderWidth: 1,
-                        backgroundColor: 'rgb(33, 160, 210, 1)',
-                    }],
-                    labels: this._datalabels,
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            //max: 100
+        try {
+            if (this._datasets !== undefined && this._parent !== undefined) {
+                let dataGraph = {};
+                // Validamos si el dataSet se construye apartir de ejes [X-Y] o por Objetos: { x: ELEMENT.item, y: ELEMENT.$ }
+                if (Object.keys(this._datasets[0]).indexOf('x') !== -1 && Object.keys(this._datasets[0]).indexOf('y') !== -1) {
+                    dataGraph = {
+                        ...{
+                            datasets: [{
+                                label: this._titleDataSet,
+                                data: this._datasets,
+                                borderWidth: 1,
+                                backgroundColor: this._backgroundColors,
+                            }]
                         }
-                    },
-                    indexAxis: 'x',
-                    plugins: {
-                        legend: {
-                            display: true,
-                            labels: {
-                                fillStyle: 'rgb(222, 195, 0)',
-                                usePointStyle: true,
-                                font: {
-                                    size: 14,
+                    }
+                } else {
+                    // DataSet con objetos
+                    if (this._labels === undefined) {
+                        console.error(`Se necesita parametro: labels`);
+                        throw new Error('labels no es definido');
+                    }
+                    let tempData = [];
+                    let contadorColores = 0;
+                    Object.keys(this.datasets).forEach((data, index) => {
+                        const DATASET = this.datasets[data]
+                        let color = undefined;
+                        if (index < this._backgroundColors.length) {
+                            color = this._backgroundColors[contadorColores];
+                            contadorColores += 1;
+                        } else {
+                            contadorColores = 0;
+                            color = this._backgroundColors[contadorColores];
+                        }
+                        tempData.push(
+                            {
+                                data: this.datasets[index].data,
+                                label: this.datasets[index].label,
+                                borderColor: color.replace('x', '.5'),
+                                backgroundColor: color.replace('x', '1'),
+                            }
+                        );
+                    });
+                    dataGraph = {
+                        ...{
+                            labels: this._labels,
+                            datasets: tempData,
+                        }
+                    };
+                }
+
+                // Creamos el canvas dentro del <article>
+                const $CONTAINER_CANVAS = document.createElement('section');
+                $CONTAINER_CANVAS.style.width = this._width;
+                $CONTAINER_CANVAS.style.height = this._height;
+                const $CANVAS = document.createElement('canvas');
+                $CANVAS.setAttribute('id', 'canvasChart');
+                $CONTAINER_CANVAS.appendChild($CANVAS);
+                this._parent.appendChild($CONTAINER_CANVAS);
+                // Creamos la configuración
+                const configChart = {
+                    type: this._type,
+                    data: { ...dataGraph },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                //max: 100
+                            }
+                        },
+                        indexAxis: 'x',
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    fillStyle: 'rgb(222, 195, 0)',
+                                    usePointStyle: false,
+                                    font: {
+                                        size: 14,
+                                    }
                                 }
                             }
                         }
                     }
                 }
+
+                // Pintamos el Chart
+                new Chart($CANVAS, configChart);
+                // Añadimos evento al documento para resizeWidth
+                window.addEventListener('resize', this.#reSizeWitdh.bind(this));
+
+            } else {
+                let parameter = undefined;
+                if (this._datasets === undefined) parameter = 'datasets';
+                if (this._datalabels === undefined) parameter = 'datalabels';
+                if (this._parent === undefined) parameter = 'parent';
+                console.error(`Se necesita parametro: ${parameter}`);
             }
-            // Pintamos el Chart
-            new Chart($CANVAS, configChart);
-            // Añadimos evento al documento para resizeWidth
-            window.addEventListener('resize', this.#reSizeWitdh.bind(this));
-        } else {
-            let parameter = undefined;
-            if (this._datasets === undefined) parameter = 'datasets';
-            if (this._datalabels === undefined) parameter = 'datalabels';
-            if (this._parent === undefined) parameter = 'parent';
-            console.error(`Se necesita parametro: ${parameter}`);
+        } catch (error) {
+            console.error(error);
         }
     }
 }
 
-export { MyChart };
+if (typeof window !== 'undefined') window.MyChart = MyChart;
+//export { MyChart };
