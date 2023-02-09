@@ -28,6 +28,7 @@ class MyChart {
             this._width = params.width || `${this._parent.clientWidth}px`;
             this._height = params.height || `${this._parent.clientHeight}px`;
             this._reSize = true;
+            this._hiddenGraph = false;
             this._backgroundColors = [
                 'rgba(0, 168, 255, x)',
                 'rgba(0, 151, 230, x)',
@@ -93,6 +94,9 @@ class MyChart {
     get backgroundColors() {
         return this._backgroundColors;
     }
+    get hiddenGraph(){
+        return this._hiddenGraph;
+    }
     // [SETTERS]
     set datasets(datasets) {
         this._datasets = datasets;
@@ -149,6 +153,11 @@ class MyChart {
     set backgroundColors(backgroundColors) {
         this._backgroundColors = backgroundColors;
         this.#reCreate();
+    }
+    set hiddenGraph(hiddenGraph = true){
+        this._hiddenGraph = hiddenGraph;
+        let hidden = (hiddenGraph) ? 'none' : 'flex';
+        this._parent.firstChild.style.display = hidden;
     }
     // [METHODS]
     #reSizeWitdh() {
@@ -222,6 +231,7 @@ class MyChart {
                 const $CONTAINER_CANVAS = document.createElement('section');
                 $CONTAINER_CANVAS.style.width = this._width;
                 $CONTAINER_CANVAS.style.height = this._height;
+                $CONTAINER_CANVAS.style.display = (this._hiddenGraph) ? 'none' : 'flex';
                 const $CANVAS = document.createElement('canvas');
                 $CANVAS.setAttribute('id', 'canvasChart');
                 $CONTAINER_CANVAS.appendChild($CANVAS);

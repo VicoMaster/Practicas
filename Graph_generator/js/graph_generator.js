@@ -127,11 +127,11 @@ async function changeDataSelects(event) {
         $SELECT_PERIODOS = document.getElementById('graphPeriodos');
     let valueRegion = $SELECT_REGION.value,
         itemSets = undefined,
-        periodoSet = undefined;
+        periodoSet = undefined,
+        typeChart = ($PRINCIPAL_TITLE.textContent.includes('Tabla')) ? 'Tabla' : graphChart.type;
+    $PRINCIPAL_TITLE.textContent = `${valueRegion} - ${typeChart}`;
     switch (event.target.id) {
         case 'graphRegion':
-            $PRINCIPAL_TITLE.textContent = valueRegion
-            $PRINCIPAL_TITLE.textContent = `${valueRegion} - ${graphChart.type}`;
             // Destruimos instancias de [Materialize] para manipular las options
             destroyInstances();
             // Eliminamos las options de los [SELECTS=items, periodos] y los volvemos a llenar con datos según selección
@@ -158,11 +158,21 @@ async function changeDataSelects(event) {
 }
 // Ejecutamos primer llenado de options en los [SELECTS]
 firstFillSelect();
+function createTable() {
+    graphChart.hiddenGraph = true;
+    console.log(graphChart.datasets);
+    console.log(graphChart.labels);
+    //const $SECTION_CHART = document.getElementById('myChart');
+    //const TEST = document.createElement('p');
+    //TEST.textContent = 'Aquí vá una tabla...'
+    //$SECTION_CHART.appendChild(TEST);
+}
 // [EVENTOS]
 const $BUTTON_BAR_CHART = document.getElementById('buttomBarChart');
 const $BUTTON_LINE_CHART = document.getElementById('buttomLineChart');
 const $BUTTON_TABLE = document.getElementById('tableBarChart');
 $BUTTON_BAR_CHART.addEventListener('click', event => {
+    graphChart.hiddenGraph = false;
     $BUTTON_LINE_CHART.classList.remove('c-l-blue');
     $BUTTON_TABLE.classList.remove('c-l-blue');
     event.target.classList.add('c-l-blue');
@@ -170,6 +180,7 @@ $BUTTON_BAR_CHART.addEventListener('click', event => {
     $PRINCIPAL_TITLE.textContent = `${document.getElementById('graphRegion').value} - ${graphChart.type}`;
 });
 $BUTTON_LINE_CHART.addEventListener('click', event => {
+    graphChart.hiddenGraph = false;
     $BUTTON_BAR_CHART.classList.remove('c-l-blue');
     $BUTTON_TABLE.classList.remove('c-l-blue');
     event.target.classList.add('c-l-blue');
@@ -177,6 +188,7 @@ $BUTTON_LINE_CHART.addEventListener('click', event => {
     $PRINCIPAL_TITLE.textContent = `${document.getElementById('graphRegion').value} - ${graphChart.type}`;
 });
 $BUTTON_TABLE.addEventListener('click', event => {
+    createTable();
     $BUTTON_BAR_CHART.classList.remove('c-l-blue');
     $BUTTON_LINE_CHART.classList.remove('c-l-blue');
     event.target.classList.add('c-l-blue');

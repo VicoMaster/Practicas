@@ -62,6 +62,7 @@ html {
     transform: translateY(-.2em) !important;
 }
 
+/* CONTIENE EL GRAPH O TABLA */
 .graph-generator__body {
     /* height: Ajusta el alto máximo del Chart */
     height: 53rem;
