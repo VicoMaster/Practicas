@@ -120,6 +120,11 @@ html {
         'opsz'40
 }
 
+.caret {
+    right: -8px !important;
+    top: -25px !important;
+}
+
 /* ATOMIC DESIGN */
 .c-l-blue {
     color: var(--color-light-blue);
