@@ -17,43 +17,79 @@
 </body>
 
 <script>
-    const DATA = {
-        labels: ['Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7'],
-        datasets: [{
-            label: "Init Test - AndrésR.Dev",
-            data: [0.6, 4.6, 15.4, 26.3, 34.9, 41.2, 44.5],
-            backgroundColor: [
-                'rgb(51, 102, 204)',
-                'rgb(52, 73, 94)',
-                'rgb(18, 31, 61)',
-                'rgb(46, 204, 113)',
-                'rgb(39, 174, 96)',
-                'rgb(22, 160, 133)',
-                'rgb(17, 146, 0)',
-            ],
-        }]
+
+    function getRandomInt(iterar, maxNum) {
+        let arrayNumbers = [];
+        for (let index = 0; index < iterar; index++) {
+            arrayNumbers.push(Math.floor(Math.random() * maxNum));
+        }
+        console.log(arrayNumbers);
+        return arrayNumbers;
+    }
+
+    const NUMBER_CFG = {
+        valueItem1: 7,
+        valueItem2: -100,
+        valueItem3: 100,
+        valueItem4: 50,
+        valueItem5: 150,
+        valueItem6: 88,
+        valueItem7: 20,
+        valueItem8: 33,
+    };
+
+    const labels = ['2019', '2018', '2019', '2020', '2021', '2022', '2023',];
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Item 1',
+                data: getRandomInt(7,200),
+                borderColor: 'rgba(226,5,24,1)',
+                backgroundColor: 'rgba(226,5,24,.5)',
+            },
+            {
+                label: 'Item 2',
+                data: getRandomInt(7,100),
+                borderColor: 'rgba(33,160,210,1)',
+                backgroundColor: 'rgba(33,160,210,.5)',
+            },
+            {
+                label: 'Item 3',
+                data: getRandomInt(7,50),
+                borderColor: 'rgba(33,160,210,1)',
+                backgroundColor: 'rgba(33,160,210,.5)',
+            },
+            {
+                label: 'Item 4',
+                data: getRandomInt(7,120),
+                borderColor: 'rgba(33,160,210,1)',
+                backgroundColor: 'rgba(33,160,210,.5)',
+            },
+            {
+                label: 'Item 5',
+                data: getRandomInt(7,150),
+                borderColor: 'rgba(33,160,210,1)',
+                backgroundColor: 'rgba(33,160,210,.5)',
+            }
+        ]
     };
 
     const config = {
         type: 'bar',
-        data: DATA,
+        data: data,
         options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            indexAxis: 'x',
+            responsive: true,
             plugins: {
                 legend: {
+                    position: 'top',
+                },
+                title: {
                     display: true,
-                    labels: {
-                        fillStyle: 'rgb(222, 195, 0)',
-                        usePointStyle: true,
-                    }
+                    text: 'Chart.js Bar Chart'
                 }
             }
-        }
+        },
     };
 
     let ctxGraph = document.getElementById('myChart').getContext("2d");
