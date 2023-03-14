@@ -1,5 +1,5 @@
 // [HTML INJECTION]
-const $HTML_INJECTION = '<main class="graph-generator"> <header class="graph-generator__header"> <section class="graph-generator__header-section"> <div class="input-field col s12 graph-generator__select"> <select id="graphRegion"> </select> <label class="graph-generator__select-label">Región</label> </div><div class="input-field col s12 graph-generator__select"> <select multiple id="graphItems"></select> <label class="graph-generator__select-label">Items</label> </div><div class="input-field col s12 graph-generator__select"> <select multiple id="graphPeriodos"></select> <label class="graph-generator__select-label">Periodos</label> </div><section class="graph-generator__section-icons"> <article id="buttomBarChart" class="material-symbols-outlined bg-l-grey c-l-blue" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Gráfico de barras">bar_chart </article> <article id="buttomLineChart" class="material-symbols-outlined bg-l-grey" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Gráfico de línea">show_chart</article> <article id="tableBarChart" class="material-symbols-outlined bg-l-grey" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tabla de datos">table_chart</article> </section> </section> <section class="graph-generator__header-section"> <div class="graph-generator__container-flex"> <article class="graph-generator__title"> <span>Titulo Principal</span> </article> <article id="buttomFullScreen" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Pantalla completa">fullscreen</article> </div></section> </header> <section class="graph-generator__body" id="myChart"></section> <footer class="graph-generator__footer"> <section class="graph-generator__container-flex w-max-c position-relative"> <article class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Cambiar Vista">visibility</article> <span class="text-abs-right">Vista #1</span> </section> <section class="graph-generator__section-icons"> <article class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Imprima/Guarde el gráfico">print</article> <article class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Descargue los datos">download</article> </section> </footer> </main>';
+const $HTML_INJECTION = '<main class="graph-generator"> <header class="graph-generator__header"> <section class="graph-generator__header-section"> <div class="input-field col s12 graph-generator__select"> <select id="graphRegion"> </select> <label class="graph-generator__select-label">Región</label> </div><div class="input-field col s12 graph-generator__select"> <select multiple id="graphItems"></select> <label class="graph-generator__select-label">Items</label> </div><div class="input-field col s12 graph-generator__select"> <select multiple id="graphPeriodos"></select> <label class="graph-generator__select-label">Periodos</label> </div><section class="graph-generator__section-icons"> <article id="buttomBarChart" class="material-symbols-outlined bg-l-grey c-l-blue" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Gráfico de barras">bar_chart </article> <article id="buttomLineChart" class="material-symbols-outlined bg-l-grey" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Gráfico de línea">show_chart</article> <article id="tableBarChart" class="material-symbols-outlined bg-l-grey" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tabla de datos">table_chart</article> </section> </section> <section class="graph-generator__header-section"> <div class="graph-generator__container-flex"> <article class="graph-generator__title"> <span>Titulo Principal</span> </article> <article id="buttomFullScreen" class="fullScreen material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Pantalla completa">fullscreen</article> </div></section> </header> <section class="graph-generator__body" id="myChart"></section> <footer class="graph-generator__footer"> <section class="graph-generator__container-flex w-max-c position-relative"> <article class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Cambiar Vista">visibility</article> <span class="text-abs-right">Vista #1</span> </section> <section class="graph-generator__section-icons"> <article class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Imprima/Guarde el gráfico">print</article> <article class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Descargue los datos">download</article> </section> </footer> </main>';
 const $CONTAINER_GRAPH_INJECTION = document.getElementById('graphInjection');
 $CONTAINER_GRAPH_INJECTION.innerHTML = $HTML_INJECTION;
 // [VARIABLES]
@@ -51,12 +51,16 @@ function fillSelectItems(params) {
     const DATA = params.data,
         REGION = params.region,
         $SELECT_ITEMS = params.select;
-    let itemSet = new Set();
+    let itemSet = new Set(),
+        countFill = 0;
     Object.keys(DATA).forEach(element => {
         if (DATA[element].region === REGION && !itemSet.has(DATA[element].item)) {
             const ELEMENT = DATA[element],
                 $OPTION = document.createElement('option');
-            $OPTION.setAttribute('selected', '');
+            if (countFill <= 3) {
+                $OPTION.setAttribute('selected', '');
+                countFill += 1;
+            }
             $OPTION.setAttribute('value', ELEMENT.item);
             $OPTION.textContent = DATA[element].item;
             itemSet.add(DATA[element].item);
@@ -160,8 +164,8 @@ async function changeDataSelects(event) {
 firstFillSelect();
 function createTable() {
     graphChart.hiddenGraph = true;
-    console.log(graphChart.datasets);
-    console.log(graphChart.labels);
+    //console.log(graphChart.datasets);
+    //console.log(graphChart.labels);
     //const $SECTION_CHART = document.getElementById('myChart');
     //const TEST = document.createElement('p');
     //TEST.textContent = 'Aquí vá una tabla...'
@@ -195,8 +199,14 @@ $BUTTON_TABLE.addEventListener('click', event => {
     event.target.classList.add('c-l-blue');
     $PRINCIPAL_TITLE.textContent = `${document.getElementById('graphRegion').value} - Tabla`;
 });
-$BUTTON_FULLSCREEN.addEventListener('click', event => {
-    console.log('Soy FullScreen');
+$BUTTON_FULLSCREEN.addEventListener('click', () => {
+    let containerGraphGenerator = document.getElementById('graphInjection');
+    let graphGenerator = containerGraphGenerator.firstChild;
+    if (!document.fullscreenElement) {
+        graphGenerator.requestFullscreen().then(() => { /**console.log('Ok')**/ }).catch(err => console.log(err));
+    } else {
+        document.exitFullscreen();
+    }
 })
 document.querySelectorAll('.graph-generator__select').forEach(select => {
     select.addEventListener('change', changeDataSelects);

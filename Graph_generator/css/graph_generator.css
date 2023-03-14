@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-.graph-generator, .graph-generator * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 :root {
     /* FONTS */
     --font-roboto-regular: 'Roboto', sans-serif;
@@ -14,10 +8,18 @@
     --color-light-grey: #F0F0F0;
     --color-dark-grey: #666666;
     --color-light-black: #202020;
+    --color-red-davivienda: #ff0010;
+    --background-fullscreen: #5B6B7E;
 }
 
 html {
     font-size: 62.5%;
+}
+
+.graph-generator, .graph-generator * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /* GRAPH-GENERATOR */
@@ -35,6 +37,10 @@ html {
     width: 100%;
 }
 
+.graph-generator:fullscreen {
+    background-color: white;
+}
+
 .graph-generator__header {
     height: 100%;
     width: 100%;
@@ -42,7 +48,7 @@ html {
 }
 
 .graph-generator__header-section {
-    height: 50%;
+    height: max-content;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -65,7 +71,7 @@ html {
 /* CONTIENE EL GRAPH O TABLA */
 .graph-generator__body {
     /* height: Ajusta el alto máximo del Chart */
-    height: 53rem;
+    height: 50rem;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -128,7 +134,7 @@ html {
 
 /* ATOMIC DESIGN */
 .c-l-blue {
-    color: var(--color-light-blue);
+    color: var(--color-red-davivienda);
 }
 
 .c-d-grey {
@@ -153,16 +159,25 @@ html {
 
 @media (hover: hover) {
     .material-symbols-outlined:hover {
-        color: var(--color-light-blue);
+        color: var(--color-red-davivienda);
     }
 
     .graph-generator__select:hover {
-        border-color: var(--color-light-blue);
+        border-color: var(--color-red-davivienda);
     }
 }
 
 /* RESPONSIVE */
 @media (max-width:750px) {
+    .fullScreen {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .graph-generator__body {
+        height: 90rem;
+    }
+
     .graph-generator__select {
         flex: none;
         margin: .5rem 0;
