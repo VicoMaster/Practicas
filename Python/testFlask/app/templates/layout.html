@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="shortcut icon" href="http://drive.google.com/uc?export=view&id=1Rvsv9r5nL0OzmrB51zETsnLNn0itayo2" type="image/x-icon">
+    <title>{% block title  %}{% endblock title %}</title>
+</head>
+
+<body>
+    {% block body %}{% endblock body %}
+    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+</body>
+
+</html>

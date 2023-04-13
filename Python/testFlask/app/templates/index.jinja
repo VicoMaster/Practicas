@@ -1,0 +1,22 @@
+{% extends "./layout.html" %}
+
+{% block title %} 
+    {{data.title_tab}}
+{% endblock title %}
+
+
+{% block body %}
+    <h1>{{data.title}}</h1>
+    <p>{{data.contain}}</p>
+    <p>Existen: {{data.count_animals}} animales</p>
+    <ul>
+        {%for animal in data.animals%}
+        <li>{{animal}}</li>
+        {%endfor%}
+    </ul>
+    {% if data.count_animals < 3 %}
+        <p>Usted tiene pocos animales</p>
+    {% else %}
+        <p>Usted tiene muchos animales</p>
+    {% endif %}
+{% endblock body %}
