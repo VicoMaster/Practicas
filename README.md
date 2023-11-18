@@ -1,2 +1,2 @@
 # Practicas
-Practicas Web con todo el código -
+Practicas Web con todo el código
